@@ -1,0 +1,1 @@
+Use ByteDance Log Search and Get API to get logs

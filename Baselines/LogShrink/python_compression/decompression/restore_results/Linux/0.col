@@ -1,0 +1,108 @@
+Jun  9 06:06:20 combo syslogd 1.4.1: restart.
+Jun  9 06:06:20 combo syslog: syslogd startup succeeded
+Jun  9 06:06:20 combo syslog: klogd startup succeeded
+Jun  9 06:06:20 combo kernel: klogd 1.4.1, log source = /proc/kmsg started.
+Jun  9 06:06:20 combo kernel: Linux version 2.6.5-1.358 (bhcompile@bugs.build.redhat.com) (gcc version 3.3.3 20040412 (Red Hat Linux 3.3.3-7)) #1 Sat May 8 09:04:50 EDT 2004
+Jun  9 06:06:20 combo kernel: BIOS-provided physical RAM map:
+Jun  9 06:06:20 combo kernel:  BIOS-e820: 0000000000000000 - 00000000000a0000 (usable)
+Jun  9 06:06:20 combo kernel:  BIOS-e820: 00000000000f0000 - 0000000000100000 (reserved)
+Jun  9 06:06:20 combo kernel:  BIOS-e820: 0000000000100000 - 0000000007eae000 (usable)
+Jun  9 06:06:20 combo kernel:  BIOS-e820: 0000000007eae000 - 0000000008000000 (reserved)
+Jun  9 06:06:20 combo kernel:  BIOS-e820: 00000000ffb00000 - 0000000100000000 (reserved)
+Jun  9 06:06:20 combo kernel: 0MB HIGHMEM available.
+Jun  9 06:06:20 combo kernel: 126MB LOWMEM available.
+Jun  9 06:06:20 combo kernel: zapping low mappings.
+Jun  9 06:06:20 combo kernel: On node 0 totalpages: 32430
+Jun  9 06:06:20 combo kernel:   DMA zone: 4096 pages, LIFO batch:1
+Jun  9 06:06:20 combo kernel:   Normal zone: 28334 pages, LIFO batch:6
+Jun  9 06:06:20 combo kernel:   HighMem zone: 0 pages, LIFO batch:1
+Jun  9 06:06:20 combo kernel: DMI 2.3 present.
+Jun  9 06:06:20 combo kernel: ACPI disabled because your bios is from 2000 and too old
+Jun  9 06:06:20 combo kernel: You can enable it with acpi=force
+Jun  9 06:06:20 combo kernel: Built 1 zonelists
+Jun  9 06:06:20 combo irqbalance: irqbalance startup succeeded
+Jun  9 06:06:20 combo kernel: Kernel command line: ro root=LABEL=/ rhgb quiet
+Jun  9 06:06:20 combo kernel: mapped 4G/4G trampoline to ffff3000.
+Jun  9 06:06:20 combo kernel: Initializing CPU#0
+Jun  9 06:06:20 combo portmap: portmap startup succeeded
+Jun  9 06:06:20 combo kernel: CPU 0 irqstacks, hard=02345000 soft=02344000
+Jun  9 06:06:20 combo kernel: PID hash table entries: 512 (order 9: 4096 bytes)
+Jun  9 06:06:20 combo kernel: Detected 731.214 MHz processor.
+Jun  9 06:06:20 combo kernel: Using tsc for high-res timesource
+Jun  9 06:06:20 combo kernel: Console: colour VGA+ 80x25
+Jun  9 06:06:20 combo kernel: Memory: 125312k/129720k available (1540k kernel code, 3860k reserved, 599k data, 144k init, 0k highmem)
+Jun  9 06:06:20 combo kernel: Calibrating delay loop... 1441.79 BogoMIPS
+Jun  9 06:06:20 combo kernel: Security Scaffold v1.0.0 initialized
+Jun  9 06:06:20 combo kernel: SELinux:  Initializing.
+Jun  9 06:06:20 combo kernel: SELinux:  Starting in permissive mode
+Jun  9 06:06:20 combo kernel: There is already a security framework initialized, register_security failed.
+Jun  9 06:06:20 combo kernel: Failure registering capabilities with the kernel
+Jun  9 06:06:20 combo kernel: selinux_register_security:  Registering secondary module capability
+Jun  9 06:06:20 combo kernel: Capability LSM initialized
+Jun  9 06:06:20 combo kernel: Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+Jun  9 06:06:20 combo kernel: Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+Jun  9 06:06:20 combo kernel: Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+Jun  9 06:06:20 combo rpc.statd[1605]: Version 1.0.6 Starting
+Jun  9 06:06:20 combo nfslock: rpc.statd startup succeeded
+Jun  9 06:06:20 combo kernel: CPU: L1 I cache: 16K, L1 D cache: 16K
+Jun  9 06:06:21 combo kernel: CPU: L2 cache: 256K
+Jun  9 06:06:21 combo kernel: Intel machine check architecture supported.
+Jun  9 06:06:21 combo kernel: Intel machine check reporting enabled on CPU#0.
+Jun  9 06:06:21 combo kernel: CPU: Intel Pentium III (Coppermine) stepping 06
+Jun  9 06:06:21 combo kernel: Enabling fast FPU save and restore... done.
+Jun  9 06:06:21 combo kernel: Enabling unmasked SIMD FPU exception support... done.
+Jun  9 06:06:21 combo kernel: Checking 'hlt' instruction... OK.
+Jun  9 06:06:21 combo kernel: POSIX conformance testing by UNIFIX
+Jun 9 06:06:21 combo kernel: NET: Registered protocol family 16
+Jun  9 06:06:21 combo kernel: PCI: PCI BIOS revision 2.10 entry at 0xfc0ce, last bus=1
+Jun  9 06:06:21 combo kernel: PCI: Using configuration type 1
+Jun  9 06:06:21 combo kernel: mtrr: v2.0 (20020519)
+Jun  9 06:06:21 combo kernel: ACPI: Subsystem revision 20040326
+Jun  9 06:06:21 combo kernel: ACPI: Interpreter disabled.
+Jun  9 06:06:21 combo kernel: Linux Plug and Play Support v0.97 (c) Adam Belay
+Jun  9 06:06:21 combo kernel: usbcore: registered new driver usbfs
+Jun  9 06:06:21 combo kernel: usbcore: registered new driver hub
+Jun  9 06:06:21 combo rpcidmapd: rpc.idmapd startup succeeded
+Jun  9 06:06:21 combo kernel: ACPI: ACPI tables contain no PCI IRQ routing entries
+Jun  9 06:06:21 combo kernel: PCI: Invalid ACPI-PCI IRQ routing table
+Jun  9 06:06:21 combo random: Initializing random number generator:  succeeded
+Jun  9 06:06:21 combo kernel: PCI: Probing PCI hardware
+Jun  9 06:06:21 combo kernel: PCI: Probing PCI hardware (bus 00)
+Jun  9 06:06:21 combo kernel: Transparent bridge - 0000:00:1e.0
+Jun  9 06:06:21 combo kernel: PCI: Using IRQ router PIIX/ICH [8086/2410] at 0000:00:1f.0
+Jun  9 06:06:21 combo kernel: apm: BIOS version 1.2 Flags 0x03 (Driver version 1.16ac)
+Jun  9 06:06:21 combo kernel: audit: initializing netlink socket (disabled)
+Jun  9 06:06:21 combo kernel: audit(1118297138.4294965368:0): initialized
+Jun  9 06:06:21 combo kernel: Total HugeTLB memory allocated, 0
+Jun  9 06:06:21 combo rc: Starting pcmcia:  succeeded
+Jun  9 06:06:21 combo kernel: VFS: Disk quotas dquot_6.5.1
+Jun  9 06:06:21 combo kernel: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+Jun  9 06:06:21 combo kernel: SELinux:  Registering netfilter hooks
+Jun  9 06:06:21 combo kernel: Initializing Cryptographic API
+Jun  9 06:06:21 combo kernel: pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+Jun  9 06:06:21 combo kernel: isapnp: Scanning for PnP cards...
+Jun  9 06:06:21 combo kernel: isapnp: No Plug & Play device found
+Jun  9 06:06:21 combo kernel: Real Time Clock Driver v1.12
+Jun  9 06:06:21 combo kernel: Linux agpgart interface v0.100 (c) Dave Jones
+Jun  9 06:06:21 combo kernel: agpgart: Detected an Intel i810 E Chipset.
+Jun  9 06:06:21 combo kernel: agpgart: Maximum main memory to use for agp memory: 93M
+Jun  9 06:06:22 combo bluetooth: hcid startup succeeded
+Jun  9 06:06:22 combo kernel: agpgart: detected 4MB dedicated video ram.
+Jun  9 06:06:22 combo hcid[1677]: HCI daemon ver 2.4 started
+Jun  9 06:06:17 combo network: Setting network parameters:  succeeded
+Jun  9 06:06:22 combo bluetooth: sdpd startup succeeded
+Jun  9 06:06:22 combo kernel: agpgart: AGP aperture is 64M @ 0xf4000000
+Jun  9 06:06:22 combo sdpd[1681]: sdpd v1.5 started
+Jun  9 06:06:17 combo network: Bringing up loopback interface:  succeeded
+Jun  9 06:06:22 combo kernel: Serial: 8250/16550 driver $Revision: 1.90 $ 8 ports, IRQ sharing enabled
+Jun  9 06:06:22 combo kernel: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+Jun  9 06:06:22 combo kernel: ttyS1 at I/O 0x2f8 (irq = 3) is a 16550A
+Jun  9 06:06:22 combo kernel: RAMDISK driver initialized: 16 RAM disks of 16384K size 1024 blocksize
+Jun  9 06:06:22 combo kernel: Uniform Multi-Platform E-IDE driver Revision: 7.00alpha2
+Jun  9 06:06:23 combo netfs: Mounting other filesystems:  succeeded
+Jun  9 06:06:23 combo kernel: ide: Assuming 33MHz system bus speed for PIO modes; override with idebus=xx
+Jun  9 06:06:23 combo kernel: ICH: IDE controller at PCI slot 0000:00:1f.1
+Jun  9 06:06:23 combo apmd[1717]: Version 3.0.2 (APM BIOS 1.2, Linux driver 1.16ac)
+Jun  9 06:06:23 combo apmd: apmd startup succeeded
+Jun  9 06:06:23 combo kernel: ICH: chipset revision 2
+Jun  9 06:06:23 combo kernel: ICH: not 100%% native mode: will probe irqs later

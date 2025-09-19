@@ -1,0 +1,2661 @@
+[0]
+<*> <*>:<*>:<*> <*> <*>: Reading included configuration file: <*> [file=<*> [line=<*>
+[1]
+<*> <*>:<*>:<*> <*> <*>: Started working: <*> available services
+[2]
+<*> <*>:<*>:<*> bn91/bn91 xinetd[2242]: removing <*>
+[3]
+<*> <*>:<*>:<*> <*> <*>: data_thread() got not answer from any <*> datasource
+[4]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[24904]: [ib_sm_sweep.c:<*>: <*> <*> <*> <*>
+[5]
+<*> <*>:<*>:<*> <*> <*>: synchronized to <*>, stratum <*>
+[6]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[24904]: [ib_sm_sweep.c:<*>: <*> <*> <*>
+[7]
+<*> <*>:<*>:<*> local@tbird-admin1 /apps/x86_64/system/ganglia-3.0.1/sbin/gmetad[1684]: RRD_update <*> <*>: illegal attempt to update using time <*> when last update time is <*> (minimum one second step)
+[8]
+<*> <*>:<*>:<*> <*> <*>: session opened for user <*> by <*>=0)
+[9]
+<*> <*>:<*>:<*> <*> <*>: (root) CMD <*> <*>
+[10]
+<*> <*>:<*>:<*> <*> <*>: session closed for user <*>
+[11]
+<*> <*>:<*>:<*> <*> logger: Kickstart Install: TBIRD Dell FIRMWARE Update Module
+[12]
+<*> <*>:<*>:<*> #1#/#1# logger: <*> Install: <*> <*> <*> <*>
+[13]
+<*> <*>:<*>:<*> <*> <*>: <*> <*> for <*> from ::ffff:<*> port <*> ssh2
+[14]
+<*> <*>:<*>:<*> <*> shutdown: shutting down for system <*>
+[15]
+<*> <*>:<*>:<*> <*> init: Switching to runlevel: <*>
+[16]
+<*> <*>:<*>:<*> <*> <*>: <*> shutdown failed
+[17]
+<*> <*>:<*>:<*> an344/an344 <*>: <*> shutdown <*>
+[18]
+<*> <*>:<*>:<*> <*> <*>: peer disconnected: SNMPv2-SMI::enterprises.674.10892.1
+[19]
+<*> <*>:<*>:<*> <*> <*>: <*> -TERM succeeded
+[20]
+<*> <*>:<*>:<*> <*> <*>: Received signal 15; terminating.
+[21]
+<*> <*>:<*>:<*> <*> <*>: <*> shutdown succeeded
+[22]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_sweep.c:254]: An existing IB node GUID <*> LID <*> was removed
+[23]
+<*> <*>:<*>:<*> <*> kernel: <*>: segfault at <*> rip <*> rsp <*> error <*>
+[24]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Generate SM <*> trap for GID=<*>
+[25]
+<*> <*>:<*>:<*> <*> kernel: SELinux: Initializing.
+[26]
+<*> <*>:<*>:<*> <*> kernel: SELinux: Starting in permissive mode
+[27]
+<*> <*>:<*>:<*> <*> kernel: Security Scaffold v1.0.0 initialized
+[28]
+<*> <*>:<*>:<*> <*> kernel: There is already a security framework initialized, register_security failed.
+[29]
+<*> <*>:<*>:<*> <*> kernel: Using ACPI (MADT) for SMP configuration information
+[30]
+<*> <*>:<*>:<*> <*> kernel: Using <*> APIC <*> <*>
+[31]
+<*> <*>:<*>:<*> <*> kernel: selinux_register_security: Registering secondary module capability
+[32]
+<*> <*>:<*>:<*> <*> kernel: time.c: Detected <*> MHz processor.
+[33]
+<*> <*>:<*>:<*> <*> kernel: time.c: Using 14.318180 MHz HPET timer.
+[34]
+<*> <*>:<*>:<*> <*> kernel: using mwait in idle threads.
+[35]
+<*> <*>:<*>:<*> <*> <*>: <*> startup succeeded
+[36]
+<*> <*>:<*>:<*> <*> <*>: Starting <*>: succeeded
+[37]
+<*> <*>:<*>:<*> <*> ts_fixup: Creating Topspin /dev entries:
+[39]
+<*> <*>:<*>:<*> <*> kernel: ACPI: HPET id: 0xffffffff base: 0xfed00000
+[40]
+<*> <*>:<*>:<*> <*> kernel: ACPI: INT_SRC_OVR (bus <*> bus_irq <*> global_irq <*> <*> <*>
+[41]
+<*> <*>:<*>:<*> <*> kernel: ACPI: IOAPIC <*> <*> <*>
+[42]
+<*> <*>:<*>:<*> en321/en321 kernel: ACPI: <*> <*> <*> <*>
+[43]
+<*> <*>:<*>:<*> <*> kernel: ACPI: LAPIC_NMI <*> high edge lint[0x1])
+[44]
+<*> <*>:<*>:<*> <*> kernel: ACPI: <*> (v001 DELL PE BKC 0x00000001 MSFT <*> @ <*>
+[45]
+<*> <*>:<*>:<*> <*> kernel: ACPI: RSDP (v000 DELL ) @ <*>
+[46]
+<*> <*>:<*>:<*> <*> kernel: <*> <*> node <*> 0000000000000000-00000001c0000000
+[47]
+<*> <*>:<*>:<*> <*> kernel: DMI 2.3 present.
+[48]
+<*> <*>:<*>:<*> <*> kernel: Intel(R) Xeon(TM) CPU 3.60GHz stepping <*>
+[49]
+<*> <*>:<*>:<*> <*> kernel: ACPI: Subsystem revision <*>
+[50]
+<*> <*>:<*>:<*> <*> kernel: Booting processor 1/6 rip <*> rsp <*>
+[51]
+<*> <*>:<*>:<*> <*> kernel: Brought up <*> CPUs
+[52]
+<*> <*>:<*>:<*> <*> kernel: CPU: L2 cache: 2048K
+[53]
+<*> <*>:<*>:<*> <*> kernel: CPU: Trace cache: 12K uops, L1 D cache: 16K
+[54]
+<*> <*>:<*>:<*> <*> kernel: Detected <*> MHz APIC timer.
+[55]
+<*> <*>:<*>:<*> <*> kernel: Initializing <*>
+[56]
+<*> <*>:<*>:<*> <*> kernel: PCI: Using <*> <*> <*>
+[57]
+<*> <*>:<*>:<*> <*> kernel: Total of <*> processors activated <*> BogoMIPS).
+[58]
+<*> <*>:<*>:<*> <*> kernel: <*> NMI <*> ... <*>
+[59]
+<*> <*>:<*>:<*> <*> kernel: checking TSC synchronization across <*> CPUs: passed.
+[60]
+<*> <*>:<*>:<*> <*> kernel: checking if image is initramfs... it is
+[61]
+<*> <*>:<*>:<*> <*> kernel: <*> zone: <*> pages, LIFO batch:<*>
+[63]
+<*> <*>:<*>:<*> <*> kernel: BIOS-e820: <*> - <*> <*>
+[64]
+<*> <*>:<*>:<*> en342/en342 kernel: ACPI: <*> <*> <*> <*>
+[65]
+<*> <*>:<*>:<*> en112/en112 sysctl: <*> = <*>
+[66]
+<*> <*>:<*>:<*> <*> kernel: CPU: Hyper-Threading is disabled
+[67]
+<*> <*>:<*>:<*> <*> kernel: Calibrating delay loop... <*> BogoMIPS (lpj=<*>
+[68]
+<*> <*>:<*>:<*> <*> kernel: Capability LSM initialized as secondary
+[69]
+<*> <*>:<*>:<*> <*> kernel: Dentry cache hash table entries: <*> (order: <*>, <*> bytes)
+[70]
+<*> <*>:<*>:<*> <*> kernel: <*> hash table entries: <*> (order: <*>, <*> bytes)
+[71]
+<*> <*>:<*>:<*> en25/en25 xinetd[2234]: removing <*>
+[72]
+<*> <*>:<*>:<*> <*> <*>: xinetd Version 2.3.13 started with libwrap loadavg options compiled in.
+[73]
+<*> <*>:<*>:<*> <*> kernel: ACPI wakeup devices:
+[74]
+<*> <*>:<*>:<*> en250/en250 kernel: ACPI: <*> <*> <*> <*>
+[75]
+<*> <*>:<*>:<*> <*> kernel: IP: routing cache hash table of <*> buckets, 512Kbytes
+[76]
+<*> <*>:<*>:<*> en250/en250 kernel: <*> <*> <*> <*>
+[77]
+<*> <*>:<*>:<*> <*> kernel: Linux agpgart interface v0.100 (c) Dave Jones
+[78]
+<*> <*>:<*>:<*> <*> kernel: NET: Registered protocol family <*>
+[79]
+<*> <*>:<*>:<*> <*> <*>: ntpd #2#@1.1190-r Mon Oct <*> <*>:<*>:<*> EDT <*> (1)
+[80]
+<*> <*>:<*>:<*> <*> <*>: precision = 1.000 usec
+[81]
+<*> <*>:<*>:<*> <*> <*>: step time server <*> offset <*> sec
+[82]
+<*> <*>:<*>:<*> <*> sshd: succeeded
+[83]
+<*> <*>:<*>:<*> <*> <*>: Server listening on :: port 22.
+[84]
+<*> <*>:<*>:<*> <*> <*>: error: Bind to port <*> on <*> failed: Address already in use.
+[85]
+<*> <*>:<*>:<*> en158/en158 xinetd[2229]: removing <*>
+[86]
+<*> <*>:<*>:<*> <*> <*>: (CRON) STARTUP (V5.0)
+[87]
+<*> <*>:<*>:<*> <*> <*>: Listening on interface <*>, <*>
+[88]
+<*> <*>:<*>:<*> <*> <*>: Listening on interface wildcard, ::#123
+[89]
+<*> <*>:<*>:<*> <*> <*>: configure: keyword "authenticate" unknown, line ignored
+[90]
+<*> <*>:<*>:<*> <*> <*>: frequency initialized <*> PPM from /var/lib/ntp/drift
+[91]
+<*> <*>:<*>:<*> <*> <*>: kernel time sync <*> <*>
+[92]
+<*> <*>:<*>:<*> en124/en124 xinetd[2231]: removing <*>
+[93]
+<*> <*>:<*>:<*> <*> kernel: hub <*>:1.0: <*> <*> <*>
+[94]
+<*> <*>:<*>:<*> <*> kernel: kjournald starting. Commit interval <*> seconds
+[95]
+<*> <*>:<*>:<*> en102/en102 kernel: md: <*> <*> <*>
+[96]
+<*> <*>:<*>:<*> <*> kernel: md: autorun ...
+[97]
+<*> <*>:<*>:<*> <*> kernel: <*> <*>:<*>:<*>: <*> Host Controller
+[98]
+<*> <*>:<*>:<*> <*> kernel: uhci_hcd <*>:<*>:<*>: irq <*>, io base <*>
+[99]
+<*> <*>:<*>:<*> <*> kernel: <*> <*>:<*>:<*>: new USB bus registered, assigned bus number <*>
+[100]
+<*> <*>:<*>:<*> <*> dhcpd: <*> on <*> to <*>:<*>:<*>:<*>:<*>:<*> via eth1
+[101]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPREQUEST for <*> <*> from <*>:<*>:<*>:<*>:<*>:<*> via eth1
+[102]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPREQUEST for <*> <*> from <*>:<*>:<*>:<*>:<*>:<*> via eth1: unknown lease <*>
+[103]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPDISCOVER from <*>:<*>:<*>:<*>:<*>:<*> via eth1: network <*>: no free leases
+[104]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPDISCOVER from <*>:<*>:<*>:<*>:<*>:<*> via eth1
+[105]
+<*> <*>:<*>:<*> <*> kernel: <*>:1): initialized
+[106]
+<*> <*>:<*>:<*> <*> kernel: audit: initializing netlink socket (disabled)
+[107]
+<*> <*>:<*>:<*> <*> kernel: divert: not allocating divert_blk for non-ethernet device <*>
+[108]
+<*> <*>:<*>:<*> <*> kernel: drivers/usb/input/hid-core.c: v2.0:USB HID core driver
+[109]
+<*> <*>:<*>:<*> <*> kernel: ide-floppy driver 0.99.newide
+[110]
+<*> <*>:<*>:<*> <*> kernel: ide: Assuming 33MHz system bus speed for PIO modes; override with idebus=xx
+[111]
+<*> <*>:<*>:<*> <*> kernel: klogd 1.4.1, log source = /proc/kmsg started.
+[112]
+<*> <*>:<*>:<*> <*> kernel: ksign: Installing public key data
+[113]
+<*> <*>:<*>:<*> <*> kernel: md: md driver 0.90.0 MAX_MD_DEVS=<*>, MD_SB_DISKS=<*>
+[114]
+<*> <*>:<*>:<*> <*> kernel: megaraid cmm: #18# (Release Date: Mon Mar <*> <*>:<*>:<*> EST 2005)
+[115]
+<*> <*>:<*>:<*> <*> kernel: megaraid: #19# (Release Date: Mon Mar <*> <*>:<*>:<*> EST 2005)
+[116]
+<*> <*>:<*>:<*> <*> kernel: megaraid: fw version:[521S] bios version:[H430]
+[117]
+<*> <*>:<*>:<*> <*> kernel: megaraid: probe new device 0x1028:0x0013:0x1028:0x016c: bus <*>:slot <*>:func <*>
+[118]
+<*> <*>:<*>:<*> <*> kernel: mice: PS/2 mouse device common for all mice
+[119]
+<*> <*>:<*>:<*> <*> kernel: mtrr: v2.0 (20020519)
+[120]
+<*> <*>:<*>:<*> <*> kernel: per-CPU timeslice cutoff: <*> usecs.
+[121]
+<*> <*>:<*>:<*> <*> kernel: scsi0 : LSI Logic MegaRAID driver
+[122]
+<*> <*>:<*>:<*> <*> kernel: Using cfq io scheduler
+[123]
+<*> <*>:<*>:<*> <*> kernel: VFS: Disk quotas dquot_6.5.1
+[124]
+<*> <*>:<*>:<*> <*> kernel: <*>:132]Couldn't find a suitable network device; setting lid_base to <*>
+[125]
+<*> <*>:<*>:<*> <*> kernel: device-mapper: <*> <*> initialised: dm-#16#@#17#
+[126]
+<*> <*>:<*>:<*> <*> kernel: divert: allocating divert_blk for <*>
+[127]
+<*> <*>:<*>:<*> <*> kernel: e1000: <*>: e1000_probe: Intel(R) PRO/1000 Network Connection
+[128]
+<*> <*>:<*>:<*> <*> kernel: e1000: eth0: e1000_watchdog: NIC Link is Up <*> Mbps Full Duplex
+[129]
+<*> <*>:<*>:<*> <*> kernel: Probing IDE interface <*>
+[130]
+<*> <*>:<*>:<*> <*> kernel: Processor <*> <*>:<*> APIC version <*>
+[131]
+<*> <*>:<*>:<*> <*> kernel: RAMDISK driver initialized: <*> RAM disks of 16384K size <*> blocksize
+[132]
+<*> <*>:<*>:<*> <*> kernel: Real Time Clock Driver v1.12
+[133]
+<*> <*>:<*>:<*> <*> kernel: SCSI device sda: <*> 512-byte hdwr sectors <*> MB)
+[134]
+<*> <*>:<*>:<*> <*> kernel: SCSI subsystem initialized
+[135]
+<*> <*>:<*>:<*> bn878/bn878 kernel: SELinux: <*> <*> <*>
+[136]
+<*> <*>:<*>:<*> <*> kernel: Serial: 8250/16550 driver $Revision: 1.90 $ <*> ports, IRQ sharing enabled
+[137]
+<*> <*>:<*>:<*> <*> kernel: Setting APIC routing to flat
+[138]
+<*> <*>:<*>:<*> <*> kernel: TCP: Hash tables configured (established <*> bind 65536)
+[139]
+<*> <*>:<*>:<*> <*> kernel: time.c: Using <*> based timekeeping.
+[140]
+<*> <*>:<*>:<*> <*> kernel: <*>: module license <*> taints kernel.
+[141]
+<*> <*>:<*>:<*> <*> kernel: ttyS0 at I/O 0x3f8 (irq = 4) is a <*>
+[142]
+<*> <*>:<*>:<*> <*> kernel: usb <*>: new <*> speed USB device using address <*>
+[143]
+<*> <*>:<*>:<*> <*> kernel: usbcore: registered new driver <*>
+[144]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Server Administrator startup complete
+[145]
+<*> <*>:<*>:<*> <*> kernel: Disabled Privacy Extensions on device <*>
+[146]
+<*> <*>:<*>:<*> <*> kernel: IPv6 over IPv4 tunneling driver
+[147]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Server Administrator starting
+[148]
+<*> <*>:<*>:<*> <*> network: Bringing up <*> <*>: <*>
+[150]
+<*> <*>:<*>:<*> <*> rc.sysinit: Setting clock (localtime): <*> <*> <*> <*>:<*>:<*> <*> <*> succeeded
+[151]
+<*> <*>:<*>:<*> <*> <*>: Home page is http://#20#/
+[152]
+<*> <*>:<*>:<*> <*> <*>: Opened configuration file /etc/smartd.conf
+[153]
+<*> <*>:<*>:<*> <*> <*>: Unable to register device /dev/sda (no Directive -d removable). Exiting.
+[154]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.neigh.default.gc_thresh1 = <*>
+[155]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI interrupt <*>:<*>:<*> -> GSI <*> (level, low) -> IRQ <*>
+[156]
+<*> <*>:<*>:<*> <*> kernel: ip_tables: (C) 2000-2002 Netfilter core team
+[157]
+<*> <*>:<*>:<*> <*> mount: <*>: <*> <*> <*> <*>: 0x5 (Out of memory)
+[158]
+<*> <*>:<*>:<*> <*> rc.sysinit: Checking root filesystem succeeded
+[159]
+<*> <*>:<*>:<*> <*> rc.sysinit: Remounting root filesystem in read-write mode: succeeded
+[160]
+<*> <*>:<*>:<*> <*> sysctl: fs.file-max = <*>
+[161]
+<*> <*>:<*>:<*> <*> <*>: Got trap from peer on fd <*>
+[162]
+<*> <*>:<*>:<*> bn804/bn804 <*>: Setting <*> <*>: succeeded
+[163]
+<*> <*>:<*>:<*> <*> rc.sysinit: Checking filesystems succeeded
+[164]
+<*> <*>:<*>:<*> bn804/bn804 sysctl: <*> = <*>
+[165]
+<*> <*>:<*>:<*> <*> <*>: starting udevd daemon
+[166]
+<*> <*>:<*>:<*> <*> kernel: <*>: no IPv6 routers present
+[167]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_assign.c:229]: Set port GUID=<*>, port=<*> DOWN (port prefix fe80000000000000, subnet_prefix fe80000000
+[168]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_assign.c:568]: Force port to go down due to LID conflict, node - GUID=<*>, port=<*>
+[169]
+<*> <*>:<*>:<*> <*> instsvcdrv: <*> device driver <*>
+[170]
+<*> <*>:<*>:<*> <*> fsck: <*>: clean, <*> files, <*> blocks
+[171]
+<*> <*>:<*>:<*> <*> fsck: <*>: recovering journal
+[172]
+<*> <*>:<*>:<*> <*> fsck: Checking all file systems.
+[173]
+<*> <*>:<*>:<*> <*> sysctl: net.core.wmem_default = <*>
+[174]
+<*> <*>:<*>:<*> <*> <*>: Unable to register SCSI device /dev/sda at line <*> of file /etc/smartd.conf
+[175]
+<*> <*>:<*>:<*> <*> fsck: [/sbin/fsck.ext3 (1) -- <*> fsck.ext3 -a <*>
+[176]
+<*> <*>:<*>:<*> <*> sysctl: kernel.sysrq = <*>
+[177]
+<*> <*>:<*>:<*> <*> date: <*> Nov <*> <*>:<*>:<*> MST <*>
+[178]
+<*> <*>:<*>:<*> <*> mount.panfs: pan_ips: error -- cfg target addresses, 0x5 (Out of memory), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_cfg.c:<*>
+[179]
+<*> <*>:<*>:<*> <*> kernel: Console: colour VGA+ 80x25
+[180]
+<*> <*>:<*>:<*> <*> kernel: <*>: apic_id <*>, version <*>, address <*>, GSI <*>
+[181]
+<*> <*>:<*>:<*> <*> kernel: ehci_hcd <*>:<*>:1d.7: irq <*>, pci mem <*>
+[182]
+<*> <*>:<*>:<*> <*> mount: mount.panfs error: mount request rejected because client-realm clock skew exceeds <*> seconds
+[183]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, Bad IEC (SMART) mode page, err=<*>, skip device
+[184]
+<*> <*>:<*>:<*> <*> kernel: ehci_hcd <*>:<*>:1d.7: USB 2.0 enabled, EHCI 1.00, driver 2004-May-10
+[185]
+<*> <*>:<*>:<*> <*> kernel: floppy0: no floppy controllers found
+[186]
+<*> <*>:<*>:<*> <*> kernel: hw_random hardware driver 1.0.0 loaded
+[187]
+<*> <*>:<*>:<*> <*> kernel: BIOS-e820: 00000000bffc0000 - 00000000bffcfc00 (ACPI data)
+[188]
+<*> <*>:<*>:<*> <*> kernel: <*> kernel module initialized successfully
+[189]
+<*> <*>:<*>:<*> <*> kernel: ACPI: Processor <*> (supports C1)
+[190]
+<*> <*>:<*>:<*> <*> kernel: Loading keyring
+[191]
+<*> <*>:<*>:<*> <*> kernel: SELinux: <*> netfilter hooks
+[192]
+<*> <*>:<*>:<*> <*> kernel: Total HugeTLB memory allocated, <*>
+[193]
+<*> <*>:<*>:<*> <*> <*>: bindcache: failed init IPS: 0x5 (Out of memory)
+[194]
+<*> <*>:<*>:<*> <*> mount.panfs: pan_ips: error -- real init, 0x5 (Out of memory), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips.c:<*>
+[195]
+<*> <*>:<*>:<*> <*> kernel: sda: assuming drive cache: write through
+[196]
+<*> <*>:<*>:<*> <*> kernel: serio: i8042 <*> port at 0x60,0x64 irq <*>
+[197]
+<*> <*>:<*>:<*> <*> kernel: task migration cache decay timeout: <*> msecs.
+[198]
+<*> <*>:<*>:<*> local@tbird-admin1 VFS: file-max limit <*> reached
+[199]
+<*> <*>:<*>:<*> local@tbird-admin1 /apps/x86_64/system/ganglia-3.0.1/sbin/gmetad[1684]: RRD_update <*>: opening <*>: Too many open files in system
+[200]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_sweep.c:<*>: IB node <*> port <*> <*> <*> <*>
+[201]
+<*> <*>:<*>:<*> <*> logger: Kickstart: setup <*> <*> <*> <*> <*>
+[202]
+<*> <*>:<*>:<*> local@tbird-admin1 /apps/x86_64/system/ganglia-3.0.1/sbin/gmetad[1684]: Unable to write meta data for metric <*> to RRD
+[203]
+<*> <*>:<*>:<*> <*> kernel: <*>:0): avc: denied { <*> } for pid=<*> comm=<*> <*>=<*> dev=<*> ino=<*> scontext=user_u:system_r:<*> tcontext=<*>:object_r:<*> tclass=<*>
+[204]
+<*> <*>:<*>:<*> <*> <*>: pam_timestamp: updated timestamp file <*>
+[205]
+<*> <*>:<*>:<*> <*> <*>: running '/usr/sbin/up2date --nox -i -f kernel-devel' with root privileges on behalf of 'root'
+[206]
+<*> <*>:<*>:<*> <*> <*>: Updated timestamp for job <*> to <*>
+[207]
+<*> <*>:<*>:<*> <*> logrotate: ALERT exited abnormally with [1]
+[208]
+<*> <*>:<*>:<*> <*> <*>: My unqualified host name <*> unknown; sleeping for retry
+[209]
+<*> <*>:<*>:<*> <*> kernel: Warning: <*> returned 0!
+[210]
+<*> <*>:<*>:<*> <*> kernel: [IB_NET][ipoib_sarp_rewrite_send][/mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/host/ulp/ipoib/obj_host_amd64_custom1_rhel4/ts_ipoib/ipoib_arp.c:1008]ib0: can't find hw address for hash <*>:<*>:<*>:<*>:<*>:<*>
+[211]
+<*> <*>:<*>:<*> <*> kernel: <*>: InfiniHost0 port <*>
+[212]
+<*> <*>:<*>:<*> <*> kernel: inserting floppy driver for <*>
+[213]
+<*> <*>:<*>:<*> bn806/bn806 kernel: md: <*> <*> <*>
+[214]
+<*> <*>:<*>:<*> <*> init: Entering runlevel: <*>
+[215]
+<*> <*>:<*>:<*> <*> <*>: No <*> <*> found
+[216]
+<*> <*>:<*>:<*> <*> mount.panfs: pan_ips: error -- cfg target addresses, 0x5 (Out of memory), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_cfg.c:<*> <*> <*> <*>:<*>:<*> mount.panfs: pan_ips: error -- real init, 0x5 (Out of memory), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips.c:<*>
+[217]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:<*>: Failed to GetNodeInfo() - hop_count: <*>, direct_path: <*>, <*>, <*>, <*>, <*>, <*>, <*>, <*>, <*>, <*>
+[218]
+<*> <*>:<*>:<*> <*> kernel: THH(1): <*>: <*>: Device in FATAL state
+[219]
+<*> <*>:<*>:<*> <*> kernel: <*>:<*> failed (0) for InfiniHost0 port <*> QPN <*> (class 0x81, aid 0x0011)
+[220]
+<*> <*>:<*>:<*> <*> kernel: [KERNEL_IB][tsIbTavorMadProcess][/mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/ib/tavor/provider/obj_host_amd64_custom1_rhel4/ts_ib_tavor/tavor_mad.c:152]InfiniHost0: EVAPI_process_local_mad failed, return code = -254 (Fatal error (Local Catastrophic Error))
+[221]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:<*>: Failed to GetNodeInfo() because of NO RESPONSE
+[222]
+<*> <*>:<*>:<*> <*> <*>: mount.panfs: started PanFS device [panfs:<*>
+[223]
+<*> <*>:<*>:<*> <*> <*>: [smux_accept] accepted fd <*> from <*>:<*>
+[224]
+<*> <*>:<*>:<*> <*> <*>: accepted smux peer: oid SNMPv2-SMI::enterprises.674.10892.1, password , descr Systems Management SNMP MIB Plug-in Manager
+[225]
+<*> <*>:<*>:<*> <*> kernel: PanFS Client version: rhel_4_amd64/release <*> SMP
+[226]
+<*> <*>:<*>:<*> <*> kernel: pan_common: init complete
+[227]
+<*> <*>:<*>:<*> cn767/cn767 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[228]
+<*> <*>:<*>:<*> <*> kernel: pan_trace: panfs trace buffer <*> added.
+[229]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: Byte range locking is turned ON
+[230]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: <*> <*> <*> <*> <*>
+[231]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: If you are running a GenuineIntel kernel, you may get an oops.
+[232]
+<*> <*>:<*>:<*> cn572/cn572 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[233]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: Read Ahead is turned ON at level <*>
+[234]
+<*> <*>:<*>:<*> <*> kernel: <*>: no version for "struct_module" found: kernel tainted.
+[235]
+<*> <*>:<*>:<*> bn726/bn726 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[236]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: loading a AuthenticAMD CPU panfs.o kernel module on a GenuineIntel CPU
+[237]
+<*> <*>:<*>:<*> bn800/bn800 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[238]
+<*> <*>:<*>:<*> bn808/bn808 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[239]
+<*> <*>:<*>:<*> bn286/bn286 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[240]
+<*> <*>:<*>:<*> <*> omsad32: tput: No value for $TERM and no -T specified
+[241]
+<*> <*>:<*>:<*> an563/an563 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[242]
+<*> <*>:<*>:<*> <*> <*>: Package Release ID=R106628 Package Description=Dell BMC Firmware, v.1.40, A05 Support Log path=/var/log/#26#/updatepackage/log/support/R106628.log
+[243]
+<*> <*>:<*>:<*> dn465/dn465 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[244]
+<*> <*>:<*>:<*> dn473/dn473 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[245]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Temperature sensor returned to a normal value Sensor location: BMC <*> Temp Chassis location: Main System Chassis Previous state was: Unknown Temperature sensor value (in Degrees Celsius): <*>
+[246]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Temperature sensor returned to a normal value Sensor location: PROC_1 Temp Chassis location: Main System Chassis Previous state was: Unknown Temperature sensor value (in Degrees Celsius): <*>
+[247]
+<*> <*>:<*>:<*> <*> ntpd: succeeded
+[248]
+<*> <*>:<*>:<*> <*> <*>: ntpd exiting on signal <*>
+[249]
+<*> <*>:<*>:<*> <*> <*>: Package Release ID=R106628 Package Description=Dell BMC Firmware, v.1.40, A05 Support Log path=/var/log/#26#/updatepackage/log/support/R106628.log Exit code = <*> (Reboot required)
+[250]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Temperature sensor detected a warning value Sensor location: BMC Ambient Temp Chassis location: Main System Chassis Previous state was: Unknown Temperature sensor value (in Degrees Celsius): <*>
+[251]
+<*> <*>:<*>:<*> <*> <*>: smartd version 5.33 [x86_64-redhat-linux-gnu] Copyright (C) 2002-4 Bruce Allen
+[252]
+<*> <*>:<*>:<*> bn575/bn575 ts_fixup:
+[253]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Temperature sensor returned to a normal value Sensor location: BMC Ambient Temp Chassis location: Main System Chassis Previous state was: Non-Critical (Warning) Temperature sensor value (in Degrees Celsius): <*>
+[254]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: warning: unable to look up public/pickup: No such file or directory
+[255]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, Temperature changed <*> Celsius to <*> Celsius since last report
+[256]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_discovery.c:1103]: Failed discover node test, node <*>, port_num= <*>, error code <*>
+[257]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> Temperature sensor detected a warning value Sensor location: BMC Ambient Temp Chassis location: Main System Chassis Previous state was: OK (Normal) Temperature sensor value (in Degrees Celsius): <*>
+[258]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Configuration caused by some ports in INIT state
+[259]
+<*> <*>:<*>:<*> <*> kernel: USB Universal Host Controller Interface driver v2.2
+[260]
+<*> <*>:<*>:<*> <*> kernel: Uniform Multi-Platform E-IDE driver Revision: 7.00alpha2
+[261]
+<*> <*>:<*>:<*> <*> <*>: tftp: client does not accept options
+[262]
+<*> <*>:<*>:<*> <*> xinetd[2245]: removing <*>
+[263]
+<*> <*>:<*>:<*> <*> <*>: <*>: from=root, size=<*>, class=<*>, nrcpts=<*>, msgid=<*>, relay=#7#@localhost
+[264]
+<*> <*>:<*>:<*> <*> <*>: <*>: to=root, ctladdr=root (0/0), delay=<*>:<*>:<*>, xdelay=<*>:<*>:<*>, mailer=relay, pri=<*>, relay=[127.0.0.1] [127.0.0.1], dsn=4.0.0, stat=Deferred: Connection refused by [127.0.0.1]
+[265]
+<*> <*>:<*>:<*> <*> <*>: unable to qualify my own domain name <*> -- using short name
+[266]
+<*> <*>:<*>:<*> <*> kernel: rip <*>
+[267]
+<*> <*>:<*>:<*> <*> kernel: warning: many lost ticks.
+[268]
+<*> <*>:<*>:<*> #1#/#1# logger: <*>: <*> <*>
+[269]
+<*> <*>:<*>:<*> #1#/#1# logger: Kickstart: <*> <*> <*>
+[270]
+<*> <*>:<*>:<*> <*> kernel: scsi[0]: scanning scsi channel <*> [Phy 0] for non-raid devices
+[271]
+<*> <*>:<*>:<*> <*> kernel: scsi[0]: scanning scsi channel <*> [virtual] for logical drives
+[272]
+<*> <*>:<*>:<*> <*> kernel: sda: asking for cache data failed
+[273]
+<*> <*>:<*>:<*> <*> logger: Kickstart Install: <*> <*> <*>
+[274]
+<*> <*>:<*>:<*> <*> <*>: START: <*> pid=<*> from=<*>
+[275]
+<*> <*>:<*>:<*> <*> <*>: NET-SNMP version 5.1.2
+[276]
+<*> <*>:<*>:<*> <*> exiting on signal <*>
+[277]
+<*> <*>:<*>:<*> <*> <*>: Now running on <*> privileges.
+[278]
+<*> <*>:<*>:<*> <*> <*>: User <*>, coming from <*>, authenticated.
+[279]
+<*> <*>:<*>:<*> <*> <*>: connection from <*>
+[280]
+<*> <*>:<*>:<*> <*> rc.sysinit: Setting hostname <*>: succeeded
+[281]
+<*> <*>:<*>:<*> bn575/bn575 sysctl: <*> = <*>
+[282]
+<*> <*>:<*>:<*> <*> <*>: Version 1.0.6 Starting
+[283]
+<*> <*>:<*>:<*> <*> <*>: Local disconnected: Connection closed.
+[284]
+<*> <*>:<*>:<*> <*> dhcpd: Sending on Socket/fallback/fallback-net
+[285]
+<*> <*>:<*>:<*> <*> dhcpd: Wrote <*> deleted host decls to leases file.
+[286]
+<*> <*>:<*>:<*> <*> dhcpd: Wrote <*> leases to leases file.
+[287]
+<*> <*>:<*>:<*> <*> dhcpd: Wrote <*> new dynamic host decls to leases file.
+[288]
+<*> <*>:<*>:<*> <*> <*>: connection lost: 'Connection closed.'
+[290]
+<*> <*>:<*>:<*> <*> sudo: <*> : TTY=unknown ; PWD=<*> ; USER=root ; COMMAND=<*>
+[291]
+<*> <*>:<*>:<*> local@tbird-admin1 postfix/pickup[22935]: warning: <*>: message has been queued for <*> days
+[292]
+<*> <*>:<*>:<*> <*> logger: Kickstart Install: <*> <*> <*> <*> <*> <*>
+[293]
+<*> <*>:<*>:<*> <*> <*>: running '/usr/sbin/up2date --nox -i <*> with root privileges on behalf of 'root'
+[294]
+<*> <*>:<*>:<*> <*> logger: Kickstart Install: <*> <*>
+[295]
+<*> <*>:<*>:<*> <*> rc.sysinit: Setting up Logical Volume Management: succeeded
+[296]
+<*> <*>:<*>:<*> cn599/cn599 kernel: ACPI: <*> <*> <*> <*>
+[297]
+<*> <*>:<*>:<*> <*> kernel: ACPI: Interpreter enabled
+[298]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI Interrupt Link <*> (IRQs <*> <*> <*> <*> <*> <*> <*> 12) <*>
+[299]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI Interrupt Link <*> (IRQs <*> <*> <*> <*> <*> <*> <*> 12)
+[300]
+<*> <*>:<*>:<*> <*> kernel: hw_random: RNG not detected
+[301]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: Cannot open file <*> for writing (Too many open files)
+[302]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: Cannot open file <*> for writing (No such file or directory)
+[303]
+<*> <*>:<*>:<*> src@tbird-sm1 <*>: [ib_sm_bringup.c:513]: Program port state, node=<*>, port= <*>, current state <*>, neighbor node=<*>, port= <*>, current state <*>
+[304]
+<*> <*>:<*>:<*> an812/an812 kernel: ACPI: <*> <*> <*> <*>
+[305]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI Interrupt Link <*> (IRQs <*> <*> <*> <*> <*> <*> <*> 12) *0, disabled.
+[306]
+<*> <*>:<*>:<*> <*> kernel: Checking aperture...
+[307]
+<*> <*>:<*>:<*> <*> network: Setting network parameters: succeeded
+[308]
+<*> <*>:<*>:<*> <*> rc.sysinit: Enabling local filesystem quotas: succeeded
+[309]
+<*> <*>:<*>:<*> <*> rc.sysinit: Enabling swap space: succeeded
+[310]
+<*> <*>:<*>:<*> <*> rc.sysinit: Mounting local filesystems: <*>
+[311]
+<*> <*>:<*>:<*> an80/an80 sysctl: <*> = <*>
+[312]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI Interrupt Routing Table <*>
+[313]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PCI Root Bridge [PCI0] (00:00)
+[314]
+<*> <*>:<*>:<*> <*> kernel: ACPI: LAPIC <*> <*> <*>
+[315]
+<*> <*>:<*>:<*> <*> kernel: Type: <*> ANSI SCSI revision: <*>
+[319]
+<*> <*>:<*>:<*> <*> rc.sysinit: -e
+[320]
+<*> <*>:<*>:<*> <*> rc.sysinit: Configuring kernel parameters: succeeded
+[321]
+<*> <*>:<*>:<*> <*> sysctl: kernel.core_uses_pid = <*>
+[322]
+<*> <*>:<*>:<*> an136/an136 kernel: ACPI: <*> <*> <*> <*>
+[323]
+<*> <*>:<*>:<*> <*> kernel: Dquot-cache hash table entries: <*> (order <*>, <*> bytes)
+[324]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs: mounted filesystem with ordered data mode.
+[325]
+<*> <*>:<*>:<*> <*> kernel: Freeing unused kernel memory: <*> freed
+[326]
+<*> <*>:<*>:<*> <*> kernel: IA32 emulation $Id: sys_ia32.c,v 1.32 2002/03/24 <*>:<*>:<*> ak Exp $
+[327]
+<*> <*>:<*>:<*> <*> ntpd: failed
+[328]
+<*> <*>:<*>:<*> <*> <*>: no server suitable for synchronization found
+[329]
+<*> <*>:<*>:<*> bn604/bn604 sysctl: <*> = <*>
+[330]
+<*> <*>:<*>:<*> <*> fsck: [/sbin/fsck.ext3 (1) -- <*>
+[332]
+<*> <*>:<*>:<*> <*> <*>: removed all generated mount points
+[333]
+<*> <*>:<*>:<*> <*> kernel: EXT3 FS on <*>, internal journal
+[334]
+<*> <*>:<*>:<*> bn960/bn960 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[335]
+<*> <*>:<*>:<*> <*> xinetd[2259]: removing <*>
+[336]
+<*> <*>:<*>:<*> <*> mount: mount.panfs: <*> local addresses: <*>:<*>
+[337]
+<*> <*>:<*>:<*> <*> <*>: BIOS update verification failed. Version expected: A04, Version found: A02
+[338]
+<*> <*>:<*>:<*> <*> kernel: <*>: Using <*> for <*> routing
+[339]
+<*> <*>:<*>:<*> <*> kernel: BIOS-provided physical RAM map:
+[340]
+<*> <*>:<*>:<*> <*> kernel: Bootdata ok (command line is ro root=LABEL=/ tsc console=tty0 console=ttyS0,<*> rhgb quiet)
+[341]
+<*> <*>:<*>:<*> <*> kernel: Built <*> zonelists
+[342]
+<*> <*>:<*>:<*> <*> kernel: CPU0: Intel(R) Xeon(TM) CPU 3.60GHz stepping <*>
+[343]
+<*> <*>:<*>:<*> <*> kernel: ACPI: Local APIC address 0xfee00000
+[344]
+<*> <*>:<*>:<*> <*> xinetd[2260]: removing <*>
+[345]
+<*> <*>:<*>:<*> <*> xinetd[2258]: removing <*>
+[346]
+<*> <*>:<*>:<*> <*> syslogd 1.4.1: restart.
+[347]
+<*> <*>:<*>:<*> <*> xinetd[2248]: removing <*>
+[348]
+<*> <*>:<*>:<*> dn377/dn377 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[349]
+<*> <*>:<*>:<*> dn479/dn479 kernel: md: <*> <*> <*>
+[350]
+<*> <*>:<*>:<*> <*> kernel: sda: sda1 sda2 sda3 sda4 < sda5 sda6 >
+[351]
+<*> <*>:<*>:<*> <*> kernel: - Added public key EA232A604969C61D
+[352]
+<*> <*>:<*>:<*> <*> kernel: - User ID: Red Hat, Inc. (Kernel Module GPG key)
+[353]
+<*> <*>:<*>:<*> <*> kernel: Adding 13309844k swap on <*> Priority:-1 extents:<*>
+[354]
+<*> <*>:<*>:<*> <*> kernel: Attached scsi generic <*> at scsi0, channel <*>, id <*>, lun <*>, type <*>
+[355]
+<*> <*>:<*>:<*> <*> kernel: Initializing IPsec netlink socket
+[356]
+<*> <*>:<*>:<*> <*> kernel: Intel E7520/7320/7525 detected.<6>pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+[357]
+<*> <*>:<*>:<*> <*> kernel: Mellanox Tavor Device Driver is creating device "InfiniHost0" (domain=<*>, bus=<*>, devfn=00)
+[358]
+<*> <*>:<*>:<*> <*> kernel: PCI0 PALO PBLO VPR0 PBHI PICH
+[359]
+<*> <*>:<*>:<*> <*> kernel: PCI: Setting latency timer of device <*>:<*>:<*> to <*>
+[360]
+<*> <*>:<*>:<*> <*> kernel: i2c /dev entries driver
+[361]
+<*> <*>:<*>:<*> <*> netfs: <*> <*> filesystems: succeeded
+[362]
+<*> <*>:<*>:<*> <*> <*>: <*> startup failed
+[363]
+<*> <*>:<*>:<*> <*> <*>: Configuration file /etc/smartd.conf parsed.
+[364]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, opened
+[365]
+<*> <*>:<*>:<*> <*> mount: mount.panfs warning: This mount still may succeed, but one or more local interfaces (listed below) failed communicate with the Panasas realm during mount. This suggests that a route cannot be established between these local interface(s) and the system. A client sends a list of IP addresses on which the Panasas storage system may establish a connection. If any one of these addresses should be excluded from the mount time check, use the 'callback-network-disallow' or 'callback-address-disallow' mount options. See 'man <*> mount.panfs' for more details on PanFS mount options. Excluding the interface from the check at mount time #15# avoid long running mount commands.
+[368]
+<*> <*>:<*>:<*> <*> kernel: Attached scsi disk sda at scsi0, channel <*>, id <*>, lun <*>
+[370]
+<*> <*>:<*>:<*> dn16/dn16 kernel: <*>: registered <*> <*> <*> <*> <*> <*>
+[373]
+<*> <*>:<*>:<*> cn741/cn741 sysctl: <*> = <*>
+[375]
+<*> <*>:<*>:<*> <*> kernel: PCI: cache line size of <*> is not supported by device <*>:<*>:1d.7
+[376]
+<*> <*>:<*>:<*> bn81/bn81 kernel: ACPI: <*> <*> <*> <*>
+[377]
+<*> <*>:<*>:<*> <*> kernel: <*>:panfs:<*>
+[378]
+<*> <*>:<*>:<*> <*> kernel: <*>:panfs:<*> <*>:panfs:<*>
+[379]
+<*> <*>:<*>:<*> <*> kernel: <ffffffff80110c9f>{child_rip+0}
+[380]
+<*> <*>:<*>:<*> <*> kernel: <*> <*>:panfs:<*>
+[381]
+<*> <*>:<*>:<*> <*> kernel: <*> pages <*> <*>
+[382]
+<*> <*>:<*>:<*> <*> kernel: <*> pages shared
+[383]
+<*> <*>:<*>:<*> <*> kernel: Call Trace:<ffffffff8015c61c>{__alloc_pages+846} <*>
+[384]
+<*> <*>:<*>:<*> <*> kernel: kpanfs_thpool: page allocation failure. order:<*>, mode:<*>
+[385]
+<*> <*>:<*>:<*> <*> kernel: Node <*> <*> free:<*> min:<*> low:<*> high:<*> active:<*> inactive:<*> present:<*> pages_scanned:<*> all_unreclaimable? <*>
+[386]
+<*> <*>:<*>:<*> <*> kernel: <ffffffff8013ed48>{del_singleshot_timer_sync+21} <ffffffff803035e3>{schedule_timeout+252}
+[388]
+<*> <*>:<*>:<*> <*> <*>: RRD_update <*>: illegal attempt to update using time <*> when last update time is <*> (minimum one second step)
+[389]
+<*> <*>:<*>:<*> <*> <*>: Package Release ID=R109030 Package Description=Dell Server System BIOS, A04 Support Log path=/var/log/#26#/updatepackage/log/support/R109030.log Exit code = <*> (Reboot required)
+[390]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: IB <*> PID= <*>
+[391]
+<*> <*>:<*>:<*> en52/en52 sysctl: <*> = <*>
+[392]
+<*> <*>:<*>:<*> <*> kernel: Linux version <*> <*> (gcc version 3.4.3 <*> (Red Hat 3.4.3-22.1)) #1 SMP Tue <*> <*> <*>:<*>:<*> MDT <*>
+[393]
+<*> <*>:<*>:<*> <*> kernel: SELinux: Disabled at runtime.
+[394]
+<*> <*>:<*>:<*> <*> kernel: ioc0: 53C1030: Capabilities={Initiator,Target}
+[395]
+<*> <*>:<*>:<*> <*> kernel: mptbase: Initiating ioc0 bringup
+[396]
+<*> <*>:<*>:<*> <*> kernel: scsi0 : ioc0: LSI53C1030, FwRev=01032300h, Ports=<*>, MaxQ=<*>, IRQ=<*>
+[397]
+<*> <*>:<*>:<*> en127/en127 sysctl: <*> = <*>
+[398]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, is SMART capable. Adding to "monitor" list.
+[399]
+<*> <*>:<*>:<*> <*> <*>: Monitoring <*> ATA and <*> SCSI devices
+[400]
+<*> <*>:<*>:<*> <*> <*>: smartd has fork()ed into background mode. New PID=<*>
+[401]
+<*> <*>:<*>:<*> <*> kernel: Vendor: PE/PV Model: 1x2 SCSI BP Rev: 1.0
+[402]
+<*> <*>:<*>:<*> <*> kernel: Vendor: <*> Model: <*> Rev: <*>
+[403]
+<*> <*>:<*>:<*> <*> kernel: Copyright (c) <*> Intel Corporation.
+[404]
+<*> <*>:<*>:<*> <*> kernel: Copyright (c) 1999-2005 LSI Logic Corporation
+[405]
+<*> <*>:<*>:<*> <*> kernel: ACPI: <*> used by override.
+[407]
+<*> <*>:<*>:<*> en325/en325 sysctl: <*> = <*>
+[408]
+<*> <*>:<*>:<*> <*> fsck: fsck.ext3 -a <*>
+[409]
+<*> <*>:<*>:<*> <*> <*>: Public key /root/.ssh2/id_dsa_cap_ssh.pub used.
+[410]
+<*> <*>:<*>:<*> <*> <*>: Public key authentication for user root accepted.
+[411]
+<*> <*>:<*>:<*> bn37/bn37 kernel: UDP: short packet: From <*>:<*> 48/16 to #112#:<*>
+[412]
+<*> <*>:<*>:<*> <*> <*>: running '/usr/sbin/up2date-config' with root privileges on behalf of 'root'
+[413]
+<*> <*>:<*>:<*> <*> <*>: smartd is exiting (exit status 0)
+[414]
+<*> <*>:<*>:<*> <*> <*>: smartd received signal <*>: Terminated
+[415]
+<*> <*>:<*>:<*> en18/en18 sysctl: <*> = <*>
+[416]
+<*> <*>:<*>:<*> <*> kernel: Bootdata ok (command line is initrd=/x86_64/initrd-2.6.9-15.EL.rootsmp console=tty0 console=ttyS0,<*> BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-15.EL.rootsmp )
+[417]
+<*> <*>:<*>:<*> <*> date: Tue <*> <*> <*>:<*>:<*> MST <*>
+[418]
+<*> <*>:<*>:<*> <*> kernel: Fusion MPT <*> Host driver <*>
+[420]
+<*> <*>:<*>:<*> <*> kernel: Fusion MPT base driver <*>
+[421]
+<*> <*>:<*>:<*> <*> kernel: Intel(R) PRO/1000 Network Driver - version <*>
+[422]
+<*> <*>:<*>:<*> <*> kernel: RAMDISK: Compressed image found at block <*>
+[423]
+<*> <*>:<*>:<*> <*> kernel: Kernel command line: initrd=/x86_64/initrd-2.6.9-15.EL.rootsmp console=tty0 console=ttyS0,<*> BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-15.EL.rootsmp
+[424]
+<*> <*>:<*>:<*> en154/en154 sysctl: <*> = <*>
+[425]
+<*> <*>:<*>:<*> <*> kernel: md: Autodetecting RAID arrays.
+[426]
+<*> <*>:<*>:<*> en242/en242 lvm.static:
+[427]
+<*> <*>:<*>:<*> <*> lvm.static: /var/lock/lvm: mkdir failed: Read-only file system
+[428]
+<*> <*>:<*>:<*> en242/en242 sysctl: <*> = <*>
+[429]
+<*> <*>:<*>:<*> <*> kernel: Initializing Cryptographic API
+[430]
+<*> <*>:<*>:<*> <*> kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[431]
+<*> <*>:<*>:<*> <*> mount: mount.panfs: couldn't create mtab lock file: /etc/mtab~ errno: <*>
+[433]
+<*> <*>:<*>:<*> <*> mount: mount: special device LABEL=<*> does not exist
+[434]
+<*> <*>:<*>:<*> <*> kernel: PCI: Probing PCI hardware (bus 00)
+[435]
+<*> <*>:<*>:<*> <*> kernel: PCI: Transparent bridge - <*>:<*>:1e.0
+[436]
+<*> <*>:<*>:<*> tsqe2/tsqe2 sysctl: <*> = <*>
+[437]
+<*> <*>:<*>:<*> <*> dhclient: <*> from <*>
+[438]
+<*> <*>:<*>:<*> <*> dhclient: DHCPDISCOVER on eth0 to #342# port <*> interval <*>
+[439]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: <*>: message-id=<*>
+[440]
+<*> <*>:<*>:<*> <*> <*>: <*>: uid=<*> from=<root>
+[441]
+<*> <*>:<*>:<*> <*> <*>: <*>: from=<*>, size=<*>, nrcpt=<*> (queue active)
+[442]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: <*>: removed
+[443]
+<*> <*>:<*>:<*> <*> <*>: <*>: to=<*>, relay=#211#[#212#], delay=<*>, status=sent (250 2.0.0 <*> Message accepted for delivery)
+[444]
+<*> <*>:<*>:<*> <*> <*>: can't open /var/lib/ntp/drift.TEMP: Permission denied
+[445]
+<*> <*>:<*>:<*> cn608/cn608 kernel:
+[446]
+<*> <*>:<*>:<*> <*> kernel: fs_client: Umounting panfs ...
+[448]
+<*> <*>:<*>:<*> <*> kernel: fs_client_cap: done
+[449]
+<*> <*>:<*>:<*> <*> kernel: fs_client_cap: starting to scrub the caps
+[450]
+<*> <*>:<*>:<*> <*> kernel: dcdbas: BIOS Update phys addr: <*>
+[451]
+<*> <*>:<*>:<*> <*> kernel: fs_client_fm: All RPCs returned
+[452]
+<*> <*>:<*>:<*> <*> kernel: pan_kmod: done quiescing subdev 0x78 ("PANASAS kernel trace facility")
+[453]
+<*> <*>:<*>:<*> <*> kernel: pan_kmod: <*> subdev 0x78 ("PANASAS kernel trace facility")
+[454]
+<*> <*>:<*>:<*> <*> kernel: pan_common: registered major number <*> for device panasas
+[456]
+<*> <*>:<*>:<*> <*> kernel: Kernel command line: ro root=LABEL=<*> tsc console=tty0 console=ttyS0,<*> rhgb quiet
+[459]
+<*> <*>:<*>:<*> <*> kernel: Memory: <*> available <*> kernel code, 0k reserved, <*> data, <*> init)
+[460]
+<*> <*>:<*>:<*> <*> kernel: No mptable found.
+[461]
+<*> <*>:<*>:<*> <*> kernel: On node <*> totalpages: <*>
+[462]
+<*> <*>:<*>:<*> <*> kernel: ACPI: (supports S0 S4 S5)
+[463]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: port <*> - port=<*>, type=ib4xTX
+[464]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: ib_sm.x destroyed pid=<*>
+[465]
+<*> <*>:<*>:<*> <*> kernel: <*>:0): avc: denied { read write } for pid=<*> comm=ntpdate name=tty dev=ram0 ino=<*> scontext=user_u:system_r:ntpd_t tcontext=system_u:object_r:file_t tclass=chr_file
+[466]
+<*> <*>:<*>:<*> <*> kernel: <*>:0): avc: denied { read } for pid=<*> comm=ntpdate path=/tmp/biosdev (deleted) dev=ramfs ino=<*> scontext=user_u:system_r:ntpd_t tcontext=user_u:object_r:ramfs_t tclass=blk_file
+[467]
+<*> <*>:<*>:<*> <*> logger: setup NTP client
+[468]
+<*> <*>:<*>:<*> <*> kernel: <*>:0): avc: denied { read write } for pid=<*> comm=ntpdate path=socket:<*> dev=sockfs ino=<*> scontext=user_u:system_r:ntpd_t tcontext=user_u:system_r:unconfined_t tclass=udp_socket
+[469]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- IPS command timeout command timed out expire_time=<*>:<*> now=<*>:<*> lifetime=<*>:<*> grace_timeouts=<*> cd=<*> session=<*> (initiator:<*>:<*> <-> target-OSD:<*>:3260) id=<*>:<*>:<*>
+[470]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_destroy: destroying aborted (rc=0x1d78 (IPS: command timed out)) command <*> <*>:<*>:<*>
+[471]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_destroy: destroying timed out command cd=<*>
+[472]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_destroy: invoking callback on aborted (rc=0x1d78 (IPS: command timed out)) command <*>
+[473]
+<*> <*>:<*>:<*> <*> <*>: Received TERM or STOP signal... shutting down...
+[475]
+<*> <*>:<*>:<*> <*> kernel: rpc: request timed out, request <*>, <*> (async), to <*>:<*>
+[476]
+<*> <*>:<*>:<*> <*> kernel: pan_rpc_native_poll_req: unable to send poll pkt 0x2399 (pan_sock: connection reset by peer)
+[477]
+<*> <*>:<*>:<*> <*> kernel: rpc: pan_rpc_request_timeout_engine poll request failed, state <*>, event <*> action <*> rc=0x2399 (pan_sock: connection reset by peer)
+[478]
+<*> <*>:<*>:<*> <*> kernel: rpc: request timed out, request <*>, <*> (async), to (peer addr not available)
+[479]
+<*> <*>:<*>:<*> src@badmin1 nfs: server nfs1 OK
+[480]
+<*> <*>:<*>:<*> <*> pbs_mom: execvp: Permission denied
+[482]
+<*> <*>:<*>:<*> an30/an30 sysctl: <*> = <*>
+[483]
+<*> <*>:<*>:<*> <*> xinetd[2270]: removing <*>
+[484]
+<*> <*>:<*>:<*> <*> <*>: X11 connection from <*>:<*> <*>
+[486]
+<*> <*>:<*>:<*> an12/an12 sysctl: <*> = <*>
+[487]
+<*> <*>:<*>:<*> <*> kernel: md: ... autorun DONE.
+[488]
+<*> <*>:<*>:<*> <*> logger: Install: apply updates
+[489]
+<*> <*>:<*>:<*> <*> logger: Kickstart Install: <*> <*> <*> <*>
+[490]
+<*> <*>:<*>:<*> an47/an47 logger: Kickstart: <*> <*> <*>
+[491]
+<*> <*>:<*>:<*> an54/an54 logger: Kickstart: <*> <*> <*>
+[492]
+<*> <*>:<*>:<*> <*> ifup: done.
+[493]
+<*> <*>:<*>:<*> an122/an122 sysctl: <*> = <*>
+[494]
+<*> <*>:<*>:<*> <*> logger: Install: Removing tftpboot installation link from <*>
+[495]
+<*> <*>:<*>:<*> <*> logger: Kickstart/Yast Install: Finished installation on localhost.localdomain
+[496]
+<*> <*>:<*>:<*> <*> <*>: removing time
+[497]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs: recovery complete.
+[498]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs: write access #15# be enabled during recovery.
+[499]
+<*> <*>:<*>:<*> an208/an208 xinetd[1948]: removing <*>
+[500]
+<*> <*>:<*>:<*> an230/an230 sysctl: <*> = <*>
+[501]
+<*> <*>:<*>:<*> <*> dhcpd: All rights reserved.
+[502]
+<*> <*>:<*>:<*> <*> dhcpd: Copyright <*> Internet Systems Consortium.
+[503]
+<*> <*>:<*>:<*> <*> dhcpd: For info, please visit http://#6#/sw/dhcp/
+[504]
+<*> <*>:<*>:<*> <*> dhcpd: Internet Systems Consortium DHCP Server V3.0.1
+[505]
+<*> <*>:<*>:<*> <*> slot101:<*> <*>: Osa: Leaf <*> is reporting fiber latch overcurrent condition on port <*> of the (Invalid Ptr)
+[506]
+<*> <*>:<*>:<*> <*> <*>: STATS: dropped <*>
+[507]
+<*> <*>:<*>:<*> <*> slot101:<*> <*>: Osa: Leaf <*> is reporting fiber latch fault condition on port <*>
+[508]
+<*> <*>:<*>:<*> <*> <*>: <*> at /devices/pci0000:00/0000:<*>:02.0/0000:<*>:00.0/0000:<*>:05.0/host0/target0:<*>:<*>:<*>:<*>:<*>
+[509]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.ip_forward = <*>
+[510]
+<*> <*>:<*>:<*> local@tbird-admin1 <*>: (root) CMD (/apps/contrib/check-disks aadmin[1-4],badmin[1-4],cadmin[1-4],dadmin[1-4],eadmin[1-2])
+[511]
+<*> <*>:<*>:<*> <*> last message repeated <*> times
+[512]
+<*> <*>:<*>:<*> en3/en3 modprobe: FATAL: Could not load /lib/modules/2.6.9-1.4.5.6smp/modules.dep: No such file or directory
+[514]
+<*> <*>:<*>:<*> <*> kernel: nfs warning: mount version older than kernel
+[515]
+<*> <*>:<*>:<*> <*> ifup: ts_ipoib device ib0 does not seem to be present, delaying initialization.
+[516]
+<*> <*>:<*>:<*> en96/en96 sysctl: <*> = <*>
+[517]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPREQUEST for <*> from <*>:<*>:<*>:<*>:<*>:<*> via eth1
+[518]
+<*> <*>:<*>:<*> en35/en35 xinetd[1960]: removing <*>
+[519]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): pid=<*>
+[521]
+<*> <*>:<*>:<*> dn840/dn840 kernel: MOSAL(1): <*> = <*>
+[522]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): req_perm = READ | WRITE
+[523]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(4): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxsys/obj_host_amd64_custom1_rhel4/mlxsys/mosal_mlock.c[1226]: MOSAL_mlock_iobuf: Failed <*> priv_mosal_mlock for addr=<*> size=<*>
+[524]
+<*> <*>:<*>:<*> <*> kernel: VIPKL(1): [create_mr] MM_bld_hh_mr failed <*>:<*>
+[525]
+<*> <*>:<*>:<*> <*> kernel: <*>: <*>: make_iobuf: MOSAL_iobuf_register failed: va=<*>=<*>
+[526]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): <*>: mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxsys/obj_host_amd64_custom1_rhel4/mlxsys/mosal_iobuf.c:<*>: MOSAL_mlock_iobuf failed - <*>
+[527]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxsys/obj_host_amd64_custom1_rhel4/mlxsys/mosal_iobuf.c[126]: dump iobuf at <*> :
+[528]
+<*> <*>:<*>:<*> <*> logger: Kickstart: setup authorization schema
+[529]
+<*> <*>:<*>:<*> <*> logger: Kickstart: Configure sysctl parameters
+[530]
+<*> <*>:<*>:<*> <*> sysctl: net.core.rmem_max = <*>
+[532]
+<*> <*>:<*>:<*> en189/en189 sysctl: <*> = <*>
+[533]
+<*> <*>:<*>:<*> <*> logger: Kickstart: <*> <*>
+[534]
+<*> <*>:<*>:<*> <*> sshd: <*> key generation succeeded
+[535]
+<*> <*>:<*>:<*> <*> <*>: [trip Temperature is <*> Celsius]
+[536]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, initial Temperature is <*> Celsius
+[537]
+<*> <*>:<*>:<*> en27/en27 sysctl: <*> = <*>
+[538]
+<*> <*>:<*>:<*> <*> dhclient: bound to <*> -- renewal in <*> seconds.
+[540]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:<*>: Topology changed
+[541]
+<*> <*>:<*>:<*> en334/en334 sysctl: <*> = <*>
+[542]
+<*> <*>:<*>:<*> en335/en335 kernel:
+[543]
+<*> <*>:<*>:<*> en324/en324 sysctl: <*> = <*>
+[544]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.route.gc_thresh = <*>
+[545]
+<*> <*>:<*>:<*> cn153/cn153 kernel: MOSAL(1): <*> = <*>
+[546]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(4): <*>: unlock_it: unknown error (-11)
+[547]
+<*> <*>:<*>:<*> cn110/cn110 kernel: MOSAL(1): <*> = <*>
+[548]
+<*> <*>:<*>:<*> <*> kernel: ACPI: Power Button (FF) [PWRF]
+[549]
+<*> <*>:<*>:<*> en210/en210 sysctl: <*> = <*>
+[550]
+<*> <*>:<*>:<*> <*> logger: ensuring time is synced
+[552]
+<*> <*>:<*>:<*> <*> kernel: SCSI device sda: drive cache: write through
+[553]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Configuration caused by <*> <*> <*>
+[556]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, SMART Failure: HARDWARE IMPENDING FAILURE DATA ERROR RATE TOO HIGH
+[557]
+<*> <*>:<*>:<*> <*> kernel: VIPKL(1): [MM_create_mr]:MM_mr_get_keys failed
+[558]
+<*> <*>:<*>:<*> dn1013/dn1013 kernel: MOSAL(1): <*> = <*>
+[559]
+<*> <*>:<*>:<*> dn866/dn866 kernel: MOSAL(1): <*> = <*>
+[560]
+<*> <*>:<*>:<*> dn871/dn871 kernel: MOSAL(1): <*> = <*>
+[561]
+<*> <*>:<*>:<*> <*> kernel: THH(4): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxhh/thh/obj_host_amd64_custom1_rhel4/mod_thh/tptm.c[263]: reserve_mtt_segs: Cannot reserve <*> MTT segments <*> dynamic MTT segments left)
+[562]
+<*> <*>:<*>:<*> <*> kernel: THH(1): <*>: rc=<*>
+[563]
+<*> <*>:<*>:<*> <*> kernel: THH(4): <*>: alloc_reg_pages: Out of MTT entries
+[564]
+<*> <*>:<*>:<*> dn875/dn875 kernel: MOSAL(1): <*> = <*>
+[565]
+<*> <*>:<*>:<*> dn868/dn868 kernel: MOSAL(1): <*> = <*>
+[566]
+<*> <*>:<*>:<*> <*> <*>: can't open /var/lib/ntp/drift.TEMP: Read-only file system
+[567]
+<*> <*>:<*>:<*> src@aadmin2 xinetd[26326]: removing <*>
+[568]
+<*> <*>:<*>:<*> <*> dhclient: DHCPREQUEST on eth0 to #342# port <*>
+[569]
+<*> <*>:<*>:<*> an558/an558 kernel:
+[570]
+<*> <*>:<*>:<*> <*> kernel: Placing software IO TLB between 0x7eb5000 - 0xbeb5000
+[571]
+<*> <*>:<*>:<*> <*> <*>: the NTP socket is in use, exiting
+[572]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.conf.default.rp_filter = <*>
+[573]
+<*> <*>:<*>:<*> an566/an566 sysctl: <*> = <*>
+[574]
+<*> <*>:<*>:<*> an743/an743 sysctl: <*> = <*>
+[575]
+<*> <*>:<*>:<*> <*> <*>: BIOS update verification was successful. Version expected: A04, Version found: A04
+[576]
+<*> <*>:<*>:<*> <*> xinetd[2253]: Exiting...
+[577]
+<*> <*>:<*>:<*> <*> xinetd[2241]: Exiting...
+[578]
+<*> <*>:<*>:<*> <*> xinetd[1950]: removing <*>
+[579]
+<*> <*>:<*>:<*> an627/an627 sysctl: <*> = <*>
+[581]
+<*> <*>:<*>:<*> an371/an371 sysctl: <*> = <*>
+[582]
+<*> <*>:<*>:<*> an347/an347 sysctl: <*> = <*>
+[583]
+<*> <*>:<*>:<*> <*> kernel: ext3_orphan_cleanup: deleting unreferenced inode <*>
+[584]
+<*> <*>:<*>:<*> an134/an134 sysctl: <*> = <*>
+[586]
+<*> <*>:<*>:<*> <*> dhclient: DHCPOFFER from <*> <30>Jan <*> <*>:<*>:<*> dhclient: DHCPREQUEST on eth0 to #342# port <*>
+[587]
+<*> <*>:<*>:<*> <*> ifup: Determining IP information for eth0...
+[589]
+<*> <*>:<*>:<*> <*> kernel: Kernel <*> <*> <*>
+[590]
+<*> <*>:<*>:<*> <*> <*>: Caught signal <*>, un-registering and exiting.
+[591]
+<*> <*>:<*>:<*> an769/an769 xinetd[1853]: removing <*>
+[592]
+<*> <*>:<*>:<*> an865/an865 sysctl: <*> = <*>
+[594]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.conf.default.accept_source_route = <*>
+[595]
+<*> <*>:<*>:<*> <*> ts_customize: Skipping customization. custom.cnf not found.
+[597]
+<*> <*>:<*>:<*> <*> xinetd[2092]: Exiting...
+[598]
+<*> <*>:<*>:<*> <*> sysctl: net.core.rmem_default = <*>
+[599]
+<*> <*>:<*>:<*> <*> <*>: removing chargen
+[600]
+<*> <*>:<*>:<*> <*> <*>: [CONF]: [super]: copy running-config config:startup-config
+[602]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs: <*>: <*> <*> on readonly <*>
+[605]
+<*> <*>:<*>:<*> an304/an304 sysctl: <*> = <*>
+[606]
+<*> <*>:<*>:<*> an461/an461 sysctl: <*> = <*>
+[608]
+<*> <*>:<*>:<*> <*> sysctl: net.core.wmem_max = <*>
+[609]
+<*> <*>:<*>:<*> <*> date: <*> Jan <*> <*>:<*>:<*> MST <*>
+[610]
+<*> <*>:<*>:<*> <*> xinetd[2265]: removing <*>
+[611]
+<*> <*>:<*>:<*> an1020/an1020 sysctl: <*> = <*>
+[612]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs: <*>: <*> orphan <*> deleted
+[614]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[24904]: [ib_sm_bringup.c:531]: Force port (node=5ad000002a2ba, port=<*>, state=4) to DOWN because (1) 1st sweep or (2) role change.
+[615]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[24904]: [ib_sm_bringup.c:577]: Force neighbor port (node=<*>, port=<*>, state=4) to DOWN because (1) 1st sweep or (2) role change.
+[616]
+<*> <*>:<*>:<*> <*> dhcpd: DHCPREQUEST for <*> from <*>:<*>:<*>:<*>:<*>:<*> via eth1: unknown lease <*>
+[617]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.neigh.default.gc_thresh2 = <*>
+[620]
+<*> <*>:<*>:<*> bn368/bn368 kernel:
+[621]
+<*> <*>:<*>:<*> <*> xinetd[1949]: removing <*>
+[622]
+<*> <*>:<*>:<*> bn141/bn141 kernel:
+[624]
+<*> <*>:<*>:<*> <*> sysctl: net.ipv4.neigh.default.gc_thresh3 = <*>
+[625]
+<*> <*>:<*>:<*> <*> ib_port_agent.x[365]: [INFO]: Change AdminStatus on <*> - new value= <*>
+[626]
+<*> <*>:<*>:<*> <*> <*>: [CONF]: [super]: config interface <*> <*> shutdown
+[627]
+<*> <*>:<*>:<*> <*> rpc.mountd: authenticated mount request from <*>:<*> for <*> (/var/lib/oneSIS/images)
+[628]
+<*> <*>:<*>:<*> <*> xinetd[1949]: Exiting...
+[629]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Configuration caused by previous <*> operation failures
+[631]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm[30794]: [ib_sm_sweep.c:<*>: <*> <*> <*> <*>
+[632]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:<*>: No topology change
+[633]
+<*> <*>:<*>:<*> <*> xinetd[2255]: removing <*>
+[636]
+<*> <*>:<*>:<*> bn920/bn920 kernel:
+[637]
+<*> <*>:<*>:<*> an145/an145 xinetd[2083]: removing <*>
+[638]
+<*> <*>:<*>:<*> an244/an244 kernel:
+[639]
+<*> <*>:<*>:<*> <*> dhcpd: in your dhcpd.conf file for the network segment
+[640]
+<*> <*>:<*>:<*> <*> dhcpd: to which interface eth1:<*> is attached. **
+[641]
+<*> <*>:<*>:<*> <*> dhcpd: you want, please write a subnet declaration
+[642]
+<*> <*>:<*>:<*> <*> dhcpd: ** Ignoring requests on eth1:0. If this is not what
+[643]
+<*> <*>:<*>:<*> <*> dhcpd: <*> on LPF/eth1/00:<*>:<*>:e3:ba:<*>
+[644]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_routing.c:<*>: Failed to set <*> <*> switch=<*>
+[646]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:<*>: ******************* NEW MASTER POLL *****************
+[647]
+<*> <*>:<*>:<*> <*> xinetd[2256]: Exiting...
+[648]
+<*> <*>:<*>:<*> <*> <*>: [CONF]: [super]: config interface ib <*> no shutdown
+[650]
+<*> <*>:<*>:<*> bn780/bn780 kernel:
+[651]
+<*> <*>:<*>:<*> <*> xinetd[2275]: removing <*>
+[652]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[15679]: [ib_sm_sweep.c:<*>: <*> <*> <*> <*>
+[654]
+<*> <*>:<*>:<*> bn971/bn971 kernel:
+[655]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:<*>: Rediscover the subnet
+[656]
+<*> <*>:<*>:<*> <*> kernel: cpu <*> <*>: low <*>, high <*>, batch <*>
+[657]
+<*> <*>:<*>:<*> <*> kernel: Active:<*> inactive:<*> dirty:<*> writeback:<*> unstable:<*> free:<*> slab:<*> mapped:<*> pagetables:<*>
+[658]
+<*> <*>:<*>:<*> <*> kernel: Free pages: <*> (0kB HighMem)
+[659]
+<*> <*>:<*>:<*> <*> kernel: Node <*> HighMem per-cpu: empty
+[660]
+<*> <*>:<*>:<*> <*> kernel: Node <*> <*>: <*> <*> <*> <*> <*> <*> 1*256kB 1*512kB 0*1024kB <*> <*> = <*>
+[661]
+<*> <*>:<*>:<*> bn971/bn971 kernel: protections[]: <*> <*> <*>
+[662]
+<*> <*>:<*>:<*> <*> kernel: <*> reserved pages
+[663]
+<*> <*>:<*>:<*> <*> kernel: Free swap: <*>
+[664]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[15679]: [ib_sm_transport.c:<*>: mad <*>, transaction_id 0xe06aa29, class 0x81, attrib 0x20, method <*>, attrib mod 0x0, slid <*>, dlid <*>, hop_count: <*>, direct_path: <*>, <*>, <*>, <*>, <*>, <*>
+[665]
+<*> <*>:<*>:<*> <*> kernel: Node <*> Normal: <*> <*> <*> <*> <*> <*> 0*256kB 0*512kB <*> <*> <*> = <*>
+[666]
+<*> <*>:<*>:<*> <*> kernel: Swap cache: add <*>, delete <*>, find <*>, race <*>
+[667]
+<*> <*>:<*>:<*> bn971/bn971 kernel: <*> <*>
+[668]
+<*> <*>:<*>:<*> <*> kernel: Node <*> HighMem: empty
+[669]
+<*> <*>:<*>:<*> <*> kernel: Mem-info:
+[670]
+<*> <*>:<*>:<*> <*> kernel: Node <*> <*> per-cpu:
+[671]
+<*> <*>:<*>:<*> bn410/bn410 kernel:
+[672]
+<*> <*>:<*>:<*> bn410/bn410 kernel: protections[]: <*> <*> <*>
+[673]
+<*> <*>:<*>:<*> bn410/bn410 kernel: <*> <*>
+[675]
+<*> <*>:<*>:<*> <*> kernel: nfs: server <*> not responding, still trying
+[676]
+<*> <*>:<*>:<*> <*> xinetd[2263]: removing <*>
+[678]
+<*> <*>:<*>:<*> <*> xinetd[2256]: removing <*>
+[679]
+<*> <*>:<*>:<*> bn53/bn53 kernel:
+[680]
+<*> <*>:<*>:<*> cn992/cn992 kernel:
+[683]
+<*> <*>:<*>:<*> src@dadmin2 dhcpd:
+[685]
+<*> <*>:<*>:<*> bn565/bn565 kernel:
+[686]
+<*> <*>:<*>:<*> bn569/bn569 kernel:
+[687]
+<*> <*>:<*>:<*> <*> xinetd[2261]: removing <*>
+[690]
+<*> <*>:<*>:<*> <*> xinetd[2253]: removing <*>
+[692]
+<*> <*>:<*>:<*> <*> <*>: [CONF]: [super]: config no ib sm subnet-prefix fe:<*>:<*>:<*>:<*>:<*>:<*>:<*>
+[693]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: connected to watchd service, sent first pulse.
+[694]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: remove appId <*> from watchd list.
+[695]
+<*> <*>:<*>:<*> cn766/cn766 xinetd[1940]: removing <*>
+[698]
+<*> <*>:<*>:<*> dn302/dn302 kernel:
+[700]
+<*> <*>:<*>:<*> <*> <*>: <*>: Bad file descriptor
+[703]
+<*> <*>:<*>:<*> <*> xinetd[2244]: removing <*>
+[704]
+<*> <*>:<*>:<*> <*> netfs: Mounting other filesystems: <*>
+[705]
+<*> <*>:<*>:<*> <*> xinetd[2262]: Exiting...
+[706]
+<*> <*>:<*>:<*> <*> xinetd[2264]: Exiting...
+[707]
+<*> <*>:<*>:<*> <*> xinetd[2269]: removing <*>
+[708]
+<*> <*>:<*>:<*> dn492/dn492 xinetd[1941]: removing <*>
+[710]
+<*> <*>:<*>:<*> <*> kernel: ACPI: PM-Timer IO Port: 0x808
+[711]
+<*> <*>:<*>:<*> <*> <*>: mount.panfs warning: mounting panfs in an untested environment!!
+[712]
+<*> <*>:<*>:<*> dn483/dn483 kernel:
+[714]
+<*> <*>:<*>:<*> <*> kernel: Losing some ticks... checking if CPU frequency changed.
+[715]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:<*>:<*>:ksocknal_recv_hello()) Error -11 reading HELLO from <*>
+[716]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(events.c:<*>:request_out_callback()) @@@ type <*>, status <*> <*> <*> <*>:<*> lens <*> ref <*> fl <*>:<*> rc <*>
+[717]
+<*> <*>:<*>:<*> <*> kernel: <*>: <*>:<*>:<*>:<*>:<*> previously skipped <*> similar messages
+[718]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(socknal_cb.c:<*>:ksocknal_autoconnect()) Deleting packet type <*> len <*> <*> <*> <*>
+[719]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(client.c:<*>:ptlrpc_expire_one_request()) @@@ timeout (sent at <*>, <*> ago) <*> <*> <*>:<*> lens <*> ref <*> fl Rpc:<*> rc 0/0
+[720]
+<*> <*>:<*>:<*> <*> kernel: LustreError: Unexpected error <*> connecting to host <*> on port <*>
+[721]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(lib-move.c:<*>:<*> Error sending PUT to <*>: <*>
+[722]
+<*> <*>:<*>:<*> <*> kernel: <*>: <*> <*> <*> similar messages
+[723]
+<*> <*>:<*>:<*> <*> kernel: Your time source seems to be instable or some driver is hogging interupts
+[724]
+<*> <*>:<*>:<*> dn15/dn15 xinetd[2254]: removing <*>
+[725]
+<*> <*>:<*>:<*> <*> xinetd[2266]: removing <*>
+[726]
+<*> <*>:<*>:<*> bn1009/bn1009 kernel:
+[730]
+<*> <*>:<*>:<*> dn594/dn594 kernel:
+[733]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[15679]: [ib_sm_sweep.c:144]: A new IB node <*> was discovered and assigned LID <*>
+[737]
+<*> <*>:<*>:<*> <*> <*>: Package Release ID=R109030 Package Description=Dell Server System BIOS, A04 Support Log path=/var/log/#26#/updatepackage/log/support/R109030.log
+[738]
+<*> <*>:<*>:<*> dn810/dn810 xinetd[2267]: removing <*>
+[739]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[15679]: [ib_sm_bringup.c:450]: Active state mismatch GUID=<*>, port=<*>, state <*>, GUID=<*>, port=<*>, state <*>
+[741]
+<*> <*>:<*>:<*> dn179/dn179 kernel:
+[742]
+<*> <*>:<*>:<*> <*> xinetd[2265]: Exiting...
+[744]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(socknal_lib-linux.c:<*>:ksocknal_lib_connect_sock()) Error <*> connecting <*> -> <*>
+[746]
+<*> <*>:<*>:<*> <*> kernel: LustreError: Host <*> was unreachable; the network or that node may be down, or Lustre may be misconfigured.
+[747]
+<*> <*>:<*>:<*> #33#/#33# <*>: process_limit: processing <*> <*> <*> for DEFAULT
+[749]
+<*> <*>:<*>:<*> dn398/dn398 kernel:
+[751]
+<*> <*>:<*>:<*> src@tbird-sm1 ib_sm.x[15679]: [ib_sm_discovery.c:949]: no routing required for port guid <*>, lid <*>
+[757]
+<*> <*>:<*>:<*> an153/an153 kernel: MOSAL(1): <*> = <*>
+[758]
+<*> <*>:<*>:<*> bn879/bn879 kernel:
+[759]
+<*> <*>:<*>:<*> <*> kernel: EXT3-fs error (device sda5) in start_transaction: Journal has aborted
+[760]
+<*> <*>:<*>:<*> <*> Server Administrator: Instrumentation Service EventID: <*> BMC Ambient Temp Main System Chassis <*>
+[761]
+<*> <*>:<*>:<*> <*> kernel: mptbase: ioc0: IOCStatus(0x0048): SCSI Task Terminated
+[762]
+<*> <*>:<*>:<*> <*> <*>: daemon started -- version 2.1.5
+[764]
+<*> <*>:<*>:<*> <*> postfix/postfix-script: <*> the Postfix mail system
+[765]
+<*> <*>:<*>:<*> <*> postfix: succeeded
+[766]
+<*> <*>:<*>:<*> <*> kernel: LustreError: Connection was refused by host <*> on port 988; check that Lustre is running on that node.
+[767]
+<*> <*>:<*>:<*> <*> <*>: <*>: to=<*>, orig_to=<*>, relay=local, delay=<*>, status=sent <*> <*> <*>
+[772]
+<*> <*>:<*>:<*> <*> <*>: <*>: to=<*>, orig_to=<*>, relay=#211#[#212#], delay=<*>, status=sent (250 2.0.0 <*> Message accepted for delivery)
+[776]
+<*> <*>:<*>:<*> <*> <*>: <*>: to=<#213#-#214#@#207#>, orig_to=<root>, relay=none, delay=<*>, status=deferred (connect to <*>: Connection timed out)
+[777]
+<*> <*>:<*>:<*> <*> <*>: connect to <*>: Connection timed out (port 25)
+[778]
+<*> <*>:<*>:<*> <*> <*>: connect to #211#[#212#]: Connection refused (port 25)
+[780]
+<*> <*>:<*>:<*> <*> <*>: (root) CMD <*> <*> <*> /dev/null)
+[784]
+<*> <*>:<*>:<*> an809/an809 kernel: Info fld=<*>, Current sda: sense key Medium Error
+[786]
+<*> <*>:<*>:<*> an809/an809 kernel: Additional sense: Address mark not found for data field
+[787]
+<*> <*>:<*>:<*> <*> kernel: end_request: I/O error, dev sda, sector <*>
+[788]
+<*> <*>:<*>:<*> an809/an809 kernel: scsi0: ERROR on channel <*>, id <*>, lun <*>, CDB: Read (10) <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[789]
+<*> <*>:<*>:<*> an809/an809 kernel: end_request: I/O error, dev sda, sector <*>: ERROR on channel <*>, id <*>, lun <*>, CDB: Read (10) <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[791]
+<*> <*>:<*>:<*> <*> <*>: warning: mail_queue_enter: create file <*>: Read-only file system
+[792]
+<*> <*>:<*>:<*> bn76/bn76 kernel:
+[796]
+<*> <*>:<*>:<*> src@aadmin2 dhcpd:
+[797]
+<*> <*>:<*>:<*> <*> <*>: terminating on signal <*>
+[798]
+<*> <*>:<*>:<*> <*> postfix: Shutting down postfix:
+[800]
+<*> <*>:<*>:<*> <*> postfix: [
+[801]
+<*> <*>:<*>:<*> <*> rc: Stopping postfix: succeeded
+[802]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): <*>: mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxsys/obj_host_amd64_custom1_rhel4/mlxsys/mosal_iobuf.c:<*>: region not in process's address space. va=<*> size=<*>
+[803]
+<*> <*>:<*>:<*> <*> kernel: Lustre: <*>:<*>:(socknal.c:<*>:ksocknal_associate_route_conn_locked()) Binding <*> <*> to <*>
+[806]
+<*> <*>:<*>:<*> <*> <*>: <*>: flags: forwardable not proxiable
+[807]
+<*> <*>:<*>:<*> cn161/cn161 kernel:
+[812]
+<*> <*>:<*>:<*> src@eadmin1 dhcpd:
+[815]
+<*> <*>:<*>:<*> #25#/#25# xinetd[1939]: removing <*>
+[816]
+<*> <*>:<*>:<*> an538/an538 smartd[1983]: Device: /dev/sda, SMART Failure: HARDWARE IMPENDING FAILURE TOO MANY BLOCK REASSIGNS
+[817]
+<*> <*>:<*>:<*> <*> mount: mount.panfs: panfs is not configured in the kernel
+[818]
+<*> <*>:<*>:<*> <*> kernel: ioctl32(fdisk:<*>: Unknown cmd fd(5) cmd(80081272){00} <*> on /dev/sda
+[819]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_setup_daemon_path) daemon's PATH is /sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin
+[820]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_setup_real_log) ERROR: failed to open "/var/log/distccd.log": No such file or directory
+[821]
+<*> <*>:<*>:<*> #8#/#8# <*>: compile from <*> to <*>
+[822]
+<*> <*>:<*>:<*> #8#/#8# <*>: gcc <*> on localhost completed ok
+[823]
+<*> <*>:<*>:<*> #8#/#8# <*>: job complete
+[824]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_check_client) connection from <*>:<*>
+[825]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_collect_child) cc times: user <*>, system <*>, <*> minflt, <*> majflt
+[826]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_exit) exit: code 0; self: <*> user <*> sys; children: <*> user <*> sys
+[827]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_log_daemon_started) inetd server started (2.18.3 x86_64-redhat-linux-gnu, built Mar <*> <*> <*>:<*>:58)
+[828]
+<*> <*>:<*>:<*> #8#/#8# <*>: (dcc_r_file_timed) <*> bytes received in <*>, rate <*>
+[829]
+<*> <*>:<*>:<*> <*> <*>: time reset <*> s
+[830]
+<*> <*>:<*>:<*> <*> kernel: sam raid obsd error on write: local_status 0x0 (Success), obsd_error 0x63c (OBSD: Capability version does not match) virtual object I-xD020038da11df0002-xGf5edfff4-xUd39e6b6f6ed05953 index <*>, stor_op <*>, component device <*>
+[832]
+<*> <*>:<*>:<*> #9#/#9# <*>: <*>: flag: no <*>
+[836]
+<*> <*>:<*>:<*> <*> pbs_mom: Bad file descriptor (9) in tm_request, non-local connect
+[841]
+<*> <*>:<*>:<*> <*> pbs_mom: Broken pipe (32) in tm_request, comm failed No error
+[842]
+<*> <*>:<*>:<*> <*> kernel: Bootdata ok (command line is initrd=/x86_64/initrd-2.6.9-1.4.5.6smp-onesis.img console=tty0 console=ttyS0,<*> quiet BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-1.4.5.6smp )
+[843]
+<*> <*>:<*>:<*> <*> kernel: Kernel command line: initrd=/x86_64/initrd-2.6.9-1.4.5.6smp-onesis.img console=tty0 console=ttyS0,<*> quiet BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-1.4.5.6smp
+[844]
+<*> <*>:<*>:<*> <*> <*>: Kerberos password <*> for user <*> <*>
+[847]
+<*> <*>:<*>:<*> <*> <*>: <*> password failed for user <*>
+[848]
+<*> <*>:<*>:<*> <*> <*>: Password authentication for user <*> failed (from <*> port <*>
+[849]
+<*> <*>:<*>:<*> <*> <*>: auths-pam: PAM subprocess returned packet SSH_PAM_OP_ERROR. (err_num: <*>, err_msg: Authentication failure)
+[850]
+<*> <*>:<*>:<*> <*> <*>: PAM transaction resulted in error.
+[851]
+<*> <*>:<*>:<*> <*> <*>: Password authentication for user <*> accepted.
+[852]
+<*> <*>:<*>:<*> <*> <*>: Device: /dev/sda, No such device or address, open() failed
+[853]
+<*> <*>:<*>:<*> <*> sudo: root : TTY=<*> ; PWD=<*> ; USER=root ; COMMAND=/bin/su - #26# -c <*> <*>
+[854]
+<*> <*>:<*>:<*> <*> kernel: nfs: server <*> OK
+[856]
+<*> <*>:<*>:<*> <*> pbs_mom: check_ms, MS reset from <*> to <*> (10.100.31.127:1023)
+[857]
+<*> <*>:<*>:<*> <*> modprobe: <*>: Error running install command for <*>
+[858]
+<*> <*>:<*>:<*> <*> kernel: <*>: Unknown symbol <*>
+[859]
+<*> <*>:<*>:<*> <*> modprobe: FATAL: Error inserting <*> <*>: Unknown symbol in module, or unknown parameter (see dmesg)
+[860]
+<*> <*>:<*>:<*> dn657/dn657 pbs_mom: System error: (15010) in 59627.tbird-admin2, abort attempted <*> times in job_start_error. ignoring abort request from node <*>:<*>
+[861]
+<*> <*>:<*>:<*> dn657/dn657 pbs_mom: System error: (15010) in 59627.tbird-admin2, job_start_error from node <*>:<*> in job_start_error
+[862]
+<*> <*>:<*>:<*> src@eadmin2 Attached scsi generic <*> at scsi0, channel <*>, id <*>, lun <*>, type <*>
+[866]
+<*> <*>:<*>:<*> src@eadmin2 EXT3-fs: mounted filesystem with ordered data mode.
+[869]
+<*> <*>:<*>:<*> src@eadmin2 Evaluate _OSC Set fails. Status = 0x0005
+[870]
+<*> <*>:<*>:<*> src@dadmin2 Probing IDE interface <*>
+[879]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 PBS_Server: is_request, bad attempt to connect from <*>:<*> (address not trusted)
+[892]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1149]: Failed discover node test, node <*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port_num= <*>, error code <*>
+[893]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Initialize a backup session with Standby SM guid <*>:<*>:ad:<*>:<*>:<*>:<*>:<*>
+[894]
+<*> <*>:<*>:<*> #2116#/#2116# <*>: (root) CMD (/usr/bin/mrtg /etc/mrtg/mrtg.cfg --lock-file /var/lock/mrtg/mrtg_l --confcache-file /var/lib/mrtg/mrtg.ok)
+[895]
+<*> <*>:<*>:<*> <*> <*>: (root) CMD <*> <*> 1)
+[896]
+<*> <*>:<*>:<*> <*> <*>:<*> ibstatmon[86db0b30]: Ism: MAD Send Get <*> <*> Failed for: <*> <*> (port <*>
+[897]
+<*> <*>:<*>:<*> an5/an5 kernel:
+[901]
+<*> <*>:<*>:<*> <*> date: <*> Feb <*> <*>:<*>:<*> MST <*>
+[903]
+<*> <*>:<*>:<*> <*> kernel: checking if image is initramfs...it isn't (no cpio magic); looks like an initrd
+[904]
+<*> <*>:<*>:<*> <*> kernel: VFS: Mounted root (ext2 filesystem).
+[907]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_assign.c:561]: Assigning LID, node - GUID=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=<*>
+[908]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_routing.c:2517]: Allocating ext_port id <*> for node guid <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port <*>
+[909]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_bringup.c:581]: Force port (node=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port=<*>, state=4) to DOWN because (1) 1st sweep or (2) role change.
+[910]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: Generate SM <*> trap for GID=fe:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>
+[911]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:144]: A new IB node <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*> was discovered and assigned LID <*>
+[912]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1373]: Finish querying all ports on switch <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>
+[913]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_discovery.c:<*>: Add <*> switch neighbor <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port_num= <*>
+[914]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1256]: Found existing neighbor <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port= <*>
+[915]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_bringup.c:551]: GUID=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port=<*>, GUID=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port=<*> ports are already ACTIVE.
+[916]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1392]: skipping discovery of node <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port <*>, because neighbor already verified
+[917]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_discovery.c:1507]: ==== Level <*>
+[918]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_discovery.c:1536]: ---- node <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*> is a switch <*> <*>
+[919]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_bringup.c:562]: Program port state, node=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port= <*>, current state <*>, neighbor node=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port= <*>, current state <*>
+[920]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_bringup.c:629]: Force neighbor port (node=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port=<*>, state=4) to DOWN because (1) 1st sweep or (2) role change.
+[921]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1367]: Discover switch <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>
+[922]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_util.c:641]: Skipping programming port HOQLife: node=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port=<*>, cache-val=<*>
+[923]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:1190]: Found new neighbor <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, port_num= <*>
+[924]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[26889]: [ib_sm_routing.c:2836]: SysImageGuid specifies type <*>, slot <*>
+[925]
+<*> <*>:<*>:<*> tbird-sm2/tbird-sm2 ib_sm[27569]: [ib_sm_multicast.c:858]: Program switch=<*>:<*>:6a:<*>:<*>:<*>:<*>:<*> MFT to zero OK
+[926]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:1914]: ********************** NEW SWEEP ********************
+[927]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:<*>: IB node <*>:<*>:ad:<*>:<*>:<*>:<*>:<*> port <*> <*> <*> <*>
+[928]
+<*> <*>:<*>:<*> <*> xinetd[2354]: Exiting...
+[938]
+<*> <*>:<*>:<*> bn474/bn474 kernel:
+[939]
+<*> <*>:<*>:<*> dn478/dn478 kernel:
+[940]
+<*> <*>:<*>:<*> cn660/cn660 kernel:
+[941]
+<*> <*>:<*>:<*> #8#/#8# sshd[4290]: pam_krb5[4290]: <*>: <*> <*>
+[947]
+<*> <*>:<*>:<*> #8#/#8# sshd[4290]: pam_krb5[4290]: <*> <*>: <*>
+[948]
+<*> <*>:<*>:<*> <*> <*>: <*>: configured realm '#24#'
+[949]
+<*> <*>:<*>:<*> #8#/#8# sshd[4290]: pam_krb5[4290]: <*>: <*>
+[950]
+<*> <*>:<*>:<*> <*> <*>: <*>: no v5 creds for user <*>, skipping session <*>
+[951]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: <*> returning <*> (Success)
+[952]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2100]: [ib_sm_sweep.c:<*>: <*> <*> <*> <*>
+[953]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_sweep.c:256]: An existing IB node GUID <*>:<*>:<*>:<*>:<*>:<*>:<*>:<*> LID <*> was removed
+[954]
+<*> <*>:<*>:<*> <*> panfs: Unmounting PanFS filesystems: succeeded
+[956]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: flag: no <*>
+[958]
+<*> <*>:<*>:<*> #8#/#8# sshd[6220]: pam_krb5[6220]: <*>: <*>
+[959]
+<*> <*>:<*>:<*> <*> <*>: <*>: removing ccache file <*>
+[960]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: renewable lifetime: <*>
+[961]
+<*> <*>:<*>:<*> #21#/#21# sshd[13790]: pam_krb5[13790]: <*> <*>: <*>
+[962]
+<*> <*>:<*>:<*> <*> <*>: <*>: afs not running
+[963]
+<*> <*>:<*>:<*> #21#/#21# sshd[13790]: pam_krb5[13790]: <*>: <*> <*>
+[964]
+<*> <*>:<*>:<*> <*> <*>: <*>: destroyed v5 ticket file for <*>
+[965]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_destroy: destroying aborted (rc=0x1d7e (IPS: session got unknown error callback)) command <*> <*>:<*>:<*>
+[966]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_destroy: invoking callback on aborted (rc=0x1d7e (IPS: session got unknown error callback)) command <*>
+[967]
+<*> <*>:<*>:<*> <*> kernel: obsd_client: obsd_client: command timed out WRITE options=0x0 obj_id=<*> starting_byte=<*> length=<*> get_attributes=0x0 set_attributes=<*> data_buffer=<*> realmname panfs1 dev_id=<*> flags=0x0 res_buffer=(0x0:0) <*>, <*>, <*> allocated_by_sam=YES
+[968]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- IPS command timeout command <*> <*> expire_time=<*>:<*> now=<*>:<*> lifetime=<*>:<*> grace_timeouts=<*> cd=<*> session=<*> (connection info not avail 0x23a5 (pan_sock: socket not connected)) id=<*>:<*>:<*>
+[969]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- wire scsi cmd out, 0x1d7a (IPS: session abort in progress), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_wire.c:<*>
+[970]
+<*> <*>:<*>:<*> an44/an44 kernel: pan_ips: error -- worker read common, 0x1d56 (IPS: bad framing in IPS data unit), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_worker.c:<*>
+[971]
+<*> <*>:<*>:<*> an44/an44 kernel: pan_ips: error -- worker target read callback, msg send failed, 0x1d7a (IPS: session abort in progress)
+[972]
+<*> <*>:<*>:<*> an699/an699 kernel: pan_ips: error -- cmd_destroy: destroying aborted (rc=0x23a8 (pan_sock: broken pipe)) command <*> (0:<*>:<*>
+[973]
+<*> <*>:<*>:<*> an699/an699 kernel: pan_ips: error -- cmd_destroy: invoking callback on aborted (rc=0x23a8 (pan_sock: broken pipe)) command <*>
+[974]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd <*>, <*> <*>: <*> <*> <*> <*>, err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_cmd.c:<*>
+[975]
+<*> <*>:<*>:<*> <*> date: <*> Mar <*> <*>:<*>:<*> MST <*>
+[977]
+<*> <*>:<*>:<*> <*> <*>: removing ntalk
+[978]
+<*> <*>:<*>:<*> en359/en359 xinetd[2362]: removing <*>
+[979]
+<*> <*>:<*>:<*> <*> mount: mount: according to mtab, /sys is already mounted on /sys
+[980]
+<*> <*>:<*>:<*> <*> mount: mount: none already mounted or /sys busy
+[981]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: banner: Kerberos <*>
+[982]
+<*> <*>:<*>:<*> #21#/#21# sshd: pam_krb5[18566]: <*> <*>: <*>
+[983]
+<*> <*>:<*>:<*> #21#/#21# sshd: <*>: <*>: <*>
+[984]
+<*> <*>:<*>:<*> <*> <*>: <*>: <*> <*> -1765328353 (Decrypt integrity check failed)
+[985]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: <*> returning <*> (Success)
+[986]
+<*> <*>:<*>:<*> #21#/#21# sshd[18569]: pam_krb5[18569]: <*> <*>: <*>
+[987]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: flag: no <*>
+[988]
+<*> <*>:<*>:<*> #21#/#21# sshd[18569]: pam_krb5[18569]: <*>: <*>
+[989]
+<*> <*>:<*>:<*> <*> <*>: removing daytime
+[990]
+<*> <*>:<*>:<*> an883/an883 xinetd[7244]: removing <*>
+[991]
+<*> <*>:<*>:<*> <*> pbs_mom: Bad UID for job execution (15023) in <*>, job_start_error from node <*>:<*> in job_start_error
+[993]
+<*> <*>:<*>:<*> <*> pbs_mom: Bad UID for job execution (15023) in <*>, abort attempted <*> times in job_start_error. ignoring abort request from node <*>:<*>
+[994]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: banner: Kerberos <*>
+[995]
+<*> <*>:<*>:<*> #8#/#8# sshd[1785]: pam_krb5[1785]: <*> <*>: <*>
+[996]
+<*> <*>:<*>:<*> #8#/#8# sshd[1785]: pam_krb5[1785]: <*>: <*>
+[997]
+<*> <*>:<*>:<*> #31#/#31# sshd[19733]: pam_krb5[19733]: <*>: <*> <*>
+[998]
+<*> <*>:<*>:<*> <*> <*>: <*>: ccache dir: /tmp
+[999]
+<*> <*>:<*>:<*> #31#/#31# sshd[19733]: pam_krb5[19733]: <*>: <*>
+[1000]
+<*> <*>:<*>:<*> <*> <*>: Authorized to <*>, krb5 principal <*> (krb5_kuserok)
+[1001]
+<*> <*>:<*>:<*> #21#/#21# sshd[7070]: pam_krb5[7070]: <*>: <*>
+[1002]
+<*> <*>:<*>:<*> cn833/cn833 xinetd[12082]: removing <*>
+[1003]
+<*> <*>:<*>:<*> dn653/dn653 xinetd[16002]: removing <*>
+[1005]
+<*> <*>:<*>:<*> an615/an615 xinetd[8306]: removing <*>
+[1006]
+<*> <*>:<*>:<*> <*> sshd: <*>: authenticating <*>
+[1007]
+<*> <*>:<*>:<*> #21#/#21# sshd: pam_krb5[11459]: <*> <*> <*> <*>
+[1008]
+<*> <*>:<*>:<*> #21#/#21# sshd: pam_krb5[11459]: <*> lifetime: <*>
+[1009]
+<*> <*>:<*>:<*> #21#/#21# sshd: <*>: <*> <*> <*> for <*>
+[1010]
+<*> <*>:<*>:<*> #21#/#21# sshd[20309]: pam_krb5[20309]: <*> lifetime: <*>
+[1011]
+<*> <*>:<*>:<*> <*> <*>: <*>: authenticating <*> to 'krbtgt/#24#@#24#'
+[1012]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: flag: <*>
+[1013]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: flags: forwardable proxiable
+[1014]
+<*> <*>:<*>:<*> <*> <*>: <*>: keytab: /etc/v5srvtab
+[1015]
+<*> <*>:<*>:<*> #21#/#21# sshd[28370]: pam_krb5[28370]: <*> lifetime: <*>
+[1016]
+<*> <*>:<*>:<*> #21#/#21# sshd[1126]: pam_krb5[1126]: <*> lifetime: <*>
+[1017]
+<*> <*>:<*>:<*> #21#/#21# sshd[10667]: pam_krb5[10667]: <*> lifetime: <*>
+[1018]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: renewable lifetime: <*>
+[1019]
+<*> <*>:<*>:<*> #21#/#21# <*>: <*>: ticket lifetime: <*>
+[1020]
+<*> <*>:<*>:<*> #8#/#8# sshd[17813]: pam_krb5[17813]: <*>: <*>
+[1021]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: ticket lifetime: <*>
+[1022]
+<*> <*>:<*>:<*> #8#/#8# sshd[18019]: pam_krb5[18019]: <*> <*> <*> <*> <*>
+[1023]
+<*> <*>:<*>:<*> #8#/#8# <*>: <*>: flag: <*>
+[1024]
+<*> <*>:<*>:<*> #8#/#8# postfix/master[2361]: warning: master_wakeup_timer_event: service <*>: Permission denied
+[1025]
+<*> <*>:<*>:<*> src@cadmin2 dhcpd:
+[1026]
+<*> <*>:<*>:<*> #33#/#33# <*>: <*>: flag: <*>
+[1027]
+<*> <*>:<*>:<*> an143/an143 kernel:
+[1028]
+<*> <*>:<*>:<*> dn10/dn10 kernel: protections[]: <*> <*> <*>
+[1029]
+<*> <*>:<*>:<*> #1#/#1# <*>: <*>: banner: Kerberos <*>
+[1030]
+<*> <*>:<*>:<*> an4/an4 kernel: protections[]: <*> <*> <*>
+[1031]
+<*> <*>:<*>:<*> #8#/#8# sshd[30680]: pam_krb5[30680]: <*> <*> <*> <*> <*>
+[1032]
+<*> <*>:<*>:<*> #1#/#1# sshd[9643]: pam_krb5[9643]: <*> <*> <*> <*> <*>
+[1033]
+<*> <*>:<*>:<*> #1#/#1# <*>: <*>: flag: no <*>
+[1034]
+<*> <*>:<*>:<*> #1#/#1# <*>: <*>: flag: <*>
+[1035]
+<*> <*>:<*>:<*> bn543/bn543 kernel: MOSAL(1): <*> = <*>
+[1036]
+<*> <*>:<*>:<*> dn770/dn770 kernel: MOSAL(1): <*> = <*>
+[1037]
+<*> <*>:<*>:<*> cn650/cn650 kernel: MOSAL(1): <*> = <*>
+[1038]
+<*> <*>:<*>:<*> cn627/cn627 kernel: MOSAL(1): <*> = <*>
+[1039]
+<*> <*>:<*>:<*> <*> <*>: <*>: called to authenticate <*>
+[1041]
+<*> <*>:<*>:<*> dn795/dn795 kernel: MOSAL(1): <*> = <*>
+[1042]
+<*> <*>:<*>:<*> <*> <*>: DEVPATH is not set
+[1044]
+<*> <*>:<*>:<*> #21#/#21# sshd[25219]: pam_krb5[25219]: <*> <*> <*> <*> for '#325#'
+[1047]
+<*> <*>:<*>:<*> <*> <*>: <*>: creating v5 ccache for <*>
+[1048]
+<*> <*>:<*>:<*> #8#/#8# sshd[2245]: pam_krb5[2245]: <*> <*> <*> <*> <*>
+[1049]
+<*> <*>:<*>:<*> <*> sshd: <*>: TGT verified using key for <*>
+[1050]
+<*> <*>:<*>:<*> <*> sshd: <*>: authentication succeeds for <*> <*>
+[1051]
+<*> <*>:<*>:<*> #21#/#21# sshd: <*>: <*> <*> <*> (Success)
+[1052]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2100]: [ib_sm_bringup.c:637]: Force neighbor port (node=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=1) to DOWN because state(1) should be active but not.
+[1053]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_bringup.c:<*>: Failed to bring port to ACTIVE for node=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port= <*>, mad status 0x1c
+[1054]
+<*> <*>:<*>:<*> tbird-sm2/tbird-sm2 ib_sm[2753]: [INFO]: Cold synchronize <*> <*> table
+[1057]
+<*> <*>:<*>:<*> tbird-sm2/tbird-sm2 ib_sm[2753]: [INFO]: DB Cold synchronization elapsed time= <*>
+[1058]
+<*> <*>:<*>:<*> <*> <*>: [INFO]: <*> SM DB synchronized with <*> SM <*> <*>:<*>:ad:<*>:<*>:<*>:<*>:<*>
+[1060]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [INFO]: Standby SM guid <*>:<*>:ad:<*>:<*>:<*>:<*>:2d, is no longer synchronized with Master SM
+[1062]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_routing.c:2936]: _ib_smAllocSubnet: initRate= <*>
+[1063]
+<*> <*>:<*>:<*> tbird-sm2/tbird-sm2 ib_sm[2753]: [INFO]: <*> <*> <*> <*> <*> <*>
+[1064]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_discovery.c:984]: no routing required for port guid <*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, lid <*>
+[1065]
+<*> <*>:<*>:<*> #31#/#31# <*>: <*>: flag: no <*>
+[1067]
+<*> <*>:<*>:<*> <*> kernel: panfs exception: at <*>:<*>, 0x1a31 (fs client: Input/output error), rollback: <*>
+[1068]
+<*> <*>:<*>:<*> <*> kernel: pan_sam: <*>: error report: cap_handle=<*> op=<*> op_offset=<*> op_length=<*> action_mask=<*> cap_offset=<*> cap_length=<*>
+[1069]
+<*> <*>:<*>:<*> <*> kernel: pan_sam: <*>: error report: failure <*>: <*> osd_op=<*> offset=<*> length=<*> error=0x7e9 (RPC: No response within the timeout period)
+[1070]
+<*> <*>:<*>:<*> <*> kernel: pan_sam: <*>: unable to report I/O error(s) to SM 0x020038da11df0002(SM): 0x2eea (bindcache: No realm managers found)
+[1071]
+<*> <*>:<*>:<*> <*> pbs_mom: sister could not communicate (15059) in <*>, job_start_error from node <*> in job_start_error
+[1072]
+<*> <*>:<*>:<*> <*> pbs_mom: node_bailout, node_bailout: received KILL/ABORT request for job <*> from node <*>
+[1073]
+<*> <*>:<*>:<*> <*> pbs_mom: sister could not communicate (15059) in <*>, abort attempted <*> times in job_start_error. ignoring abort request from node <*>
+[1074]
+<*> <*>:<*>:<*> #21#/#21# kernel: panfs: <*> total uses of size <*> blocks
+[1075]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- <*> <*> <*> <*>, 0x2399 (pan_sock: connection reset by peer), err_loc=<*>, <*>:<*>
+[1076]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- tx sched send, 0x2399 (pan_sock: connection reset by peer), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_tx_sched.c:<*>
+[1077]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- tx sched dequeue and send mod, 0x2399 (pan_sock: connection reset by peer), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_tx_sched.c:<*>
+[1080]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- destroying partially read data_cmd <*>
+[1083]
+<*> <*>:<*>:<*> <*> kernel: sam raid obsd error on <*>: local_status 0x1d78 (IPS: command timed out), obsd_error 0x0 (Success) virtual object <*> index <*>, stor_op <*>, component device <*>
+[1084]
+<*> <*>:<*>:<*> <*> kernel: obsd_client: obsd_client: command timed out READ options=<*> obj_id=<*> starting_byte=<*> length=<*> get_attributes=0x0 realmname panfs1 dev_id=<*> flags=0x0 res_buffer=(0x0:0) <*>, <*>, <*> allocated_by_sam=YES
+[1085]
+<*> <*>:<*>:<*> <*> <*>: <*>: pam_open_session returning <*> (Success)
+[1086]
+<*> <*>:<*>:<*> #33#/#33# sshd[4203]: pam_krb5[4203]: <*> lifetime: <*>
+[1087]
+<*> <*>:<*>:<*> <*> <*>: <*>: saving v5 credentials to 'FILE:<*>
+[1088]
+<*> <*>:<*>:<*> <*> sshd: <*>: validating credentials
+[1089]
+<*> <*>:<*>:<*> #8#/#8# sshd[11853]: pam_krb5[11853]: <*> <*> <*> <*> for '#2219#'
+[1090]
+<*> <*>:<*>:<*> <*> xinetd[2262]: removing <*>
+[1096]
+<*> <*>:<*>:<*> dn946/dn946 kernel: protections[]: <*> <*> <*>
+[1097]
+<*> <*>:<*>:<*> dn946/dn946 kernel:
+[1098]
+<*> <*>:<*>:<*> dn946/dn946 kernel: <*> <*>
+[1099]
+<*> <*>:<*>:<*> <*> kernel: <*>:panfs:pan_malloc_lowest+81} <ffffffff801347ee>{autoremove_wake_function+0}
+[1100]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 modprobe: modprobe: Can't locate module binfmt-464c
+[1101]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: Accepted publickey for root from <*> port <*> ssh2
+[1102]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [INFO]: Master SM DB synchronized with all designated backup SMs
+[1103]
+<*> <*>:<*>:<*> cn874/cn874 kernel: MOSAL(1): <*> = <*>
+[1106]
+<*> <*>:<*>:<*> an746/an746 kernel: MOSAL(1): <*> = <*>
+[1107]
+<*> <*>:<*>:<*> <*> pbs_mom: im_request, job <*>: command <*>
+[1108]
+<*> <*>:<*>:<*> <*> kernel: panfs exception: at <*>:<*>, <*> <*>: <*> <*> <*>, rollback: <*>
+[1111]
+<*> <*>:<*>:<*> <*> <*>: subsystem request for sftp
+[1112]
+<*> <*>:<*>:<*> bn88/bn88 kernel: MOSAL(1): <*> = <*>
+[1113]
+<*> <*>:<*>:<*> #31#/#31# sshd[25816]: pam_krb5[25816]: <*> lifetime: <*>
+[1115]
+<*> <*>:<*>:<*> cn468/cn468 kernel:
+[1116]
+<*> <*>:<*>:<*> #8#/#8# sshd[10697]: pam_krb5[10697]: <*> <*> <*> <*> <*>
+[1117]
+<*> <*>:<*>:<*> bn331/bn331 kernel: MOSAL(1): <*> = <*>
+[1118]
+<*> <*>:<*>:<*> an265/an265 kernel: MOSAL(1): <*> = <*>
+[1119]
+<*> <*>:<*>:<*> #21#/#21# sshd[27962]: pam_krb5[27962]: <*> <*> <*> <*> for '#2238#'
+[1120]
+<*> <*>:<*>:<*> <*> <*>: pan_kernel: expected release: 2.6.9-1.4.5.6smp release is: 2.6.9-34.EL_lustre.1.4.6.1smp
+[1122]
+<*> <*>:<*>:<*> <*> kernel: ib_mthca: Initializing <*>:<*>:00.0
+[1123]
+<*> <*>:<*>:<*> <*> kernel: ib_mthca: Mellanox InfiniBand HCA driver v0.06 (June <*>, 2005)
+[1124]
+<*> <*>:<*>:<*> <*> kernel: <*>: Address64 -------- Resource unparsed
+[1125]
+<*> <*>:<*>:<*> <*> kernel: pciehp: Both _OSC and OSHP methods do not exist
+[1126]
+<*> <*>:<*>:<*> <*> kernel: <*>: <*>: Slot <*> at s:b:d:f=0x00:<*>:1f:<*>
+[1127]
+<*> <*>:<*>:<*> <*> kernel: <*>: acpi_pciehprm:<*> OSHP fails=0x5
+[1128]
+<*> <*>:<*>:<*> <*> instsvcdrv: dcdbas device driver built for kernel 2.6.9-34.EL_lustre.1.4.6.1smp
+[1129]
+<*> <*>:<*>:<*> <*> kernel: dcdbas: version magic '2.6.9-34.EL_lustre.1.4.6.1smp SMP gcc-3.4' should be '2.6.9-34.EL_lustre.1.4.6.1smp SMP gcc-3.3'
+[1130]
+<*> <*>:<*>:<*> <*> instsvcdrv: dcdbas device driver load failed for kernel 2.6.9-34.EL_lustre.1.4.6.1smp. See /var/log/dcdbas.log for output from modprobe.
+[1131]
+<*> <*>:<*>:<*> <*> kernel: Calibrating delay using timer specific routine.. <*> BogoMIPS (lpj=<*>
+[1132]
+<*> <*>:<*>:<*> <*> kernel: time.c: Lost <*> timer <*> <*> <*>
+[1133]
+<*> <*>:<*>:<*> <*> xinetd[2628]: removing <*>
+[1135]
+<*> <*>:<*>:<*> <*> kernel: Evaluate _OSC Set fails. Status = 0x0005
+[1136]
+<*> <*>:<*>:<*> #9#/#9# sshd: pam_krb5[27902]: <*> lifetime: <*>
+[1137]
+<*> <*>:<*>:<*> #9#/#9# sshd: pam_krb5[27902]: <*> <*> <*> <*> <*>
+[1138]
+<*> <*>:<*>:<*> <*> <*>: <*>: authentication fails for <*> <*>: Authentication failure (Decrypt integrity check failed)
+[1139]
+<*> <*>:<*>:<*> <*> <*>: no servers reachable
+[1140]
+<*> <*>:<*>:<*> #9#/#9# <*>: <*>: banner: Kerberos <*>
+[1142]
+<*> <*>:<*>:<*> #1#/#1# crond[1950]: pam_krb5[1950]: <*> returning <*> (Success)
+[1144]
+<*> <*>:<*>:<*> #1#/#1# crond[1950]: pam_krb5[1950]: <*> lifetime: <*>
+[1145]
+<*> <*>:<*>:<*> bn531/bn531 kernel: <*> <*>
+[1146]
+<*> <*>:<*>:<*> bn524/bn524 kernel: <*> <*>
+[1147]
+<*> <*>:<*>:<*> an945/an945 kernel: protections[]: <*> <*> <*>
+[1148]
+<*> <*>:<*>:<*> dn909/dn909 kernel: <*> <*>
+[1149]
+<*> <*>:<*>:<*> #8#/#8# sshd[3430]: pam_krb5[3430]: <*> <*> <*> <*> <*>
+[1150]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 <*>: stream_eof, connection to <*> <*> <*> <*> <*> <*> setting node state to down
+[1151]
+<*> <*>:<*>:<*> an810/an810 kernel:
+[1153]
+<*> <*>:<*>:<*> an253/an253 kernel:
+[1154]
+<*> <*>:<*>:<*> <*> sysctl: vm.min_free_kbytes = <*>
+[1163]
+<*> <*>:<*>:<*> cn522/cn522 kernel:
+[1164]
+<*> <*>:<*>:<*> <*> <*>: Timed out waiting for hotplug event <*> Rebasing to <*>
+[1171]
+<*> <*>:<*>:<*> dn233/dn233 kernel:
+[1172]
+<*> <*>:<*>:<*> src@aadmin1 rpc.mountd: failed to lock /var/lib/nfs/rmtab
+[1173]
+<*> <*>:<*>:<*> <*> xinetd[2272]: removing <*>
+[1175]
+<*> <*>:<*>:<*> an577/an577 kernel:
+[1177]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 <*>: stream_eof, connection to <*> <*> <*> <*> <*> setting node state to down
+[1178]
+<*> <*>:<*>:<*> bn930/bn930 kernel:
+[1181]
+<*> <*>:<*>:<*> src@cadmin3 rpc.mountd: can't stat exported dir /var/lib/oneSIS/images/x86_64/RedHat-EL-AS4-U1-madinst: No such file or directory
+[1184]
+<*> <*>:<*>:<*> dn627/dn627 kernel:
+[1185]
+<*> <*>:<*>:<*> bn156/bn156 kernel:
+[1193]
+<*> <*>:<*>:<*> cn438/cn438 kernel:
+[1195]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_assign.c:588]: Force port to go down due to LID conflict, node - GUID=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=<*>
+[1197]
+<*> <*>:<*>:<*> <*> xinetd[2271]: removing <*>
+[1202]
+<*> <*>:<*>:<*> bn889/bn889 kernel:
+[1205]
+<*> <*>:<*>:<*> cn53/cn53 kernel:
+[1207]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_bringup.c:489]: Active state mismatch GUID=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=<*>, state <*>, GUID=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=<*>, state <*>
+[1208]
+<*> <*>:<*>:<*> <*> <*>: <*>: <*> returning <*> (Authentication failure)
+[1209]
+<*> <*>:<*>:<*> #56#/#56# <*>: <*>: message-id=<*>
+[1212]
+<*> <*>:<*>:<*> #56#/#56# postfix/qmgr[3261]: <*>: removed
+[1213]
+<*> <*>:<*>:<*> #8#/#8# sshd: <*>: <*> <*> <*> for <*>
+[1214]
+<*> <*>:<*>:<*> cn151/cn151 kernel: protections[]: <*> <*> <*>
+[1216]
+<*> <*>:<*>:<*> dn30/dn30 kernel: MOSAL(1): <*> = <*>
+[1217]
+<*> <*>:<*>:<*> <*> kernel: Kernel command line: initrd=/x86_64/initrd-2.6.9-34.EL_lustre.1.4.6.1smp-onesis.img report_lost_ticks noht tsc console=tty0 console=ttyS0,<*> quiet BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-34.EL_lustre.1.4.6.1smp
+[1218]
+<*> <*>:<*>:<*> bn550/bn550 kernel: MOSAL(1): <*> = <*>
+[1219]
+<*> <*>:<*>:<*> cn636/cn636 kernel: MOSAL(1): <*> = <*>
+[1220]
+<*> <*>:<*>:<*> en306/en306 xinetd[2619]: removing <*>
+[1222]
+<*> <*>:<*>:<*> bn859/bn859 kernel: MOSAL(1): <*> = <*>
+[1223]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): va = <*>
+[1224]
+<*> <*>:<*>:<*> cn599/cn599 kernel: MOSAL(1): <*> = <*>
+[1225]
+<*> <*>:<*>:<*> cn989/cn989 kernel: MOSAL(1): <*> = <*>
+[1226]
+<*> <*>:<*>:<*> dn1019/dn1019 kernel: MOSAL(1): <*> = <*>
+[1227]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): size = <*>
+[1228]
+<*> <*>:<*>:<*> dn539/dn539 kernel: MOSAL(1): <*> = <*>
+[1229]
+<*> <*>:<*>:<*> cn1017/cn1017 kernel: MOSAL(1): <*> = <*>
+[1230]
+<*> <*>:<*>:<*> bn368/bn368 kernel: MOSAL(1): <*> = <*>
+[1231]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): file_p = <*>
+[1232]
+<*> <*>:<*>:<*> cn1009/cn1009 kernel: MOSAL(1): <*> = <*>
+[1233]
+<*> <*>:<*>:<*> cn44/cn44 kernel: MOSAL(1): <*> = <*>
+[1234]
+<*> <*>:<*>:<*> cn941/cn941 kernel: MOSAL(1): <*> = <*>
+[1235]
+<*> <*>:<*>:<*> <*> kernel: Lustre: <*>: Connection restored to service <*> using nid <*>
+[1236]
+<*> <*>:<*>:<*> <*> kernel: LustreError: Connection to service <*> via nid <*> was lost; in progress operations using this service #15# wait for recovery to complete.
+[1237]
+<*> <*>:<*>:<*> <*> kernel: Lustre: <*>:<*>:(router.c:<*>:lnet_notify()) Upcall: NID <*> is dead
+[1238]
+<*> <*>:<*>:<*> <*> kernel: Lustre: <*>:<*>:(linux-debug.c:<*>:libcfs_run_upcall()) Invoked <*> upcall /usr/lib/lustre/lnet_upcall ROUTER_NOTIFY,<*>,down,<*>
+[1239]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(socklnd_cb.c:<*>:ksocknal_check_peer_timeouts()) Timeout out <*> ip <*>:<*>
+[1240]
+<*> <*>:<*>:<*> cn913/cn913 kernel: MOSAL(1): <*> = <*>
+[1242]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): file_pgoff = <*>
+[1243]
+<*> <*>:<*>:<*> bn1000/bn1000 kernel: MOSAL(1): <*> = <*>
+[1244]
+<*> <*>:<*>:<*> #31#/#31# sshd[3092]: pam_krb5[3092]: <*>: <*>
+[1245]
+<*> <*>:<*>:<*> <*> <*>: <*>: pam_close_session returning <*> (Success)
+[1246]
+<*> <*>:<*>:<*> #31#/#31# sshd[3092]: pam_krb5[3092]: <*> lifetime: <*>
+[1247]
+<*> <*>:<*>:<*> <*> kernel: pan_sam: <*>: unable to report I/O error(s) to SM 0x020038da11df0002(SM): 0x7e9 (RPC: No response within the timeout period)
+[1248]
+<*> <*>:<*>:<*> <*> kernel: Out of Memory: Killed process <*> <*>
+[1249]
+<*> <*>:<*>:<*> <*> kernel: oom-killer: gfp_mask=<*>
+[1250]
+<*> <*>:<*>:<*> cn151/cn151 kernel:
+[1251]
+<*> <*>:<*>:<*> bn663/bn663 kernel: pan_freelist: tolerating leak (bug 27645); freelist &pan_rm_bindcache_req_fl, buffer <*>, at rhel_4_amd64/release/build/panfs/rm/client/pan_rm_client_bindcache.c:<*> {no_stack_traceback_support}
+[1256]
+<*> <*>:<*>:<*> bn663/bn663 kernel: pan_mem: tolerating leak (bug 27645); buffer <*>:<*> at rhel_4_amd64/release/build/panfs/rm/client/pan_rm_client_bindcache.c:<*>
+[1257]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd <*>, 0x23a1 (pan_sock: timeout), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_cmd.c:<*>
+[1258]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- tx sched dequeue and send mod, 0x23a1 (pan_sock: timeout), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_tx_sched.c:<*>
+[1259]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- tx sched send next, 0x23a1 (pan_sock: timeout), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_tx_sched.c:<*>
+[1260]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- tx sched send, 0x23a1 (pan_sock: timeout), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips_tx_sched.c:<*>
+[1261]
+<*> <*>:<*>:<*> <*> xinetd[2273]: removing <*>
+[1266]
+<*> <*>:<*>:<*> <*> date: Sat Apr <*> <*>:<*>:<*> MST <*>
+[1268]
+<*> <*>:<*>:<*> an147/an147 lvm.static:
+[1269]
+<*> <*>:<*>:<*> <*> kernel: Bootdata ok (command line is initrd=/x86_64/initrd-2.6.9-34.EL_lustre.1.4.6.1smp-onesis.img report_lost_ticks noht tsc console=tty0 console=ttyS0,<*> quiet BOOT_IMAGE=/x86_64/vmlinuz-2.6.9-34.EL_lustre.1.4.6.1smp )
+[1272]
+<*> <*>:<*>:<*> <*> kernel: pan_ips: error -- cmd_timeout_task_query: couldn't send task_query 0x2399 (pan_sock: connection reset by peer)
+[1274]
+<*> <*>:<*>:<*> <*> kernel: obsd_client: obsd_client: command timed out SETATTR options=0x0 obj_id=<*> get_attributes=0x0 set_attributes=<*> realmname panfs1 dev_id=<*> flags=0x0 res_buffer=(0x0:0) <*>, <*>, <*> allocated_by_sam=YES
+[1275]
+<*> <*>:<*>:<*> bn657/bn657 postfix/master[2337]: warning: /usr/libexec/postfix/pickup: bad command startup -- throttling
+[1276]
+<*> <*>:<*>:<*> bn657/bn657 postfix/master[2337]: warning: process /usr/libexec/postfix/pickup pid <*> exit status <*>
+[1277]
+<*> <*>:<*>:<*> <*> kernel: obsd_client: obsd_client: command timed out GETATTR options=0x1 obj_id=<*> get_attributes=<*> realmname panfs1 dev_id=<*> flags=0x0 res_buffer=(0x0:0) <*>, <*>, <*> allocated_by_sam=YES
+[1278]
+<*> <*>:<*>:<*> an812/an812 kernel:
+[1279]
+<*> <*>:<*>:<*> an786/an786 xinetd[2235]: removing <*>
+[1280]
+<*> <*>:<*>:<*> an702/an702 xinetd[2057]: removing <*>
+[1281]
+<*> <*>:<*>:<*> an320/an320 kernel:
+[1282]
+<*> <*>:<*>:<*> an332/an332 kernel:
+[1283]
+<*> <*>:<*>:<*> <*> date: <*> Apr <*> <*>:<*>:<*> MDT <*>
+[1284]
+<*> <*>:<*>:<*> <*> xinetd[2247]: removing <*>
+[1285]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 <*>: <*>: message-id=<*>
+[1286]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 <*>: <*>: uid=<*> from=<tbird-#2148#@#207#>
+[1287]
+<*> <*>:<*>:<*> tbird-admin2/tbird-admin2 postfix/qmgr[1933]: <*>: removed
+[1288]
+<*> <*>:<*>:<*> #2116#/#2116# RT: About to think about scrips for transaction <*>
+[1289]
+<*> <*>:<*>:<*> #2116#/#2116# RT: We don't do <*> yet <*> <*>:155)
+[1290]
+<*> <*>:<*>:<*> #32#/#32# sshd[22386]: pam_krb5[22386]: <*> lifetime: <*>
+[1291]
+<*> <*>:<*>:<*> <*> <*> <*> <*>:<*>:<*> <*>: %RPM0-P:CP <*>: Changed interface state to <*>: Gi <*>
+[1292]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2100]: [ib_sm_discovery.c:1050]: _ib_smDiscoverPort(port= 6)
+[1293]
+<*> <*>:<*>:<*> cn641/cn641 kernel: MOSAL(1): <*> = <*>
+[1294]
+<*> <*>:<*>:<*> dn83/dn83 kernel: MOSAL(1): <*> = <*>
+[1295]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): <*> = no
+[1296]
+<*> <*>:<*>:<*> dn266/dn266 kernel: MOSAL(1): <*> = <*>
+[1297]
+<*> <*>:<*>:<*> cn127/cn127 kernel: MOSAL(1): <*> = <*>
+[1298]
+<*> <*>:<*>:<*> dn69/dn69 kernel: MOSAL(1): <*> = <*>
+[1299]
+<*> <*>:<*>:<*> dn797/dn797 pbs_mom: node_bailout, 67266.tbird-admin2 POLL failed from node <*> <*>
+[1300]
+<*> <*>:<*>:<*> cn965/cn965 kernel: MOSAL(1): <*> = <*>
+[1301]
+<*> <*>:<*>:<*> cn956/cn956 kernel: MOSAL(1): <*> = <*>
+[1302]
+<*> <*>:<*>:<*> src@dadmin1 dhcpd: No subnet declaration for eth1:<*> (0.0.0.0).
+[1303]
+<*> <*>:<*>:<*> <*> kernel: shpchp: shpc_init : shpc_cap_offset == <*>
+[1304]
+<*> <*>:<*>:<*> <*> <*>: removing echo
+[1305]
+<*> <*>:<*>:<*> an851/an851 nfslock: <*> <*> succeeded
+[1310]
+<*> <*>:<*>:<*> <*> xinetd[2275]: Exiting...
+[1312]
+<*> <*>:<*>:<*> dn466/dn466 kernel:
+[1316]
+<*> <*>:<*>:<*> bn655/bn655 kernel:
+[1318]
+<*> <*>:<*>:<*> cn606/cn606 kernel:
+[1319]
+<*> <*>:<*>:<*> en320/en320 kernel:
+[1322]
+<*> <*>:<*>:<*> bn959/bn959 kernel: protections[]: <*> <*> <*>
+[1324]
+<*> <*>:<*>:<*> dn192/dn192 kernel: protections[]: <*> <*> <*>
+[1325]
+<*> <*>:<*>:<*> dn214/dn214 kernel: protections[]: <*> <*> <*>
+[1326]
+<*> <*>:<*>:<*> an553/an553 kernel:
+[1327]
+<*> <*>:<*>:<*> an660/an660 kernel: protections[]: <*> <*> <*>
+[1328]
+<*> <*>:<*>:<*> bn69/bn69 kernel:
+[1329]
+<*> <*>:<*>:<*> cn557/cn557 kernel: protections[]: <*> <*> <*>
+[1330]
+<*> <*>:<*>:<*> <*> <*>: warning: process <*> pid <*> killed by signal <*>
+[1331]
+<*> <*>:<*>:<*> bn928/bn928 kernel: protections[]: <*> <*> <*>
+[1333]
+<*> <*>:<*>:<*> an957/an957 kernel: protections[]: <*> <*> <*>
+[1334]
+<*> <*>:<*>:<*> <*> <*>: removing eklogin
+[1335]
+<*> <*>:<*>:<*> <*> xinetd[2276]: removing <*>
+[1338]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_discovery.c:752]: switch lid change, node - GUID=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port=<*>, neighbor (nil), changing lid from <*>, back to original <*>
+[1339]
+<*> <*>:<*>:<*> bn395/bn395 xinetd[2264]: removing <*>
+[1343]
+<*> <*>:<*>:<*> bn620/bn620 kernel:
+[1345]
+<*> <*>:<*>:<*> <*> kernel: Node <*> Normal: <*> <*> <*> <*> <*> 1*128kB <*> <*> <*> 0*2048kB <*> = <*>
+[1346]
+<*> <*>:<*>:<*> #56#/#56# <*>: <*> CMD <*>
+[1347]
+<*> <*>:<*>:<*> <*> <*>: <*>:CP <*>: Changed interface state to <*>: Gi <*>
+[1349]
+<*> <*>:<*>:<*> <*> sudo: <*> : TTY=<*> ; PWD=<*> ; USER=root ; COMMAND=<*> <*>
+[1351]
+<*> <*>:<*>:<*> #9#/#9# sshd[30863]: pam_krb5[30863]: <*>: <*>
+[1352]
+<*> <*>:<*>:<*> #9#/#9# sshd[30863]: pam_krb5[30863]: <*> lifetime: <*>
+[1353]
+<*> <*>:<*>:<*> <*> <*>: <*>: krb5_get_init_creds_password(krbtgt/#24#@#24#) returned -1765328360 (Preauthentication failed)
+[1354]
+<*> <*>:<*>:<*> #32#/#32# <*>: <*>: banner: Kerberos <*>
+[1355]
+<*> <*>:<*>:<*> #56#/#56# <*>: (root) CMD (/apps/breakfix-testing/SCRIPTS/ping_f10_leaves.exp | mail -s "F10 <*> minute cron to avoid arp table loss, please fix f10 - Cron <#7#@#56#> /apps/breakfix-testing/SCRIPTS/ping_f10_leaves.exp" #1867#@#207# #57#@#207# #385#@#207# )
+[1356]
+<*> <*>:<*>:<*> dn618/dn618 kernel: MOSAL(1): <*> = <*>
+[1357]
+<*> <*>:<*>:<*> <*> MDT: %RPM1-P:CP %SEC-5-LOGIN_SUCCESS: Login successful for user admin on line <*> (10.100.248.3)
+[1358]
+<*> <*>:<*>:<*> <*> MDT: %RPM1-P:CP %SEC-5-LOGOUT: Exec session is terminated for user admin on line <*> (10.100.248.3)
+[1359]
+<*> <*>:<*>:<*> an870/an870 kernel: MOSAL(1): <*> = <*>
+[1360]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): prot_ctx = USER
+[1361]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): map_list = <*>
+[1362]
+<*> <*>:<*>:<*> an839/an839 kernel: MOSAL(1): <*> = <*>
+[1363]
+<*> <*>:<*>:<*> bn590/bn590 kernel: MOSAL(1): <*> = <*>
+[1364]
+<*> <*>:<*>:<*> bn40/bn40 kernel: MOSAL(1): <*> = <*>
+[1365]
+<*> <*>:<*>:<*> an1011/an1011 kernel: MOSAL(1): <*> = <*>
+[1366]
+<*> <*>:<*>:<*> an56/an56 kernel: MOSAL(1): <*> = <*>
+[1367]
+<*> <*>:<*>:<*> an99/an99 kernel: MOSAL(1): <*> = <*>
+[1368]
+<*> <*>:<*>:<*> <*> pbs_mom: Inappropriate ioctl for device (25) in open_demux, open_demux: connect <*>:<*>
+[1369]
+<*> <*>:<*>:<*> <*> pbs_mom: Inappropriate ioctl for device (25) in search_env_and_open, MPIEXEC_STDOUT_PORT=<*>
+[1370]
+<*> <*>:<*>:<*> <*> pbs_mom: Inappropriate ioctl for device (25) in search_env_and_open, failed connect to mpiexec process on MS
+[1371]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: Calling RRDs::<*> --template uptime:loss:median:ping1:ping2:ping3:ping4:ping5:ping6:ping7:ping8:ping9:ping10:ping11:ping12:ping13:ping14:ping15:ping16:ping17:ping18:ping19:ping20 N:U:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>
+[1372]
+<*> <*>:<*>:<*> #56#/#56# <*>: <*>: to=<#26#@#56#.#207#>, orig_to=<#26#>, relay=local, delay=<*>, status=bounced (cannot access mailbox /var/mail/#26# for user #26#. error writing message: File too large)
+[1373]
+<*> <*>:<*>:<*> #56#/#56# <*>: <*>: uid=<*> from=<#26#>
+[1374]
+<*> <*>:<*>:<*> #56#/#56# <*>: <*>: to=<#26#@#207#>, relay=#211#[#212#], delay=<*>, status=bounced (host #211#[#212#] said: <*> 5.1.1 <#26#@#207#>... User unknown (in reply to RCPT TO command))
+[1375]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> 1.8 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1376]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 2.8 <*> <*> <*> <*> <*> <*> <*>
+[1377]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.1 <*> <*> <*> <*> <*> <*>
+[1378]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.8 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1379]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> 0.5 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1380]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.1 <*>
+[1381]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> 0.5 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1382]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> 0.4 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1383]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [INFO]: Resynchronize with Standby SM guid <*>:<*>:ad:<*>:<*>:<*>:<*>:2d
+[1384]
+<*> <*>:<*>:<*> #56#/#56# <*>: (#26#) CMD (/home/#26#/cricket-1.0.5/collect-subtrees 2>&1 > /dev/null)
+[1385]
+<*> <*>:<*>:<*> #25#/#25# crond[10469]: pam_krb5[10469]: <*>: <*> <*>
+[1386]
+<*> <*>:<*>:<*> #25#/#25# crond[10469]: pam_krb5[10469]: <*>: <*>
+[1387]
+<*> <*>:<*>:<*> #21#/#21# sshd[4555]: pam_krb5[4555]: <*> <*> <*> <*> for '#2377#'
+[1388]
+<*> <*>:<*>:<*> #31#/#31# sshd[12459]: pam_krb5[12459]: <*>: <*>
+[1389]
+<*> <*>:<*>:<*> #31#/#31# sshd[12459]: pam_krb5[12459]: <*> lifetime: <*>
+[1390]
+<*> <*>:<*>:<*> dn441/dn441 kernel: MOSAL(1): <*> = <*>
+[1395]
+<*> <*>:<*>:<*> cn281/cn281 kernel: MOSAL(1): <*> = <*>
+[1396]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 12.0 <*> <*> <*> <*> <*> <*> <*>
+[1399]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: '10.100.200.2 : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1400]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: '10.100.200.5 : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1401]
+<*> <*>:<*>:<*> cn299/cn299 kernel: MOSAL(1): <*> = <*>
+[1402]
+<*> <*>:<*>:<*> cn61/cn61 kernel: MOSAL(1): <*> = <*>
+[1403]
+<*> <*>:<*>:<*> dn387/dn387 kernel: MOSAL(1): <*> = <*>
+[1404]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> 0.3 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1405]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> 13.1 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1406]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: '10.100.200.6 : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1407]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.2 <*>
+[1408]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.6 <*> <*> <*> <*>
+[1409]
+<*> <*>:<*>:<*> an489/an489 kernel: MOSAL(1): <*> = <*>
+[1411]
+<*> <*>:<*>:<*> an931/an931 kernel: MOSAL(1): <*> = <*>
+[1412]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Executing /usr/local/sbin/fping -C <*> -q -B1 -r1 -i10 badmin3 ibr4-southern <*> ibr1-northern ibr6-southern #27# bn1024 ibr6-northern nfs2 <*> ibr8-southern badmin1 ibr1-southern <*> ibr7-southern <*> bn1 ibr5-northern nfs1 br1iblsw1 ibr3-southern ibr8-northern badmin2 ibr4-northern ibr2-southern ibr3-northern <*> tbr1iblsw1 ibr5-southern <*> badmin4 ibr2-northern ibr7-northern
+[1413]
+<*> <*>:<*>:<*> dn400/dn400 kernel: protections[]: <*> <*> <*>
+[1415]
+<*> <*>:<*>:<*> dn474/dn474 kernel:
+[1416]
+<*> <*>:<*>:<*> <*> kernel: Node <*> <*>: 0*4kB <*> <*> <*> <*> <*> 1*256kB <*> 0*1024kB 1*2048kB <*> = <*>
+[1417]
+<*> <*>:<*>:<*> dn972/dn972 kernel: protections[]: <*> <*> <*>
+[1418]
+<*> <*>:<*>:<*> dn706/dn706 kernel:
+[1419]
+<*> <*>:<*>:<*> dn667/dn667 kernel:
+[1420]
+<*> <*>:<*>:<*> dn965/dn965 kernel: protections[]: <*> <*> <*>
+[1422]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.8 <*>
+[1423]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> 0.5 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1424]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.9 <*> <*>
+[1425]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Sleeping <*> seconds.
+[1426]
+<*> <*>:<*>:<*> an354/an354 kernel: MOSAL(1): <*> = <*>
+[1427]
+<*> <*>:<*>:<*> an438/an438 kernel: MOSAL(1): <*> = <*>
+[1429]
+<*> <*>:<*>:<*> an386/an386 kernel: MOSAL(1): <*> = <*>
+[1430]
+<*> <*>:<*>:<*> bn349/bn349 kernel:
+[1434]
+<*> <*>:<*>:<*> bn630/bn630 kernel:
+[1436]
+<*> <*>:<*>:<*> #32#/#32# su[22190]: pam_krb5[22190]: <*>: <*>
+[1439]
+<*> <*>:<*>:<*> #32#/#32# su[22190]: pam_krb5[22190]: <*> lifetime: <*>
+[1440]
+<*> <*>:<*>:<*> #32#/#32# sudo: #47# : TTY=pts/1 ; PWD=/projects/tbird/#47#/appscbench ; USER=root ; COMMAND=/bin/su - -c cd /scratch3/#125#-test-tbird/nodehwtest/breakfix && rm -f <*>
+[1441]
+<*> <*>:<*>:<*> #32#/#32# su[13529]: pam_krb5[13529]: <*> lifetime: <*>
+[1442]
+<*> <*>:<*>:<*> #32#/#32# <*>: <*>: flag: no <*>
+[1443]
+<*> <*>:<*>:<*> #32#/#32# su[13583]: pam_krb5[13583]: <*>: <*>
+[1444]
+<*> <*>:<*>:<*> #32#/#32# <*>: <*>: renewable lifetime: <*>
+[1445]
+<*> <*>:<*>:<*> #32#/#32# su[17059]: pam_krb5[17059]: <*>: <*>
+[1446]
+<*> <*>:<*>:<*> #32#/#32# <*>: <*>: ticket lifetime: <*>
+[1447]
+<*> <*>:<*>:<*> <*> <*>: <*>: created v5 ccache <*> for <*>
+[1448]
+<*> <*>:<*>:<*> dn120/dn120 kernel: MOSAL(1): <*> = <*>
+[1449]
+<*> <*>:<*>:<*> dn119/dn119 kernel: MOSAL(1): <*> = <*>
+[1450]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> 2.1 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1451]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.1 <*> <*>
+[1452]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> 0.4 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>
+[1453]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> <*> 0.0 <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> 0.7 <*>
+[1454]
+<*> <*>:<*>:<*> #25#/#25# <*>: <*>: ticket lifetime: <*>
+[1455]
+<*> <*>:<*>:<*> en228/en228 kernel: scsi0 (0:0): rejecting I/O to offline device
+[1457]
+<*> <*>:<*>:<*> bn140/bn140 xinetd[2268]: removing <*>
+[1460]
+<*> <*>:<*>:<*> <*> mount.panfs: pan_ips: error -- real init, 0x5 (Out of memory), err_loc=<*>, rhel_4_amd64/release/build/panfs/ips/pan_ips.c:<*> <*> <*> <*>:<*>:<*> mount.panfs: bindcache: failed init IPS: 0x5 (Out of memory)
+[1461]
+<*> <*>:<*>:<*> en207/en207 kernel:
+[1462]
+<*> <*>:<*>:<*> <*> pbs_mom: im_request, bad connect from <*>:<*> - unauthorized (okclients: <*>,<*>,<*>
+[1463]
+<*> <*>:<*>:<*> an717/an717 kernel:
+[1464]
+<*> <*>:<*>:<*> bn677/bn677 kernel: MOSAL(1): <*> = <*>
+[1467]
+<*> <*>:<*>:<*> <*> kernel: THH(4): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxhh/thh/obj_host_amd64_custom1_rhel4/mod_thh/tptm.c[1264]: MOSAL_iobuf_register failed: va=<*>, size=0x200000 (-4:MT_ENORSC
+[1468]
+<*> <*>:<*>:<*> <*> kernel: VIPKL(1): Inside CQM_create_cq: Unable to register HH CQ. hh_ret = -255
+[1469]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): page_shift = <*>
+[1470]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxsys/obj_host_amd64_custom1_rhel4/mlxsys/mosal_mlock.c[1326]: priv_mosal_mlock: could not find mm=<*> (pid=<*> in the hash
+[1471]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): prev = <*>
+[1472]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): mlock_ctx = <*>
+[1473]
+<*> <*>:<*>:<*> bn346/bn346 kernel: MOSAL(1): <*> = <*>
+[1474]
+<*> <*>:<*>:<*> bn967/bn967 kernel: MOSAL(1): <*> = <*>
+[1475]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): next = <*>
+[1476]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): ref_iobuf = <*>
+[1477]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:449]: Failed to get PortInfo from IB node <*>:<*>:ad:<*>:<*>:<*>:<*>:<*> port <*>
+[1478]
+<*> <*>:<*>:<*> an141/an141 xinetd[2095]: removing <*>
+[1479]
+<*> <*>:<*>:<*> <*> xinetd[2257]: Exiting...
+[1481]
+<*> <*>:<*>:<*> bn45/bn45 kernel:
+[1482]
+<*> <*>:<*>:<*> cn200/cn200 xinetd[2274]: removing <*>
+[1483]
+<*> <*>:<*>:<*> #31#/#31# sshd[10395]: pam_krb5[10395]: <*> lifetime: <*>
+[1485]
+<*> <*>:<*>:<*> #31#/#31# sshd[10397]: pam_krb5[10397]: <*>: <*> <*>
+[1486]
+<*> <*>:<*>:<*> #31#/#31# sshd[10397]: pam_krb5[10397]: <*>: <*>
+[1487]
+<*> <*>:<*>:<*> #31#/#31# sshd[10397]: pam_krb5[10397]: <*> lifetime: <*>
+[1488]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_routing.c:<*>: Failed to set <*> <*> switch=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>
+[1490]
+<*> <*>:<*>:<*> #31#/#31# <*>: <*>: banner: Kerberos <*>
+[1492]
+<*> <*>:<*>:<*> #31#/#31# sshd[4003]: pam_krb5[4003]: <*>: <*>
+[1493]
+<*> <*>:<*>:<*> #31#/#31# sshd[4003]: pam_krb5[4003]: <*> lifetime: <*>
+[1494]
+<*> <*>:<*>:<*> <*> <*>: [ib_sm_sweep.c:1553]: No configuration change required
+[1496]
+<*> <*>:<*>:<*> #56#/#56# smokeping[5024]: FPing: Got fping output: <*> : <*> <*> <*> <*> <*> 0.9 <*> <*> <*> 0.6 <*> <*> <*> <*> <*> <*> <*> <*> 0.5 <*>
+[1507]
+<*> <*>:<*>:<*> dn17/dn17 kernel:
+[1508]
+<*> <*>:<*>:<*> dn251/dn251 kernel:
+[1509]
+<*> <*>:<*>:<*> dn940/dn940 kernel:
+[1512]
+<*> <*>:<*>:<*> an765/an765 kernel:
+[1527]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): req_perm = READ
+[1538]
+<*> <*>:<*>:<*> #33#/#33# sshd[18214]: pam_krb5[18214]: <*>: <*> <*>
+[1540]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2133]: [INFO]: Program switch port state to down, node=<*>:<*>:ad:<*>:<*>:<*>:<*>:<*>, port= <*>, due to non-responding CA
+[1541]
+<*> <*>:<*>:<*> tsqe2/tsqe2 <*>: Key exchange failed in remote: 'Key exchange failed.'
+[1543]
+<*> <*>:<*>:<*> tsqe2/tsqe2 <*>: Remote host disconnected: Key exchange failed.
+[1544]
+<*> <*>:<*>:<*> tsqe2/tsqe2 <*>: Remote host disconnected: Authentication cancelled by user.
+[1545]
+<*> <*>:<*>:<*> tsqe2/tsqe2 <*>: authentication cancelled by user: 'Authentication cancelled by user.'
+[1546]
+<*> <*>:<*>:<*> <*> date: <*> May <*> <*>:<*>:<*> MDT <*>
+[1547]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: [ib_sm_sweep.c:1875]: async events require sweep
+[1548]
+<*> <*>:<*>:<*> #56#/#56# smokeping[12363]: RRDs::update ERROR: <*> <*> <*> <*> <*> <*>
+[1549]
+<*> <*>:<*>:<*> en3/en3 kernel: LustreError: <*>:<*>:(socklnd_cb.c:<*>:ksocknal_find_timed_out_conn()) Timed out TX to <*> <*> <*> <*>
+[1550]
+<*> <*>:<*>:<*> en3/en3 kernel: LustreError: A timeout occurred sending data to <*> the network or that node may be down.
+[1551]
+<*> <*>:<*>:<*> <*> kernel: MOSAL(1): <*>: MOSAL_virt_to_phys_ex: cannot retrieve <*>: prot_ctx=USER, va=<*>
+[1552]
+<*> <*>:<*>:<*> <*> su: <*>: krb5_get_init_creds_password(krbtgt/#24#@#24#) returned -1765328378 (Client not found in Kerberos database)
+[1553]
+<*> <*>:<*>:<*> <*> <*>: <*>: pam_acct_mgmt returning <*> (User not known to the underlying authentication module)
+[1554]
+<*> <*>:<*>:<*> bn567/bn567 pbs_mom: scan_for_exiting, system epilog failed w/rc=<*>
+[1555]
+<*> <*>:<*>:<*> bn567/bn567 pbs_mom: Operation now in progress (115) in obit_reply, DIS_reply_read failed, rc=<*> sock=<*>
+[1556]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 <*>: (root) CMD <*>
+[1558]
+<*> <*>:<*>:<*> an780/an780 kernel:
+[1566]
+<*> <*>:<*>:<*> <*> sysctl: vm.max_map_count = <*>
+[1578]
+<*> <*>:<*>:<*> dn145/dn145 kernel:
+[1581]
+<*> <*>:<*>:<*> #31#/#31# crond[16695]: pam_krb5[16695]: <*>: <*>
+[1583]
+<*> <*>:<*>:<*> #31#/#31# crond[16695]: pam_krb5[16695]: <*> lifetime: <*>
+[1584]
+<*> <*>:<*>:<*> <*> <*>: removing ftp
+[1585]
+<*> <*>:<*>:<*> <*> <*>:<*> ibstatmon[86db0b30]: Mad Util Send Timeout: LID:0x0000 QP:<*> timeout=<*>
+[1586]
+<*> <*>:<*>:<*> <*> <*>:<*> ibstatmon[86db0b30]: TMS: Infiniband Port Stat Info Query failed. switch #:<*> port #:<*> return code: <*>
+[1587]
+<*> <*>:<*>:<*> <*> pbs_mom: Connection refused (111) in open_demux, open_demux: cannot connect to <*>:<*>
+[1588]
+<*> <*>:<*>:<*> #9#/#9# time.c: Lost <*> timer tick(s)! rip __do_softirq+0x4d/0xd0)
+[1589]
+<*> <*>:<*>:<*> #9#/#9# Warning: kfree_skb on hard IRQ ffffffff802bc94f
+[1591]
+<*> <*>:<*>:<*> bn567/bn567 ts_fixup:
+[1593]
+<*> <*>:<*>:<*> #32#/#32# <*>: pam_krb5[12338]: <*>: <*>
+[1594]
+<*> <*>:<*>:<*> <*> <*>: FAIL: rsync service_limit from=<*>
+[1596]
+<*> <*>:<*>:<*> en380/en380 pbs_mom: Bad file descriptor (9) in tm_request, comm failed Protocol failure in commit
+[1605]
+<*> <*>:<*>:<*> <*> chassis_mgr.x[478]: [INFO]: power-supply <*> <*> <*>
+[1606]
+<*> <*>:<*>:<*> dn356/dn356 kernel:
+[1607]
+<*> <*>:<*>:<*> an357/an357 xinetd[2251]: removing <*>
+[1609]
+<*> <*>:<*>:<*> bn453/bn453 kernel:
+[1613]
+<*> <*>:<*>:<*> #31#/#31# sshd[21858]: pam_krb5[21858]: <*>: <*>
+[1617]
+<*> <*>:<*>:<*> #31#/#31# sshd[21858]: pam_krb5[21858]: <*> lifetime: <*>
+[1618]
+<*> <*>:<*>:<*> <*> <*>: <*>: trying previously-entered password for <*>
+[1619]
+<*> <*>:<*>:<*> tbird-sm2/tbird-sm2 ib_sm[27873]: [INFO]: <*> <*> <*> <*> <*> <*>
+[1620]
+<*> <*>:<*>:<*> local@tbird-admin1 protections[]: <*> <*> <*>
+[1623]
+<*> <*>:<*>:<*> an993/an993 kernel:
+[1625]
+<*> <*>:<*>:<*> bn834/bn834 kernel:
+[1626]
+<*> <*>:<*>:<*> an549/an549 smartd[1979]: Device: /dev/sda, SMART Failure: FAILURE PREDICTION THRESHOLD EXCEEDED
+[1627]
+<*> <*>:<*>:<*> <*> <*>: %RPM0-P:CP %SNMP-3-SNMP_AUTH_FAIL: SNMP Authentication failure for SNMP request from host <*>
+[1628]
+<*> <*>:<*>:<*> #2116#/#2116# RT: Asset <*> created of type <*> by RT_System (/opt/rt3/local/lib/RTx/AssetTracker/Asset_Overlay.pm:534)
+[1629]
+<*> <*>:<*>:<*> <*> kernel: RPC: error <*> connecting to server panfs4
+[1630]
+<*> <*>:<*>:<*> #9#/#9# crond[32410]: pam_krb5[32410]: <*> lifetime: <*>
+[1632]
+<*> <*>:<*>:<*> #33#/#33# crond[4755]: pam_krb5[4755]: <*>: <*> <*>
+[1633]
+<*> <*>:<*>:<*> #9#/#9# crond[23191]: pam_krb5[23191]: <*> lifetime: <*>
+[1634]
+<*> <*>:<*>:<*> #32#/#32# crond[9458]: pam_krb5[9458]: <*>: <*>
+[1635]
+<*> <*>:<*>:<*> #31#/#31# sshd[22294]: pam_krb5[22294]: <*>: <*>
+[1636]
+<*> <*>:<*>:<*> #31#/#31# sshd[22294]: pam_krb5[22294]: <*> lifetime: <*>
+[1637]
+<*> <*>:<*>:<*> #9#/#9# crond[24449]: pam_krb5[24449]: <*>: <*>
+[1639]
+<*> <*>:<*>:<*> #31#/#31# crond[25036]: pam_krb5[25036]: <*> lifetime: <*>
+[1640]
+<*> <*>:<*>:<*> #9#/#9# crond[25910]: pam_krb5[25910]: <*>: <*>
+[1641]
+<*> <*>:<*>:<*> #8#/#8# sshd[5774]: pam_krb5[5774]: <*> <*> <*> <*> for '#736#'
+[1642]
+<*> <*>:<*>:<*> #1#/#1# crond[25743]: pam_krb5[25743]: <*> lifetime: <*>
+[1643]
+<*> <*>:<*>:<*> #33#/#33# crond[11237]: pam_krb5[11237]: <*>: <*> <*>
+[1644]
+<*> <*>:<*>:<*> #33#/#33# crond[11237]: pam_krb5[11237]: <*> lifetime: <*>
+[1645]
+<*> <*>:<*>:<*> #25#/#25# <*>: <*>: banner: Kerberos <*>
+[1646]
+<*> <*>:<*>:<*> <*> kernel: panfs mount: error: got version [rhel_4_amd64/release 2.3.5-186238.3], wanted version [rhel_4_amd64/release 2.3.4-182875.13]
+[1654]
+<*> <*>:<*>:<*> #31#/#31# sshd[12961]: pam_krb5[12961]: <*>: <*>
+[1655]
+<*> <*>:<*>:<*> #31#/#31# <*>: <*>: renewable lifetime: <*>
+[1656]
+<*> <*>:<*>:<*> <*> Jun <*> <*>:<*>:<*> <*>: %RPM0-P:CP %SNMP-3-SNMP_AUTH_FAIL: SNMP Authentication failure for SNMP request from host #34#
+[1657]
+<*> <*>:<*>:<*> #31#/#31# crond[25051]: pam_krb5[25051]: <*>: <*>
+[1658]
+<*> <*>:<*>:<*> #31#/#31# <*>: <*>: ticket lifetime: <*>
+[1659]
+<*> <*>:<*>:<*> #9#/#9# crond[7003]: pam_krb5[7003]: <*>: <*>
+[1660]
+<*> <*>:<*>:<*> #9#/#9# crond[7003]: pam_krb5[7003]: <*> lifetime: <*>
+[1661]
+<*> <*>:<*>:<*> #1#/#1# crond[2757]: pam_krb5[2757]: <*> lifetime: <*>
+[1662]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(lib-move.c:<*>:lnet_send()) No route to <*> (all routers down)
+[1663]
+<*> <*>:<*>:<*> #33#/#33# <*>: <*>: flag: no <*>
+[1664]
+<*> <*>:<*>:<*> #33#/#33# crond[23721]: pam_krb5[23721]: <*> lifetime: <*>
+[1665]
+<*> <*>:<*>:<*> bn997/bn997 xinetd[2212]: removing <*>
+[1668]
+<*> <*>:<*>:<*> #31#/#31# sshd: <*>: <*>: <*>
+[1669]
+<*> <*>:<*>:<*> #25#/#25# crond[2498]: pam_krb5[2498]: <*>: <*>
+[1670]
+<*> <*>:<*>:<*> #25#/#25# crond[2498]: pam_krb5[2498]: <*> lifetime: <*>
+[1671]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2591]: [INFO]: Error Threshold Exceeded on node=<*>:<*>:6a:<*>:<*>:<*>:<*>:<*> port=<*>
+[1672]
+<*> <*>:<*>:<*> tbird-sm1/tbird-sm1 ib_sm[2591]: [INFO]: chassis-guid=<*>:<*>:<*>:<*>:<*>:<*>:<*>:<*>, slot=<*>, external-port=<*>
+[1673]
+<*> <*>:<*>:<*> <*> MDT: %RPM0-P:CP %IP-4-ADDRMOVE: IP Address <*> is moved from MAC address <*>:<*>:<*>:<*>:<*>:<*> to MAC address <*>:<*>:<*>:<*>:<*>:<*>
+[1675]
+<*> <*>:<*>:<*> dn442/dn442 kernel: protections[]: <*> <*> <*>
+[1677]
+<*> <*>:<*>:<*> #33#/#33# crond[26999]: pam_krb5[26999]: ticket lifetime: <*>
+[1678]
+<*> <*>:<*>:<*> #25#/#25# <*>: <*>: flag: no <*>
+[1679]
+<*> <*>:<*>:<*> #25#/#25# <*>: <*>: flag: <*>
+[1680]
+<*> <*>:<*>:<*> #9#/#9# crond[19224]: pam_krb5[19224]: <*>: <*>
+[1682]
+<*> <*>:<*>:<*> <*> <*>: <*>: called to update credentials for <*>
+[1683]
+<*> <*>:<*>:<*> #8#/#8# sshd: pam_krb5[19316]: <*> <*> <*> (Success)
+[1684]
+<*> <*>:<*>:<*> #9#/#9# <*>: <*>: flag: <*>
+[1685]
+<*> <*>:<*>:<*> #31#/#31# sshd: <*>: krb5_get_init_creds_password(krbtgt/#24#@#24#) returned <*> (Success)
+[1686]
+<*> <*>:<*>:<*> #25#/#25# crond[10178]: pam_krb5[10178]: <*> lifetime: <*>
+[1687]
+<*> <*>:<*>:<*> #32#/#32# crond[18342]: pam_krb5[18342]: <*>: <*>
+[1688]
+<*> <*>:<*>:<*> #25#/#25# crond[11129]: pam_krb5[11129]: <*> lifetime: <*>
+[1689]
+<*> <*>:<*>:<*> #33#/#33# crond[20797]: pam_krb5[20797]: <*> lifetime: <*>
+[1690]
+<*> <*>:<*>:<*> #31#/#31# <*>: <*>: flag: <*>
+[1691]
+<*> <*>:<*>:<*> #33#/#33# crond[26093]: pam_krb5[26093]: <*> lifetime: <*>
+[1692]
+<*> <*>:<*>:<*> #2116#/#2116# RT: DBD::mysql::st execute failed: Column 'RightName' cannot be null at /usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Handle.pm line 492. (/usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Handle.pm:492)
+[1694]
+<*> <*>:<*>:<*> #2116#/#2116# RT: RT::Handle=HASH(0x2019790) couldn't execute the query 'INSERT INTO ACL (PrincipalId, DelegatedFrom, RightName, ObjectId, PrincipalType, DelegatedBy, ObjectType) VALUES (?, ?, ?, ?, ?, ?, ?)' at /usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Handle.pm line <*> DBIx::SearchBuilder::Handle::SimpleQuery('RT::Handle=HASH(0x2019790)', 'INSERT INTO ACL (PrincipalId, DelegatedFrom, RightName, Objec...', <*>, <*>, 'undef', <*>, 'Group', <*>, 'RT::CustomField', ...) called at /usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Handle.pm line <*> DBIx::SearchBuilder::Handle::Insert('RT::Handle=HASH(0x2019790)', 'ACL', 'PrincipalId', <*>, 'DelegatedFrom', <*>, 'RightName', 'undef', 'ObjectId', ...) called at /usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Handle/mysql.pm line <*> DBIx::SearchBuilder::Handle::mysql::Insert('RT::Handle=HASH(0x2019790)', 'ACL', 'PrincipalId', <*>, 'DelegatedFrom', <*>, 'RightName', 'undef', 'ObjectId', ...) called at /usr/lib/perl5/site_perl/5.8.5/DBIx/SearchBuilder/Record.pm line <*> <*>
+[1695]
+<*> <*>:<*>:<*> #2116#/#2116# RT: RTx::AssetTracker::Asset=<*> tried to load a bogus asset named: <*> (/opt/rt3/local/lib/RTx/AssetTracker/Asset_Overlay.pm:235)
+[1697]
+<*> <*>:<*>:<*> #25#/#25# crond[11480]: pam_krb5[11480]: <*> lifetime: <*>
+[1698]
+<*> <*>:<*>:<*> #2116#/#2116# RT: Warning! Custom Field does not exist for asset <*>: <*> <*> (RAS.pm:447)
+[1699]
+<*> <*>:<*>:<*> #2116#/#2116# RT: Warning! Custom Field does not exist for asset <*>: Disk size (GB) (RAS.pm:447)
+[1700]
+<*> <*>:<*>:<*> #2116#/#2116# RT: Warning! Custom Field does not exist for asset <*>: <*> (RAS.pm:447)
+[1701]
+<*> <*>:<*>:<*> #25#/#25# crond[1488]: pam_krb5[1488]: <*> lifetime: <*>
+[1702]
+<*> <*>:<*>:<*> #2116#/#2116# kernel: nfs_statfs: statfs error = <*>
+[1703]
+<*> <*>:<*>:<*> <*> kernel: THH(1): mnt_projects/sysapps/src/ib/topspin/topspin-src-3.2.0-16/third_party/thca4_linux/kernel/mlxhh/thh/obj_host_amd64_custom1_rhel4/mod_thh/cmdif_comm.c[1417]: print_track_arr: idx=<*>, token=0x0000, counter=<*>
+[1704]
+<*> <*>:<*>:<*> bn525/bn525 xinetd[2223]: removing <*>
+[1706]
+<*> <*>:<*>:<*> #32#/#32# <*>: <*>: flag: <*>
+[1707]
+<*> <*>:<*>:<*> #25#/#25# crond[13461]: pam_krb5[13461]: <*> lifetime: <*>
+[1708]
+<*> <*>:<*>:<*> #33#/#33# <*>: <*>: banner: Kerberos <*>
+[1709]
+<*> <*>:<*>:<*> <*> Jul <*> <*>:<*>:<*> MDT: %RPM0-P:CP %IP-4-ADDRMOVE: IP Address <*> is moved from MAC address <*>:<*>:<*>:<*>:<*>:<*> to MAC address <*>:<*>:<*>:<*>:<*>:<*>
+[1710]
+<*> <*>:<*>:<*> #9#/#9# crond[29490]: pam_krb5[29490]: <*> lifetime: <*>
+[1711]
+<*> <*>:<*>:<*> bn997/bn997 kernel:
+[1712]
+<*> <*>:<*>:<*> <*> kernel: Lustre: OBD class driver Build Version: <*>, #10#@#11#
+[1713]
+<*> <*>:<*>:<*> <*> kernel: Lustre: Accept secure, port <*>
+[1714]
+<*> <*>:<*>:<*> <*> kernel: Lustre: Added LNI <*> [8/256]
+[1715]
+<*> <*>:<*>:<*> <*> kernel: Lustre: Lustre Lite Client File System; #10#@#11#
+[1716]
+<*> <*>:<*>:<*> <*> kernel: <*>: <*>:<*>:(lib-move.c:<*>:lnet_match_md()) Dropping PUT from <*> portal <*> match <*> offset <*> length <*>: no match
+[1718]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:(socklnd_cb.c:<*>:ksocknal_txlist_done()) Deleting packet type <*> len <*> <*>
+[1719]
+<*> <*>:<*>:<*> #9#/#9# crond[3652]: pam_krb5[3652]: <*> lifetime: <*>
+[1721]
+<*> <*>:<*>:<*> #25#/#25# crond[6593]: pam_krb5[6593]: <*> lifetime: <*>
+[1722]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>: Connection to service <*> via nid <*> was lost; in progress operations using this service #15# wait for recovery to complete.
+[1724]
+<*> <*>:<*>:<*> #9#/#9# LustreError: <*>:<*>:<*>:<*>:<*> Skipped <*> previous similar messages
+[1727]
+<*> <*>:<*>:<*> <*> kernel: LustreError: <*>:<*>:<*>:<*>:<*> Skipped <*> previous similar messages
+[1728]
+<*> <*>:<*>:<*> <*> kernel: Lustre: Changing connection for <*> to <*>
+[1731]
+<*> <*>:<*>:<*> #25#/#25# crond[5657]: pam_krb5[5657]: <*> lifetime: <*>
+[1734]
+<*> <*>:<*>:<*> #33#/#33# crond[19948]: pam_krb5[19948]: <*> lifetime: <*>
+[1736]
+<*> <*>:<*>:<*> #25#/#25# crond[7343]: pam_krb5[7343]: <*> lifetime: <*>
+[1738]
