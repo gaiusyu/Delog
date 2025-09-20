@@ -709,128 +709,146 @@ void Decompressor::decompress_to_stream(std::ostream& out) {
     }
 }
 
-// *** NEW: Special tag handler initialization function ***
+// *** MODIFIED: Special tag handler initialization function ***
 void Decompressor::initialize_special_handlers() {
     // Handle the <T> tag (timestamp), with different logic based on logname_.
     special_handlers_["<T>"] = [this](const std::string& stored_value) -> std::string {
-            if (logname_ == "OpenSSH") {
-                const std::string& value = stored_value;
-                size_t len = value.length();
-                if (len == 7 || len == 8) {
-                    try {
-                        size_t day_part_len = len - 6;
-                        int dd = std::stoi(value.substr(0, day_part_len));
-                        int hh = std::stoi(value.substr(day_part_len, 2));
-                        int mm = std::stoi(value.substr(day_part_len + 2, 2));
-                        int ss = std::stoi(value.substr(day_part_len + 4, 2));
-                        std::stringstream result;
-                        result << dd << " " << std::setw(2) << std::setfill('0') << hh << ":" << std::setw(2) << std::setfill('0') << mm << ":" << std::setw(2) << std::setfill('0') << ss;
-                        return result.str();
-                    } catch (const std::exception&) {
-                        return "[OpenSSH timestamp conversion error: " + stored_value + "]";
-                    }
-                } else {
-                    return "[OpenSSH timestamp format error (length should be 7 or 8): " + stored_value + "]";
+        if (logname_ == "OpenSSH") {
+            const std::string& value = stored_value;
+            size_t len = value.length();
+            if (len == 7 || len == 8) {
+                try {
+                    size_t day_part_len = len - 6;
+                    int dd = std::stoi(value.substr(0, day_part_len));
+                    int hh = std::stoi(value.substr(day_part_len, 2));
+                    int mm = std::stoi(value.substr(day_part_len + 2, 2));
+                    int ss = std::stoi(value.substr(day_part_len + 4, 2));
+                    std::stringstream result;
+                    result << dd << " " << std::setw(2) << std::setfill('0') << hh << ":" << std::setw(2) << std::setfill('0') << mm << ":" << std::setw(2) << std::setfill('0') << ss;
+                    return result.str();
+                } catch (const std::exception&) {
+                    return "[OpenSSH timestamp conversion error: " + stored_value + "]";
                 }
+            } else {
+                return "[OpenSSH timestamp format error (length should be 7 or 8): " + stored_value + "]";
             }
-            else if (logname_ == "Apache") {
-                std::string padded_value = stored_value;
-                while (padded_value.length() < 8) {
-                    padded_value.insert(0, 1, '0');
-                }
-                if (padded_value.length() == 8) {
-                    return padded_value.substr(0, 2) + " " + padded_value.substr(2, 2) + ":" + padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2);
-                } else {
-                    return "[Apache timestamp format error: " + stored_value + "]";
-                }
+        }
+        else if (logname_ == "Apache") {
+            std::string padded_value = stored_value;
+            while (padded_value.length() < 8) {
+                padded_value.insert(0, 1, '0');
             }
-            else if (logname_ == "Android") {
-                std::string padded_value = stored_value;
-                if (padded_value.length() == 12) {
-                    padded_value.insert(0, 1, '0');
-                }
-                if (padded_value.length() == 13) {
-                    return padded_value.substr(0, 2) + "-" + padded_value.substr(2, 2) + " " +
-                        padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2) + ":" +
-                        padded_value.substr(8, 2) + "." + padded_value.substr(10, 3);
-                } else {
-                    return "[Android timestamp format error (length should be 12 or 13): " + stored_value + "]";
-                }
+            if (padded_value.length() == 8) {
+                return padded_value.substr(0, 2) + " " + padded_value.substr(2, 2) + ":" + padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2);
+            } else {
+                return "[Apache timestamp format error: " + stored_value + "]";
             }
-            else if (logname_ == "Hadoop" || logname_ == "HDFS") {
-                if (stored_value.length() == 9) {
-                    return stored_value.substr(0, 2) + ":" + stored_value.substr(2, 2) + ":" +
-                        stored_value.substr(4, 2) + "," + stored_value.substr(6, 3);
-                } else {
-                    return "[" + logname_ + " timestamp format error (length should be 9): " + stored_value + "]";
-                }
+        }
+        else if (logname_ == "Android") {
+            std::string padded_value = stored_value;
+            if (padded_value.length() == 12) {
+                padded_value.insert(0, 1, '0');
             }
-            else if (logname_ == "HPC") {
-                std::string padded_value = stored_value;
-                while(padded_value.length() < 10) {
-                    padded_value.insert(0, 1, '0');
-                }
-                return padded_value;
+            if (padded_value.length() == 13) {
+                return padded_value.substr(0, 2) + "-" + padded_value.substr(2, 2) + " " +
+                       padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2) + ":" +
+                       padded_value.substr(8, 2) + "." + padded_value.substr(10, 3);
+            } else {
+                return "[Android timestamp format error (length should be 12 or 13): " + stored_value + "]";
             }
-            // Linux & Mac:  hh:mm:ss
-            else if (logname_ == "Linux" || logname_ == "Mac") {
-                // 
-                if (stored_value.length() > 6) {
-                    return "[" + logname_ + " timestamp format error (length > 6): " + stored_value + "]";
-                }
-                
-                std::string padded_value = stored_value;
-                // 
-                while (padded_value.length() < 6) {
-                    padded_value.insert(0, 1, '0');
-                }
-                
-                // 
-                return padded_value.substr(0, 2) + ":" + padded_value.substr(2, 2) + ":" + padded_value.substr(4, 2);
+        }
+        else if (logname_ == "Hadoop" || logname_ == "HDFS") {
+            if (stored_value.length() == 9) {
+                return stored_value.substr(0, 2) + ":" + stored_value.substr(2, 2) + ":" +
+                       stored_value.substr(4, 2) + "," + stored_value.substr(6, 3);
+            } else {
+                return "[" + logname_ + " timestamp format error (length should be 9): " + stored_value + "]";
             }
-            else if (logname_ == "Windows") {
-                if (stored_value.length() == 14) {
-                    return stored_value.substr(0, 4) + "-" + stored_value.substr(4, 2) + "-" +
-                        stored_value.substr(6, 2) + " " + stored_value.substr(8, 2) + ":" +
-                        stored_value.substr(10, 2) + ":" + stored_value.substr(12, 2);
-                } else {
-                    return "[Windows timestamp format error (length should be 14): " + stored_value + "]";
-                }
+        }
+        else if (logname_ == "HPC") {
+            std::string padded_value = stored_value;
+            while(padded_value.length() < 10) {
+                padded_value.insert(0, 1, '0');
             }
-            else if (logname_ == "Zookeeper") {
-                if (stored_value.length() == 17) {
-                    return stored_value.substr(0, 4) + "-" + stored_value.substr(4, 2) + "-" +
-                        stored_value.substr(6, 2) + " " + stored_value.substr(8, 2) + ":" +
-                        stored_value.substr(10, 2) + ":" + stored_value.substr(12, 2) + "," +
-                        stored_value.substr(14, 3);
-                } else {
-                    return "[Zookeeper timestamp format error (length should be 17): " + stored_value + "]";
-                }
+            return padded_value;
+        }
+        else if (logname_ == "Linux" || logname_ == "Mac") {
+            if (stored_value.length() > 6) {
+                return "[" + logname_ + " timestamp format error (length > 6): " + stored_value + "]";
             }
-            else if (logname_ == "Proxifier") {
-                std::string padded_value = stored_value;
-                if (padded_value.length() == 9) {
-                    padded_value.insert(0, 1, '0');
-                }
-                if (padded_value.length() == 10) {
-                    return padded_value.substr(0, 2) + "." + padded_value.substr(2, 2) + " " +
-                        padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2) + ":" +
-                        padded_value.substr(8, 2);
-                } else {
-                    return "[Proxifier timestamp format error (length should be 9 or 10): " + stored_value + "]";
-                }
+            std::string padded_value = stored_value;
+            while (padded_value.length() < 6) {
+                padded_value.insert(0, 1, '0');
             }
-            else { // Default/generic timestamp logic.
-                std::string padded_value = stored_value;
-                while(padded_value.length() < 14) padded_value.insert(0, 1, '0');
-                if (padded_value.length() == 14) {
-                    return padded_value.substr(0, 4) + "-" + padded_value.substr(4, 2) + "-" + padded_value.substr(6, 2) + " " + padded_value.substr(8, 2) + ":" + padded_value.substr(10, 2) + ":" + padded_value.substr(12, 2);
-                } else if (padded_value.length() == 12) {
-                    return "20" + padded_value.substr(0, 2) + "-" + padded_value.substr(2, 2) + "-" + padded_value.substr(4, 2) + " " + padded_value.substr(6, 2) + ":" + padded_value.substr(8, 2) + ":" + padded_value.substr(10, 2);
-                }
-                return "[Timestamp format error: " + stored_value + "]";
+            return padded_value.substr(0, 2) + ":" + padded_value.substr(2, 2) + ":" + padded_value.substr(4, 2);
+        }
+        else if (logname_ == "Windows") {
+            if (stored_value.length() == 14) {
+                return stored_value.substr(0, 4) + "-" + stored_value.substr(4, 2) + "-" +
+                       stored_value.substr(6, 2) + " " + stored_value.substr(8, 2) + ":" +
+                       stored_value.substr(10, 2) + ":" + stored_value.substr(12, 2);
+            } else {
+                return "[Windows timestamp format error (length should be 14): " + stored_value + "]";
             }
-        };
+        }
+        else if (logname_ == "Zookeeper") {
+            if (stored_value.length() == 17) {
+                return stored_value.substr(0, 4) + "-" + stored_value.substr(4, 2) + "-" +
+                       stored_value.substr(6, 2) + " " + stored_value.substr(8, 2) + ":" +
+                       stored_value.substr(10, 2) + ":" + stored_value.substr(12, 2) + "," +
+                       stored_value.substr(14, 3);
+            } else {
+                return "[Zookeeper timestamp format error (length should be 17): " + stored_value + "]";
+            }
+        }
+        else if (logname_ == "Proxifier") {
+            std::string padded_value = stored_value;
+            if (padded_value.length() == 9) {
+                padded_value.insert(0, 1, '0');
+            }
+            if (padded_value.length() == 10) {
+                return padded_value.substr(0, 2) + "." + padded_value.substr(2, 2) + " " +
+                       padded_value.substr(4, 2) + ":" + padded_value.substr(6, 2) + ":" +
+                       padded_value.substr(8, 2);
+            } else {
+                return "[Proxifier timestamp format error (length should be 9 or 10): " + stored_value + "]";
+            }
+        }
+        else if (logname_ == "Spark") {
+            std::string padded_value = stored_value;
+            if (padded_value.length() == 11) {
+                padded_value.insert(0, 1, '0');
+            }
+            if (padded_value.length() == 12) {
+                return padded_value.substr(0, 2) + "/" + padded_value.substr(2, 2) + "/" +
+                       padded_value.substr(4, 2) + " " + padded_value.substr(6, 2) + ":" +
+                       padded_value.substr(8, 2)+":" +
+                       padded_value.substr(10, 2);
+            } else {
+                return "[Proxifier timestamp format error (length should be 9 or 10): " + stored_value + "]";
+            }
+        }
+        else if (logname_ == "Thunderbird") {
+            std::string padded_value = stored_value;
+            if (padded_value.length() == 8) {
+                return padded_value.substr(0, 4) + "." + padded_value.substr(4, 2) + "." +
+                       padded_value.substr(6, 2);
+            } else {
+                return "[Proxifier timestamp format error (length should be 9 or 10): " + stored_value + "]";
+            }
+        }
+        else { // Default/generic timestamp logic.
+            std::string padded_value = stored_value;
+            while(padded_value.length() < 14) padded_value.insert(0, 1, '0');
+            if (padded_value.length() == 14) {
+                return padded_value.substr(0, 4) + "-" + padded_value.substr(4, 2) + "-" + padded_value.substr(6, 2) + " " + padded_value.substr(8, 2) + ":" + padded_value.substr(10, 2) + ":" + padded_value.substr(12, 2);
+            } else if (padded_value.length() == 12) {
+                return "20" + padded_value.substr(0, 2) + "-" + padded_value.substr(2, 2) + "-" + padded_value.substr(4, 2) + " " + padded_value.substr(6, 2) + ":" + padded_value.substr(8, 2) + ":" + padded_value.substr(10, 2);
+            }
+            return "[Timestamp format error: " + stored_value + "]";
+        }
+    };
+
     // Handle the <I> tag (IP address).
     special_handlers_["<I>"] = [](const std::string& stored_value) -> std::string {
         std::string padded_value = stored_value;
@@ -848,6 +866,58 @@ void Decompressor::initialize_special_handlers() {
                unpad_part(std::string_view(padded_value).substr(9, 3));
     };
 
+    // ===================================================================
+    // BGL specific handlers
+    // ===================================================================
+    special_handlers_["<P>"] = [this](const std::string& stored_value) -> std::string {
+        if (logname_ == "BGL") {
+            if (stored_value.length() == 14) {
+                return stored_value.substr(0, 4) + "-" + stored_value.substr(4, 2) + "-" +
+                       stored_value.substr(6, 2) + "-" + stored_value.substr(8, 2) + "." +
+                       stored_value.substr(10, 2) + "." + stored_value.substr(12, 2);
+            } else {
+                return "[BGL <P> tag format error (length should be 14): " + stored_value + "]";
+            }
+        }
+        return "[Unhandled tag <P> for log " + logname_ + ": " + stored_value + "]";
+    };
+
+    special_handlers_["<O>"] = [this](const std::string& stored_value) -> std::string {
+        if (logname_ == "BGL") {
+            std::string padded_value = stored_value;
+            while (padded_value.length() < 8) {
+                padded_value.insert(0, 1, '0');
+            }
+            return padded_value.substr(0, 4) + "." + padded_value.substr(4, 2) + "." +
+                   padded_value.substr(6, 2);
+        }
+        return "[Unhandled tag <O> for log " + logname_ + ": " + stored_value + "]";
+    };
+
+    special_handlers_["<Q>"] = [this](const std::string& stored_value) -> std::string {
+        if (logname_ == "BGL") {
+            return "core." + stored_value;
+        }
+        return "[Unhandled tag <Q> for log " + logname_ + ": " + stored_value + "]";
+    };
+
+    // START: Corrected BGL <R> handler
+    special_handlers_["<R>"] = [this](const std::string& stored_value) -> std::string {
+        if (logname_ == "BGL") {
+            // Regex: R"(\.(\d{6}))"
+            // The stored value is the numeric part, which needs to be padded to 6 digits.
+            std::string padded_value = stored_value;
+            while (padded_value.length() < 6) {
+                padded_value.insert(0, 1, '0');
+            }
+            // Prepend the dot to restore the original token.
+            return "." + padded_value;
+        }
+        // Fallback for any other log type that might use <R>
+        return "[Unhandled tag <R> for log " + logname_ + ": " + stored_value + "]";
+    };
+    // END: Corrected BGL <R> handler
+    
     // Handle tags that directly return the stored value.
     auto return_as_is = [](const std::string& stored_value) { return stored_value; };
     special_handlers_["<X>"] = return_as_is;
@@ -862,8 +932,6 @@ void Decompressor::initialize_special_handlers() {
     special_handlers_["<F>"] = return_as_is;
     special_handlers_["<A>"] = return_as_is;
 }
-
-// *** REMOVED: Standalone restoreTimestamp function; its logic is integrated into initialize_special_handlers. ***
 
 // *** REFACTORED: reconstruct_token_from_value function ***
 std::string Decompressor::reconstruct_token_from_value(const std::string& full_tag, const std::string& stored_value) {
