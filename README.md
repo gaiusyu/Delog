@@ -65,7 +65,7 @@ This traditional approach requires you to manually install dependencies and comp
 - **Python Package**: `regex==2012.1.8`
 
 **2. Dataset Preparation:**
-- **Loghub (1.0):** Download from [https://github.com/logpai/loghub](https://github.com/logpai/loghub) and place the datasets in `Logs/{logname}/{logname}.log` (e.g., `Logs/HDFS/HDFS.log`).
+- **Loghub (1.0):** Download from [https://github.com/logpai/loghub](https://github.com/logpai/loghub) and place the datasets in `Logs/{logname}/{logname}.log` (e.g., `Logs/Apache/Apache.log`).
 - **Loghub 2.0:** Download from [https://zenodo.org/records/8275861](https://zenodo.org/records/8275861) and place the datasets in `Loghub_data/{logname}/{logname}.log`.
 > **Note:** The `Apache` log is already included in the `Logs/` directory for a quick test run.
 
@@ -106,7 +106,7 @@ You need to provide the log files from your local machine.
   - `my_logs`: for input log files.
   - `compressed_archives`: for the output of the compression step.
   - `decompressed_logs`: for the final decompressed output.
-- Download a log dataset (e.g., `HDFS.log`) and place it inside the `my_logs` folder.
+- Download a log dataset (e.g., `Apache.log`) and place it inside the `my_logs` folder.
 
 **4. Run DeLog Compression via Docker:**
 Navigate to the directory containing the three folders, then execute the command below.
@@ -145,14 +145,14 @@ docker run --rm \
 -v "$(pwd)/compressed_archives:/input" \
 -v "$(pwd)/decompressed_logs:/output" \
 anonymous4d3a/delog-decompressor \
-output_HDFS decompressed_HDFS.log 8
+output_Apache decompressed_Apache.log 8
 
 # On Windows PowerShell:
 docker run --rm `
 -v "$(pwd)/compressed_archives:/input" `
 -v "$(pwd)/decompressed_logs:/output" `
 anonymous4d3a/delog-decompressor `
-output_HDFS decompressed_HDFS.log 8
+output_Apache decompressed_Apache.log 8
 ```
 After this command finishes, the fully reconstructed log file `decompressed_Apache.log` will appear in your `decompressed_logs` folder. You can verify that it is identical to the original `my_logs/Apache.log`.
 
