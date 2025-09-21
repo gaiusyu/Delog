@@ -20,7 +20,7 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
     *   [4.1. Claim from Section 2.1: Average Character Length](#41-claim-from-section-21-average-character-length)
     *   [4.2. Claim from Section 2.3: Lossiness in Existing Compressors](#42-claim-from-section-23-lossiness-in-existing-compressors)
     *   [4.3. Claim from Section 2.3: Resource Utilization Overhead](#43-claim-from-section-23-resource-utilization-overhead)
-5.  [Supplementary Material](#5-reproducing-supplementary-material-empirical-study-on-log-parsers)
+5.  [Reproducing Supplementary Material](#5-supplementary-material-empirical-study-on-log-parsers)
      *   [5.1. The Performance of General-Purpose Compressors on All Logs](#51-the-performance-of-general-compressor-on-all-logs)
      *   [5.2. Run Log Parsers](#52-running-log-parsers)
      *   [5.3. Compression on Parsing Results](#53-compression-based-on-parsing-results)
