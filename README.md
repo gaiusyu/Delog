@@ -91,7 +91,6 @@ This method uses a pre-configured Docker image that contains all dependencies an
 **2. Pull the Docker Image:**
 Open your terminal and pull the pre-built image from Docker Hub.
 ```sh
-# Please replace 'yourusername/delog-compressor' with the actual image path you provided
 docker pull anonymous4d3a/delog-compressor:latest
 ```
 
@@ -109,14 +108,14 @@ docker run --rm \
 -v "$(pwd)/my_logs:/data" \
 -v "$(pwd)/my_output:/output" \
 anonymous4d3a/delog-compressor \
-HDFS.log HDFS --kernel lzma --threads 8
+Apache.log Apache --kernel lzma --threads 4
 
 # On Windows PowerShell:
 docker run --rm `
 -v "$(pwd)/my_logs:/data" `
 -v "$(pwd)/my_output:/output" `
 anonymous4d3a/delog-compressor `
-Apache.log HDFS --kernel lzma --threads 4
+Apache.log Apache --kernel lzma --threads 4
 ```
 After the command finishes, the compressed archive (e.g., `chunk_0.tar.xz`) and an experiment log (`experiment_results.csv`) will appear in your `my_output` directory.
 
@@ -126,7 +125,7 @@ The Docker container accepts the same command-line arguments as the native execu
 - **Usage:** `docker run ... <image_name> [OPTIONS] <input_file> <log_name>`
 - **Arguments:**
     - `<input_file>`: The name of the log file inside your `my_logs` folder.
-    - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`).
+    - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`). This option enables predefined regular expressions for known benchmark log types to accurately extract timestamps. If you are compressing logs from outside the benchmarks, you can provide any arbitrary string for this parameter. DeLog will still achieve effective performance. Please note that for the compression of all ByteDance logs, we did not use any predefined regular expressions.
 - **Options:**
     - `--kernel <name>`: `lzma`, `gzip`, `bzip2`, `lz4`, `none`.
     - `--processing-mode <mode>`: `normal` (DeLog), `fast` (DeLog-L).
