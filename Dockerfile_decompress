@@ -1,14 +1,14 @@
 # ===================================================================
-# STAGE 1: 编译阶段 (Builder)
+# STAGE 1: Compilation Stage (Builder)
 # ===================================================================
 FROM ubuntu:22.04 AS builder
 
-# 设置工作目录
+# Set the working directory
 WORKDIR /app
 
-# 安装编译所需的依赖
-# g++, make: 编译工具
-# libarchive-dev: libarchive 的开发头文件和库，编译时需要
+# Install build dependencies
+# g++, make: Build tools
+# libarchive-dev: Development headers and libraries for libarchive, required for compilation
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     g++ \
@@ -16,42 +16,42 @@ RUN apt-get update && \
     libarchive-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# 拷贝源代码
+# Copy the source code
 COPY decompressor.cpp .
 
-# 运行编译命令，生成可执行文件 'decompress'
-# 注意链接 -larchive
+# Run the compilation command to generate the 'decompress' executable
+# Note the linking of -larchive
 RUN g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
 
 # ===================================================================
-# STAGE 2: 最终运行阶段 (Final Image)
+# STAGE 2: Final Runtime Stage (Final Image)
 # ===================================================================
 FROM ubuntu:22.04
 
-# 设置工作目录
+# Set the working directory
 WORKDIR /app
 
-# 安装运行时所需的依赖
-# libarchive13: libarchive 的运行时库
+# Install runtime dependencies
+# libarchive13: Runtime library for libarchive
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     libarchive13 && \
     rm -rf /var/lib/apt/lists/*
 
-# 从 'builder' 阶段拷贝编译好的可执行文件
+# Copy the compiled executable from the 'builder' stage
 COPY --from=builder /app/decompress .
 
-# 拷贝入口脚本并赋予执行权限
+# Copy the entrypoint script and make it executable
 COPY entrypoint_decompress.sh .
 RUN chmod +x entrypoint_decompress.sh
 
-# 创建用户用于挂载数据卷的目录
-# /input: 用于存放包含压缩块的目录
-# /output: 用于存放解压后的日志文件
+# Create directories for user-mounted volumes
+# /input: For the directory containing compressed chunks
+# /output: For the decompressed log file
 RUN mkdir -p /input /output
 
-# 设置容器的入口点
+# Set the container's entrypoint
 ENTRYPOINT ["/app/entrypoint_decompress.sh"]
 
-# 默认显示帮助信息
+# Show help information by default
 CMD ["--help"]

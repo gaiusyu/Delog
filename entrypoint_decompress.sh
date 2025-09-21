@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# 发生错误时立即退出
+# Exit immediately if a command exits with a non-zero status.
 set -e
 
-# 显示帮助信息的函数
+# Function to display help message.
 show_help() {
     echo "Usage: docker run --rm -v <local_archives_parent_dir>:/input -v <local_output_dir>:/output <image_name> <input_dir_name> <output_file_name> [threads]"
     echo ""
@@ -21,30 +21,30 @@ show_help() {
     echo ""
 }
 
-# 检查 --help 或参数数量不足
+# Check for --help flag or an insufficient number of arguments.
 if [ "$1" == "--help" ] || [ $# -lt 2 ]; then
     show_help
     exit 0
 fi
 
-# 从参数中获取变量
+# Get variables from command-line arguments.
 INPUT_DIR_NAME="$1"
 OUTPUT_FILE_NAME="$2"
-# 如果没有提供线程数，则默认使用所有可用的CPU核心
+# If the number of threads is not provided, default to the number of available CPU cores.
 NUM_THREADS="${3:-$(nproc)}"
 
-# 构建容器内部的绝对路径
+# Build the absolute paths inside the container.
 FULL_INPUT_PATH="/input/${INPUT_DIR_NAME}"
 FULL_OUTPUT_PATH="/output/${OUTPUT_FILE_NAME}"
 
-# 检查输入目录是否存在
+# Check if the input directory exists.
 if [ ! -d "${FULL_INPUT_PATH}" ]; then
     echo "Error: Input directory not found at '${FULL_INPUT_PATH}'."
     echo "Please make sure your directory of archives is in the folder you mounted to /input."
     exit 1
 fi
 
-# --- 核心逻辑 ---
+# --- Core Logic ---
 
 echo "========================================"
 echo "Starting DeLog Decompression"
@@ -54,7 +54,7 @@ echo "Output File:      ${FULL_OUTPUT_PATH}"
 echo "Threads:          ${NUM_THREADS}"
 echo "----------------------------------------"
 
-# 执行C++解压程序
+# Execute the C++ decompressor program.
 /app/decompress "${FULL_INPUT_PATH}" "${FULL_OUTPUT_PATH}" "${NUM_THREADS}"
 
 echo "----------------------------------------"
