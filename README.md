@@ -8,9 +8,10 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
 ### Table of Contents
 1.  [Artifact Overview](#1-artifact-overview)
 2.  [Getting Started](#2-getting-started)
-    *   [2.1. Hardware & Software Requirements](#21-hardware--software-requirements)
-    *   [2.2. Dataset Preparation](#22-dataset-preparation)
-    *   [2.3. Compilation](#23-compilation)
+    *   [2.1. Hardware Requirements](#21-hardware-requirements)
+    *   [2.2. Setup Options](#22-setup-options)
+        *   [Option A: Manual Setup (for deep-dive and ablation studies)](#option-a-manual-setup-for-deep-dive-and-ablation-studies)
+        *   [Option B: Using Docker (Recommended for quick evaluation)](#option-b-using-docker-recommended-for-quick-evaluation)
 3.  [Reproducing Key Evaluation Results](#3-reproducing-key-evaluation-results)
     *   [3.1. Main Evaluation: DeLog Performance (RQ3)](#31-main-evaluation-delog-performance-rq3)
     *   [3.2. Baseline Comparisons (RQ3)](#32-baseline-comparisons-rq3)
@@ -42,49 +43,101 @@ This artifact accompanies the paper "DeLog: An Efficient Log Compression Framewo
 
 This section outlines the necessary prerequisites and initial setup steps.
 
-### 2.1. Hardware & Software Requirements
+### 2.1. Hardware Requirements
 
-#### Software Dependencies
-- **Python**: `>= 3.7.3`
-- **GCC**: `>= 9.4.0`
-- **PCRE2**: `= 10.34`
-- **Python Package**: `regex==2012.1.8`
-
-#### Hardware Dependencies
 - **CPU**: A modern CPU with at least **4 cores** is required. (Recommended: Intel i5, AMD Ryzen 5, or better). DeLog is designed for parallel execution and benefits significantly from multiple cores.
 - **Memory (RAM)**:
     - **For DeLog only**: Minimum **4 GB**, Recommended **8 GB**.
     - **For All Baselines**: To reproduce all experiments, a system with **32 GB of RAM** is strongly recommended, as some baselines (e.g., LogReducer) have very high memory consumption.
 
-### 2.2. Dataset Preparation
+### 2.2. Setup Options
 
-1.  **Loghub (1.0):**
-    *   Download from: [https://github.com/logpai/loghub](https://github.com/logpai/loghub)
-    *   Place the datasets in the following structure: `Logs/{logname}/{logname}.log`. For example, the HDFS log should be at `Logs/HDFS/HDFS.log`.
+We offer two methods to set up the environment. For a quick verification of our main results, we highly recommend the Docker-based approach. For detailed ablation studies or modifications to the source code, the manual setup is more suitable.
 
-2.  **Loghub 2.0:**
-    *   Download from: [https://zenodo.org/records/8275861](https://zenodo.org/records/8275861)
-    *   Place the datasets in the following structure: `Loghub_data/{logname}/{logname}.log`.
+#### Option A: Manual Setup (for deep-dive and ablation studies)
 
+This traditional approach requires you to manually install dependencies and compile the source code.
+
+**1. Software Dependencies:**
+- **Python**: `>= 3.7.3`
+- **GCC**: `>= 9.4.0`
+- **PCRE2**: `= 10.34`
+- **Python Package**: `regex==2012.1.8`
+
+**2. Dataset Preparation:**
+- **Loghub (1.0):** Download from [https://github.com/logpai/loghub](https://github.com/logpai/loghub) and place the datasets in `Logs/{logname}/{logname}.log` (e.g., `Logs/HDFS/HDFS.log`).
+- **Loghub 2.0:** Download from [https://zenodo.org/records/8275861](https://zenodo.org/records/8275861) and place the datasets in `Loghub_data/{logname}/{logname}.log`.
 > **Note:** The `Apache` log is already included in the `Logs/` directory for a quick test run.
 
-### 2.3. Compilation
-
-First, compile the DeLog compressor and decompressor.
-
-**1. Compile Compressor:**
+**3. Compilation:**
+Compile the DeLog compressor and decompressor.
 ```bash
+# Compile Compressor
 g++ -std=c++17 -O3 -o Delog_compress compressor.cpp -lpcre2-8 -lstdc++fs -pthread
-```
 
-**2. Compile Decompressor:**
-```bash
+# Compile Decompressor
 g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
 ```
 
+---
+
+#### Option B: Using Docker (Recommended for quick evaluation)
+
+This method uses a pre-configured Docker image that contains all dependencies and the compiled DeLog executable. It is the fastest way to run and verify our compression tool.
+
+**1. Prerequisites:**
+- [Docker](https://www.docker.com/products/docker-desktop/) must be installed and running on your system.
+
+**2. Pull the Docker Image:**
+Open your terminal and pull the pre-built image from Docker Hub.
+```sh
+# Please replace 'yourusername/delog-compressor' with the actual image path you provided
+docker pull anonymous4d3a/delog-compressor:latest
+```
+
+**3. Prepare Datasets:**
+Even with Docker, you need to provide the log files from your local machine.
+- Create two directories on your system: `my_logs` for input and `my_output` for results.
+- Download the desired log datasets (e.g., HDFS, Apache) and place the log file (e.g., `HDFS.log`) inside the `my_logs` folder.
+
+**4. Run DeLog Compression via Docker:**
+Navigate to the directory containing `my_logs` and `my_output`, then execute the command below. The container will automatically process the specified log file and place the compressed archive in your `my_output` folder.
+
+```sh
+# On Linux or macOS:
+docker run --rm \
+-v "$(pwd)/my_logs:/data" \
+-v "$(pwd)/my_output:/output" \
+anonymous4d3a/delog-compressor \
+HDFS.log HDFS --kernel lzma --threads 8
+
+# On Windows PowerShell:
+docker run --rm `
+-v "$(pwd)/my_logs:/data" `
+-v "$(pwd)/my_output:/output" `
+anonymous4d3a/delog-compressor `
+Apache.log HDFS --kernel lzma --threads 4
+```
+After the command finishes, the compressed archive (e.g., `chunk_0.tar.xz`) and an experiment log (`experiment_results.csv`) will appear in your `my_output` directory.
+
+**5. Docker Command-Line Options:**
+The Docker container accepts the same command-line arguments as the native executable.
+
+- **Usage:** `docker run ... <image_name> [OPTIONS] <input_file> <log_name>`
+- **Arguments:**
+    - `<input_file>`: The name of the log file inside your `my_logs` folder.
+    - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`).
+- **Options:**
+    - `--kernel <name>`: `lzma`, `gzip`, `bzip2`, `lz4`, `none`.
+    - `--processing-mode <mode>`: `normal` (DeLog), `fast` (DeLog-L).
+    - `--threads <num>`: Number of parallel threads.
+    - *(... and others as supported by the executable)*
+
+> **Note:** The automated benchmark scripts (`DeLog_benchmark.py`, etc.) and ablation studies are designed to be run in a manual setup environment (Option A), as they involve file system interactions and code modifications not easily managed within the streamlined Docker workflow.
+
 ## 3. Reproducing Key Evaluation Results
 
-This section provides step-by-step instructions to reproduce the main experimental results from our paper.
+This section provides step-by-step instructions to reproduce the main experimental results from our paper. **These instructions assume you have chosen `Option A: Manual Setup`.**
 
 ### 3.1. Main Evaluation: DeLog Performance (RQ3)
 
