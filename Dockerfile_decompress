@@ -1,0 +1,57 @@
+# ===================================================================
+# STAGE 1: 编译阶段 (Builder)
+# ===================================================================
+FROM ubuntu:22.04 AS builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装编译所需的依赖
+# g++, make: 编译工具
+# libarchive-dev: libarchive 的开发头文件和库，编译时需要
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    g++ \
+    make \
+    libarchive-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# 拷贝源代码
+COPY decompressor.cpp .
+
+# 运行编译命令，生成可执行文件 'decompress'
+# 注意链接 -larchive
+RUN g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
+
+# ===================================================================
+# STAGE 2: 最终运行阶段 (Final Image)
+# ===================================================================
+FROM ubuntu:22.04
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装运行时所需的依赖
+# libarchive13: libarchive 的运行时库
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libarchive13 && \
+    rm -rf /var/lib/apt/lists/*
+
+# 从 'builder' 阶段拷贝编译好的可执行文件
+COPY --from=builder /app/decompress .
+
+# 拷贝入口脚本并赋予执行权限
+COPY entrypoint_decompress.sh .
+RUN chmod +x entrypoint_decompress.sh
+
+# 创建用户用于挂载数据卷的目录
+# /input: 用于存放包含压缩块的目录
+# /output: 用于存放解压后的日志文件
+RUN mkdir -p /input /output
+
+# 设置容器的入口点
+ENTRYPOINT ["/app/entrypoint_decompress.sh"]
+
+# 默认显示帮助信息
+CMD ["--help"]

@@ -83,56 +83,81 @@ g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
 
 #### Option B: Using Docker (Recommended for quick evaluation)
 
-This method uses a pre-configured Docker image that contains all dependencies and the compiled DeLog executable. It is the fastest way to run and verify our compression tool.
+This method uses pre-configured Docker images that contain all dependencies and executables. It is the fastest way to run and verify our complete compression/decompression workflow.
 
 **1. Prerequisites:**
 - [Docker](https://www.docker.com/products/docker-desktop/) must be installed and running on your system.
 
-**2. Pull the Docker Image:**
-Open your terminal and pull the pre-built image from Docker Hub.
+**2. Pull the Docker Images:**
+Open your terminal and pull the pre-built images for both the compressor and decompressor from Docker Hub.
 ```sh
+# 
+
+# Pull the compressor image
 docker pull anonymous4d3a/delog-compressor:latest
+
+# Pull the decompressor image
+docker pull anonymous4d3a/delog-decompressor:latest
 ```
 
 **3. Prepare Datasets:**
-Even with Docker, you need to provide the log files from your local machine.
-- Create two directories on your system: `my_logs` for input and `my_output` for results.
-- Download the desired log datasets (e.g., HDFS, Apache) and place the log file (e.g., `HDFS.log`) inside the `my_logs` folder.
+You need to provide the log files from your local machine.
+- Create three directories on your system:
+  - `my_logs`: for input log files.
+  - `compressed_archives`: for the output of the compression step.
+  - `decompressed_logs`: for the final decompressed output.
+- Download a log dataset (e.g., `HDFS.log`) and place it inside the `my_logs` folder.
 
 **4. Run DeLog Compression via Docker:**
-Navigate to the directory containing `my_logs` and `my_output`, then execute the command below. The container will automatically process the specified log file and place the compressed archive in your `my_output` folder.
-
+Navigate to the directory containing the three folders, then execute the command below.
 ```sh
 # On Linux or macOS:
 docker run --rm \
 -v "$(pwd)/my_logs:/data" \
--v "$(pwd)/my_output:/output" \
+-v "$(pwd)/compressed_archives:/output" \
 anonymous4d3a/delog-compressor \
 Apache.log Apache --kernel lzma --threads 4
 
 # On Windows PowerShell:
 docker run --rm `
 -v "$(pwd)/my_logs:/data" `
--v "$(pwd)/my_output:/output" `
-anonymous4d3a/delog-compressor `
+-v "$(pwd)/compressed_archives:/output" `
+Apache/delog-compressor `
 Apache.log Apache --kernel lzma --threads 4
 ```
-After the command finishes, the compressed archive (e.g., `chunk_0.tar.xz`) and an experiment log (`experiment_results.csv`) will appear in your `my_output` directory.
+After this step, a new directory (e.g., `output_Apache`) containing compressed chunk files will appear inside your `compressed_archives` folder.
 
-**5. Docker Command-Line Options:**
-The Docker container accepts the same command-line arguments as the native executable.
-
-- **Usage:** `docker run ... <image_name> [OPTIONS] <input_file> <log_name>`
+**5. Docker Compressor Command-Line Options:**
+- **Usage:** `docker run ... anonymous4d3a/delog-compressor [OPTIONS] <input_file> <log_name>`
 - **Arguments:**
     - `<input_file>`: The name of the log file inside your `my_logs` folder.
-    - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`). This option enables predefined regular expressions for known benchmark log types to accurately extract timestamps. If you are compressing logs from outside the benchmarks, you can provide any arbitrary string for this parameter. DeLog will still achieve effective performance. Please note that for the compression of all ByteDance logs, we did not use any predefined regular expressions.
+    - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`). This option enables predefined regular expressions for known benchmark log types to accurately extract timestamps and other common patterns. If you are compressing logs from outside the benchmarks, you can provide any arbitrary string for this parameter. DeLog will still achieve effective performance. Please note that for the compression of all ByteDance logs, we did not use any predefined regular expressions.
 - **Options:**
-    - `--kernel <name>`: `lzma`, `gzip`, `bzip2`, `lz4`, `none`.
+    - `--kernel <name>`: `lzma`, `gzip`, `bzip2`, `none`.
     - `--processing-mode <mode>`: `normal` (DeLog), `fast` (DeLog-L).
     - `--threads <num>`: Number of parallel threads.
-    - *(... and others as supported by the executable)*
+
+**6. Decompress the Archive via Docker:**
+Now, use the decompressor image to restore the original log file.
+```sh
+# On Linux or macOS:
+docker run --rm \
+-v "$(pwd)/compressed_archives:/input" \
+-v "$(pwd)/decompressed_logs:/output" \
+anonymous4d3a/delog-decompressor \
+output_HDFS decompressed_HDFS.log 8
+
+# On Windows PowerShell:
+docker run --rm `
+-v "$(pwd)/compressed_archives:/input" `
+-v "$(pwd)/decompressed_logs:/output" `
+anonymous4d3a/delog-decompressor `
+output_HDFS decompressed_HDFS.log 8
+```
+After this command finishes, the fully reconstructed log file `decompressed_Apache.log` will appear in your `decompressed_logs` folder. You can verify that it is identical to the original `my_logs/Apache.log`.
 
 > **Note:** The automated benchmark scripts (`DeLog_benchmark.py`, etc.) and ablation studies are designed to be run in a manual setup environment (Option A), as they involve file system interactions and code modifications not easily managed within the streamlined Docker workflow.
+
 
 ## 3. Reproducing Key Evaluation Results
 
