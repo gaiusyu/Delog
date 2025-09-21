@@ -1,6 +1,12 @@
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
 ### Artifact for USENIX FAST '26 Submission
 
+> **A Note on Artifact Viewing:** We have observed that the anonymous artifact hosting platform, `https://anonymous.4open.science/`, has certain limitations in rendering this `README.md` file. Specifically, you may find that:
+> *   The internal links in the Table of Contents are not clickable.
+> *   The code blocks lack a convenient one-click "copy" button, requiring manual selection.
+
+> We sincerely apologize for any inconvenience this may cause during your evaluation. The full, interactive experience will be available on the public GitHub repository once the anonymous review process is complete.
+
 We sincerely thank the Artifact Evaluation Committee for dedicating their time and expertise to reviewing our work. This artifact provides all the necessary components, data, and instructions to reproduce the key findings presented in our paper. We have strived to make the evaluation process as clear and straightforward as possible and welcome any feedback for improvement.
 
 ---
