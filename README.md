@@ -435,7 +435,7 @@ python run_all.py
 This script will use the outputs from the log parsers to evaluate a parse-then-compress pipeline, generating the results shown in the supplementary material.
 
 
-## 6. Update during Rebuttal
+## 6. Updates during Rebuttal (Optional)
 
 ### 6.1 Parsing Accuracy of Delog
 
@@ -474,7 +474,10 @@ Across the 16 public benchmark datasets, DeLog achieved an average PA, PTA, FTA,
 
 
 **Throughput vs. Thread Count (I/O):**
-<img src="throughput_vs_threads.png" alt="pdf" width="500">
+<div align="center">
+  <img src="throughput_vs_threads.png" alt="pdf" width="500">
+</div>
+
 
 **Scalability:**
 
