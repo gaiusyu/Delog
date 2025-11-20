@@ -1,3 +1,8 @@
+> **Note for Rebuttal Reviewers:** In direct response to feedback and questions raised during the review process, we have added a new, supplementary section: **Chapter 6. Updates during Rebuttal**.
+>
+> This section is provided solely to clarify and elaborate on specific points of inquiry. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Chapters 1 through 5, remains entirely unchanged from the initial submission.
+
+
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
 ### Artifact for USENIX FAST '26 Submission
 
@@ -30,7 +35,11 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
      *   [5.1. The Performance of General-Purpose Compressors on All Logs](#51-the-performance-of-general-compressor-on-all-logs)
      *   [5.2. Run Log Parsers](#52-running-log-parsers)
      *   [5.3. Compression on Parsing Results](#53-compression-based-on-parsing-results)
-
+6.  [Updates during Rebuttal (Optional)](#6-updates-during-rebuttal-optional)
+    *   [6.1. Parsing Accuracy of DeLog](#61-parsing-accuracy-of-delog)
+    *   [6.2. System-level Evaluation](#62-system-level-evaluation)
+    *   [6.3. The Compression Ratio of µSlope(CLP)](#63-the-compression-ratio-of-µslopeclp)
+    *   [6.4. How to Reproduce these New Results](#64-how-to-reproduce-these-new-results)
 ---
 
 ## 1. Artifact Overview
@@ -424,3 +433,142 @@ python run_all.py
 ```
 
 This script will use the outputs from the log parsers to evaluate a parse-then-compress pipeline, generating the results shown in the supplementary material.
+
+
+## 6. Update during Rebuttal
+
+### 6.1 Parsing Accuracy of Delog
+
+To get "Parsing Accuracy" of Delog, we conducted an experiment to retroactively derive a "parsing accuracy" metric for DeLog. To do this, we forcibly mapped DeLog's tag generation process to a conventional parsing task. Specifically, we treated tokens tagged as "No pattern" as the template, and all other token types were treated as variables.
+
+Across the 16 public benchmark datasets, DeLog achieved an average PA, PTA, FTA, and RTA of 0. Its average GA was 0.526. For comparison, Drain, a parser widely used in log compressors such as Logzip, achieves an average GA of 0.865 on the same datasets.
+
+
+| Dataset       |   GA    |   PA    |   PTA   |   RTA   |   FTA   | Tool Templates | Ground Templates |
+|:--------------|:-------:|:-------:|:-------:|:-------:|:-------:|:--------------:|:----------------:|
+| Android       | 0.456   | 0.000   | 0.000   | 0.000   | 0.000   | 259            | 166              |
+| Apache        | 0.000   | 0.000   | 0.000   | 0.000   | 0.000   | 12             | 6                |
+| BGL           | 0.744   | 0.000   | 0.000   | 0.000   | 0.000   | 373            | 120              |
+| HDFS          | 0.808   | 0.000   | 0.000   | 0.000   | 0.000   | 22             | 14               |
+| HPC           | 0.792   | 0.000   | 0.000   | 0.000   | 0.000   | 67             | 46               |
+| Hadoop        | 0.716   | 0.000   | 0.000   | 0.000   | 0.000   | 131            | 114              |
+| HealthApp     | 1.000   | 0.000   | 0.000   | 0.000   | 0.000   | 75             | 75               |
+| Linux         | 0.093   | 0.000   | 0.000   | 0.000   | 0.000   | 202            | 118              |
+| Mac           | 0.174   | 0.000   | 0.000   | 0.000   | 0.000   | 621            | 341              |
+| OpenSSH       | 0.336   | 0.000   | 0.000   | 0.000   | 0.000   | 197            | 27               |
+| OpenStack     | 0.199   | 0.000   | 0.000   | 0.000   | 0.000   | 1500           | 43               |
+| Proxifier     | 0.000   | 0.000   | 0.000   | 0.000   | 0.000   | 526            | 8                |
+| Spark         | 0.925   | 0.000   | 0.000   | 0.000   | 0.000   | 39             | 36               |
+| Thunderbird   | 0.615   | 0.000   | 0.000   | 0.000   | 0.000   | 244            | 149              |
+| Windows       | 0.703   | 0.000   | 0.000   | 0.000   | 0.000   | 81             | 50               |
+| Zookeeper     | 0.853   | 0.000   | 0.000   | 0.000   | 0.000   | 191            | 50               |
+| **Average**   | **0.526** | **0.000** | **0.000** | **0.000** | **0.000** | **283.8**      | **85.2**         |
+
+
+### 6.2 System-level Evaluation
+
+
+**Setting:** Compress 1GB production logs (LogC) while varying the number of threads (1, 2, 4, 8, 16). We select the fastest log compressor Denum and lzma for comparison. 
+
+**A more comprehensive system-level evaluation is planned for a future version of this work.**
+
+
+**Throughput vs. Thread Count (I/O):**
+<img src="throughput_vs_threads.png" alt="pdf" width="500">
+
+**Scalability:**
+
+| **Threads** | **Delog Time (s)** | **Delog Speedup** | **Denum Time (s)** | **Denum Speedup** | **LZMA Time (s)** | **LZMA Speedup** |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **1** | 88.41 | 1.00x | 157.57 | 1.00x | 125.38 | 1.00x |
+| **2** | 47.97 | 1.84x | 83.47 | 1.89x | 63.14 | 1.99x |
+| **4** | 30.87 | 2.86x | 52.44 | 3.01x | 39.48 | 3.18x |
+| **8** | 23.43 | 3.77x | 38.55 | 4.09x | 26.56 | 4.72x |
+| **16**| 17.58 | 5.03x | 27.09 | 5.82x | 19.04 | 6.59x |
+
+### 6.3 The Compression Ratio of µSlope(CLP)
+
+**Setting:** We evaluated the compression ratio on the 16 public benchmark datasets, comparing DeLog with LZMA, CLP, and a combined CLP+LZMA approach.
+
+| Dataset | LZMA | CLP | CLP+LZMA | Delog |
+|:---|---:|---:|---:|---:|
+| **Android** | 19.400 | 20.370 | 21.180 | 30.350 |
+| **Apache** | 30.750 | 13.560 | 18.620 | 59.650 |
+| **BGL** | 22.050 | 11.070 | 12.360 | 45.680 |
+| **Hadoop** | 37.600 | 26.810 | 41.260 | 79.630 |
+| **HDFS** | 15.620 | 16.410 | 16.640 | 29.010 |
+| **HealthApp** | 15.830 | 12.350 | 12.990 | 55.930 |
+| **HPC** | 19.790 | 15.100 | 17.750 | 46.840 |
+| **Linux** | 19.980 | 9.180 | 13.810 | 30.630 |
+| **Mac** | 23.880 | 12.880 | 13.860 | 43.690 |
+| **OpenSSH** | 22.270 | 17.920 | 18.760 | 106.010 |
+| **OpenStack** | 15.650 | 12.880 | 13.450 | 23.750 |
+| **Proxifier** | 21.090 | 9.190 | 12.610 | 30.780 |
+| **Spark** | 23.130 | 20.970 | 21.640 | 61.790 |
+| **Thunderbird**| 28.540 | 18.980 | 19.560 | 68.650 |
+| **Windows** | 217.850 | 446.120 | 469.550 | 541.570 |
+| **Zookeeper** | 30.020 | 31.820 | 47.940 | 154.930 |
+| **Average** | **35.216** | **44.101** | **48.874** | **88.056** |
+
+### 6.4 How to Reproduce These New Results
+
+**1. For parsing accuracy of Delog**
+
+```bash
+cd LogParsing
+
+mkdir logs
+```
+Download the 16 benchmark datasets from [loghub1.0](https://github.com/logpai/loghub) and place them into directory `logs`. The expected directory structure is as follows:
+
+logs/
+├── Android/
+│   ├── Android_2k.log
+│   ├── Android_2k.log_structured.csv
+│   └── Android_2k.log_templates.csv
+│
+├── Apache/
+│   ├── Apache_2k.log
+│   ├── Apache_2k.log_structured.csv
+│   └── Apache_2k.log_templates.csv
+│
+├── ... 
+│
+└── Zookeeper/
+    ├── Zookeeper_2k.log
+    ├── Zookeeper_2k.log_structured.csv
+    └── Zookeeper_2k.log_templates.csv
+
+Then, run the evaluation script:
+```bash
+python3 main_evaluator.py
+```
+Results will be printed to the console.
+
+**2. For system-level evaluation of baslines**
+
+A script for system-level evaluation is provided in each tool's directory.
+
+**To evaluate DeLog:**
+```bash
+# Ensure you are in the DeLog project's root directory
+chmod +x system-level.sh
+./system-level.sh
+```
+The results will be saved in the `evaluation_results` directory.
+
+**To evaluate Denum:**
+```bash
+cd Baselines/Denum
+chmod +x system-level.sh
+./system-level.sh
+```
+The results will be saved in the `evaluation_results` directory.
+
+**To evaluate LZMA:**
+```bash
+# Navigate to the directory containing the lzma script
+chmod +x system-level_lzma.sh
+./system-level_lzma.sh
+```
+The results will be saved in the `evaluation_results_lzma` directory.
