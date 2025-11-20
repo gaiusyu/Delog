@@ -467,6 +467,7 @@ Across the 16 public benchmark datasets, DeLog achieved an average PA, PTA, FTA,
 
 ### 6.2 System-level Evaluation
 
+CPU usage and peak memory are available in Section [4.3. Claim from Section 2.3: Resource Utilization Overhead](#43-claim-from-section-23-resource-utilization-overhead). This section provides I/O and Scalability.
 
 **Setting:** Compress 1GB production logs (LogC) while varying the number of threads (1, 2, 4, 8, 16). We select the fastest log compressor Denum and lzma for comparison. 
 
@@ -524,23 +525,26 @@ mkdir logs
 ```
 Download the 16 benchmark datasets from [loghub1.0](https://github.com/logpai/loghub) and place them into directory `logs`. The expected directory structure is as follows:
 
+<pre>
 logs/
 ├── Android/
 │   ├── Android_2k.log
 │   ├── Android_2k.log_structured.csv
 │   └── Android_2k.log_templates.csv
-│
+
 ├── Apache/
 │   ├── Apache_2k.log
 │   ├── Apache_2k.log_structured.csv
 │   └── Apache_2k.log_templates.csv
-│
-├── ... 
-│
+
+├── ...
+
 └── Zookeeper/
     ├── Zookeeper_2k.log
     ├── Zookeeper_2k.log_structured.csv
     └── Zookeeper_2k.log_templates.csv
+</pre>
+
 
 Then, run the evaluation script:
 ```bash
@@ -570,7 +574,7 @@ The results will be saved in the `evaluation_results` directory.
 
 **To evaluate LZMA:**
 ```bash
-# Navigate to the directory containing the lzma script
+# Back to DeLog project's root directory
 chmod +x system-level_lzma.sh
 ./system-level_lzma.sh
 ```
