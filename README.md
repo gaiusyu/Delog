@@ -1,6 +1,6 @@
-> **Note for Rebuttal Reviewers:** In direct response to feedback and questions raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**.
+> **Note for Rebuttal Reviewers:** In direct response to concerns raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**.
 >
-> This section is provided solely to clarify and elaborate on specific points of inquiry. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
+> For your convenience, this section is brief and targeted. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
 
 
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
@@ -471,7 +471,7 @@ CPU usage and peak memory are available in Section [4.3. Claim from Section 2.3:
 
 **Setting:** Compress 1GB production logs (LogC) while varying the number of threads (1, 2, 4, 8, 16). We select the fastest log compressor Denum and lzma for comparison. 
 
-**A more comprehensive system-level evaluation is planned for a future version of this work.**
+**A more comprehensive system-level evaluation will be added to next version of our paper.**
 
 
 **Throughput vs. Thread Count (I/O):**
