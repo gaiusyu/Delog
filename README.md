@@ -1,6 +1,4 @@
-> **Note for Rebuttal Reviewers:** In direct response to concerns raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**.
->
-> For your convenience, this section is brief and targeted. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
+> **Note for Rebuttal Reviewers:** In direct response to concerns raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**. For your convenience, this section is brief and targeted. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
 
 
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
