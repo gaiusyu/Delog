@@ -1,6 +1,6 @@
-> **Note for Rebuttal Reviewers:** In direct response to feedback and questions raised during the review process, we have added a new, supplementary section: **Chapter 6. Updates during Rebuttal**.
+> **Note for Rebuttal Reviewers:** In direct response to feedback and questions raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**.
 >
-> This section is provided solely to clarify and elaborate on specific points of inquiry. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Chapters 1 through 5, remains entirely unchanged from the initial submission.
+> This section is provided solely to clarify and elaborate on specific points of inquiry. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
 
 
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
@@ -481,6 +481,8 @@ CPU usage and peak memory are available in Section [4.3. Claim from Section 2.3:
 
 
 **Scalability:**
+
+We select the fastest log compressor Denum and lzma for comparison. Thread numbers are set to 1,2,4,8,16, Delog consistently achieves the lowest absolute execution time at every thread count. For example, at 16 threads, Delog is 1.54x faster than the fastest log compressor Denum (17.58s vs 27.09s) and 1.08x faster than LZMA (17.58s vs 19.04s). Delog exhibits a similar scaling trend as the others.
 
 | **Threads** | **Delog Time (s)** | **Delog Speedup** | **Denum Time (s)** | **Denum Speedup** | **LZMA Time (s)** | **LZMA Speedup** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
