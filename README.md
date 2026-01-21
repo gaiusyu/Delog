@@ -1,6 +1,4 @@
-# DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
-### Artifact for USENIX FAST '26 Submission
-
+# DeLog
 
 ---
 
