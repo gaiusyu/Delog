@@ -1,16 +1,6 @@
-> **Note for Rebuttal Reviewers:** In direct response to concerns raised during the review process, we have added a new, supplementary section: **Section 6. Updates during Rebuttal**. For your convenience, this section is brief and targeted. In adherence to the rebuttal guidelines, it is not intended as a presentation of new core results, and we consider it optional reading for your convenience. The original artifact, encompassing Sections 1 through 5, remains entirely unchanged from the initial submission.
-
-
 # DeLog: An Efficient Log Compression Framework with Pattern-based Grouping
 ### Artifact for USENIX FAST '26 Submission
 
-> **A Note on Artifact Viewing:** We have observed that the anonymous artifact hosting platform, `https://anonymous.4open.science/`, has certain limitations in rendering this `README.md` file. Specifically, you may find that:
-> *   The internal links in the Table of Contents are not clickable.
-> *   The code blocks lack a convenient one-click "copy" button, requiring manual selection.
-
-> We sincerely apologize for any inconvenience this may cause during your evaluation. The full, interactive experience will be available on the public GitHub repository once the anonymous review process is complete.
-
-We sincerely thank the Artifact Evaluation Committee for dedicating their time and expertise to reviewing our work. This artifact provides all the necessary components, data, and instructions to reproduce the key findings presented in our paper. We have strived to make the evaluation process as clear and straightforward as possible and welcome any feedback for improvement.
 
 ---
 
@@ -33,7 +23,7 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
      *   [5.1. The Performance of General-Purpose Compressors on All Logs](#51-the-performance-of-general-compressor-on-all-logs)
      *   [5.2. Run Log Parsers](#52-running-log-parsers)
      *   [5.3. Compression on Parsing Results](#53-compression-based-on-parsing-results)
-6.  [Updates during Rebuttal (Optional)](#6-updates-during-rebuttal-optional)
+6.  [Additional Results](#6-additonal-results)
     *   [6.1. Parsing Accuracy of DeLog](#61-parsing-accuracy-of-delog)
     *   [6.2. System-level Evaluation](#62-system-level-evaluation)
     *   [6.3. The Compression Ratio of µSlope(CLP)](#63-the-compression-ratio-of-µslopeclp)
@@ -433,8 +423,7 @@ python run_all.py
 This script will use the outputs from the log parsers to evaluate a parse-then-compress pipeline, generating the results shown in the supplementary material.
 
 
-## 6. Updates during Rebuttal (Optional)
-
+## 6. Addtional Results
 ### 6.1 Parsing Accuracy of Delog
 
 To get "Parsing Accuracy" of Delog, we conducted an experiment to retroactively derive a "parsing accuracy" metric for DeLog. To do this, we forcibly mapped DeLog's tag generation process to a conventional parsing task. Specifically, we treated tokens tagged as "No pattern" as the template, and all other token types were treated as variables.
@@ -514,7 +503,7 @@ We select the fastest log compressor Denum and lzma for comparison. Thread numbe
 | **Zookeeper** | 30.020 | 31.820 | 47.940 | 154.930 |
 | **Average** | **35.216** | **44.101** | **48.874** | **88.056** |
 
-### 6.4 How to Reproduce These New Results
+### 6.4 How to Reproduce These Results
 
 **1. For parsing accuracy of Delog**
 
