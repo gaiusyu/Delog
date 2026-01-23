@@ -2,7 +2,7 @@
 
 https://arxiv.org/abs/2601.15084
 
-This work uses the Loghub 1.0 and Loghub 2.0 datasets. We obtained consent from the dataset authors ([@pinjia he](hepinjia@cuhk.edu.cn) and [@zhihan jiang](zhjiang22@cse.cuhk.edu.hk)) and strictly comply with their non-commercial licenses. This work is for research purposes only and has not been used in any ByteDance product or commercial deployment.
+This work uses the Loghub 1.0 and Loghub 2.0 datasets. We obtained consent from the dataset authors ([@pinjia he](mailto:hepinjia@cuhk.edu.cn) and [@zhihan jiang](mailto:zhjiang22@cse.cuhk.edu.hk)) and strictly comply with their non-commercial licenses. This work is for research purposes only and has not been used in any ByteDance product or commercial deployment.
 
 ---
 
