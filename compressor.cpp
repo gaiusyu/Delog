@@ -5,6 +5,7 @@
 #include <fstream>
 #include <filesystem>
 #include <unordered_map>
+#include <map> // FIX: Added missing header
 #include <array>
 #include <mutex>
 #include <memory>
@@ -19,16 +20,178 @@
 #include <unordered_set>
 #include <tuple>
 #include <optional>
-#include <iterator> // For std::make_move_iterator
-#include <sstream>  // For std::stringstream
+#include <iterator>
+#include <sstream>
+#include <variant>
+#include <cctype>
+#include <unistd.h> 
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <pcre2.h>
-#include <cctype>
+#include <archive.h>
+#include <archive_entry.h>
+#define BS_THREAD_POOL_ENABLE_FUTURES
+#include "BS_thread_pool.hpp"
+// ===================================================================
+// In-Memory Data Structures
+// ===================================================================
+
+struct InMemoryTemplates {
+    std::string mapping_data;
+    std::vector<char> ids_data;
+};
+
+using InMemoryFileContent = std::variant<std::string, std::vector<char>>;
+using InMemoryFileCollection = std::map<std::string, InMemoryFileContent>;
 
 // ===================================================================
-// Log Processing Mode Definition
+// Enum Definitions
 // ===================================================================
+
 enum class LogMode { TEXT, JSON };
+enum class ProcessingMode { NORMAL, FAST };
+enum class CompressionKernel { LZMA, GZIP, BZIP2, LZ4, ZSTD, NONE };
+enum class PieceType { STATIC_TEXT, VARIABLE }; // FIX: Correctly defined enum
+
+// ===================================================================
+// Struct Definitions
+// ===================================================================
+
+// FIX: Correctly defined struct, separate from PieceType enum
+struct TokenType {
+    bool has_alpha = false;
+    bool has_digit = false;
+    bool has_special = false;
+    bool is_pure_digit = false;
+};
+
+struct CompressionInfo {
+    std::string extension;
+};
+
+struct LinePiece {
+    PieceType type;
+    std::string original_token;
+    std::string full_tag;
+    std::optional<size_t> start_pos;
+    std::optional<size_t> end_pos;
+};
+
+using AnalyzedLine = std::vector<LinePiece>;
+using GlobalTagData = std::unordered_map<std::string, std::vector<std::string>>;
+
+// ===================================================================
+// Core Classes
+// ===================================================================
+
+// FIX: Removed duplicate/placeholder definition
+class PatternRecognizer {
+public:
+    std::vector<pcre2_code*> compiled_patterns;
+    std::vector<std::string> substitutions;
+
+    PatternRecognizer(const std::string& logname) {
+        struct RegexPattern {
+            std::vector<std::string> patterns;
+            std::vector<std::string> substitutions;
+        };
+        std::unordered_map<std::string, RegexPattern> regex_map;
+        regex_map["Android"] = { { R"((\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\.(\d{3}))"}, {"<T>"} };
+        regex_map["Apache"] = { {R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"((\d{2}) (\d{2}):(\d{2}):(\d{2}))"}, {"<I>", "<T>"} };
+        regex_map["BGL"] = { {R"((\d{4})-(\d{2})-(\d{2})-(\d{2})\.(\d{2})\.(\d{2}))", R"((\d{4})\.(\d{2})\.(\d{2}))", R"(core\.(\d+))", R"(\.(\d{6}))"}, { "<P>", "<O>", "<Q>","<R>"} };
+        regex_map["Hadoop"] = { {R"((\d{4})\-(\d{2})\-(\d{2}))", R"((\d{2}):(\d{2}):(\d{2}),(\d{3}))"}, {"<X>", "<T>"} };
+        regex_map["HDFS"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"(blk_-?\d+)"}, {"<A>",  "<B>"} };
+        regex_map["HealthApp"] = { { R"((\d{8})\-(\d+):(\d+):(\d+))"}, {"<A>"} };
+        regex_map["HPC"] = { {R"(\d{10})"}, {"<T>"} };
+        regex_map["Linux"] = { { R"(rhost=([^\s]+))", R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"((\d{2}):(\d{2}):(\d{2}))"}, {"<A>", "<B>", "<T>"} };
+        regex_map["Mac"] = { {R"((\d+)-(\d+)-(\d+)-(\d+))", R"((\d{2}):(\d{2}):(\d{2}))"}, {"<X>", "<T>"} };
+        regex_map["OpenSSH"] = { {R"((\d+)\.(\d+)\.(\d+)\.(\d+)(?![.\d]))", R"((\d+) (\d{2}):(\d{2}):(\d{2}))"}, {"<A>", "<T>"} };
+        regex_map["OpenStack"] = { { R"(\.(\d+)-(\d+)-(\d+)_(\d+):(\d+):(\d+))",R"((\d+)-(\d+)-(\d+).(\d+):(\d+):(\d+)\.(\d+))",R"((\d+)\.(\d+)\.(\d+)\.(\d+))"}, { "<X>", "<Y>", "<Z>"} };
+        regex_map["Proxifier"] = { { R"((\d{2})\.(\d{2}) (\d{2}):(\d{2}):(\d{2}))"}, {"<T>"} };
+        regex_map["Spark"] = { {  R"((\d{2})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2}))",R"((\d+)\.(\d+)\.(\d+)\.(\d+))"}, {"<T>","<A>"}};
+        regex_map["Thunderbird"] = { { R"((\d{2}):(\d{2}):(\d{2}))",R"((\d{4}\.)(\d{2})\.(\d{2}))"}, {"<A>","<T>"}};
+        regex_map["Windows"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))",R"((\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}))", R"((\d+):(\d+):(\d+))"}, {"<A>","<T>","<B>"} };
+        regex_map["Zookeeper"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))",R"((\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}),(\d{3}))"}, {"<A>","<T>"} };
+
+        if (regex_map.count(logname)) {
+            const auto& log_patterns = regex_map.at(logname);
+            substitutions = log_patterns.substitutions;
+            for (const auto& pattern_str : log_patterns.patterns) {
+                compiled_patterns.push_back(compile_pattern(pattern_str.c_str()));
+            }
+        } else {
+            std::cerr << "Warning: No predefined patterns for logname '" << logname << "'." << std::endl;
+        }
+    }
+
+    ~PatternRecognizer() {
+        for (auto re : compiled_patterns) {
+            pcre2_code_free(re);
+        }
+    }
+private:
+    pcre2_code* compile_pattern(const char *pattern) {
+        int errornumber;
+        PCRE2_SIZE erroroffset;
+        pcre2_code *re = pcre2_compile((PCRE2_SPTR)pattern, PCRE2_ZERO_TERMINATED, 0, &errornumber, &erroroffset, nullptr);
+        if (re == nullptr) {
+            throw std::runtime_error("Regex compilation failed for: " + std::string(pattern));
+        }
+        return re;
+    }
+};
+
+
+std::string to_alpha_id(int64_t n, const std::string& prefix = "z") {
+    if (n < 0) return prefix + "neg" + to_alpha_id(-n, "");
+    if (n == 0) return prefix + "a";
+    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const int charset_size = sizeof(charset) - 1;
+    std::string result;
+    while (n > 0) {
+        result += charset[n % charset_size];
+        n /= charset_size;
+    }
+    std::reverse(result.begin(), result.end());
+    return prefix + result;
+}
+
+class TagManager {
+public:
+    std::string get_or_create_id(const std::string& full_tag) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto it = tag_to_id_map_.find(full_tag);
+        if (it != tag_to_id_map_.end()) {
+            return it->second;
+        }
+        std::string new_alpha_id = to_alpha_id(next_id_++);
+        tag_to_id_map_[full_tag] = new_alpha_id;
+        id_to_tag_map_.push_back({new_alpha_id, full_tag});
+        return new_alpha_id;
+    }
+
+    const std::unordered_map<std::string, std::string>& get_tag_to_id_map() const {
+        return tag_to_id_map_;
+    }
+
+    std::string get_mapping_as_string() const {
+        std::string result;
+        std::vector<std::pair<std::string, std::string>> sorted_map = id_to_tag_map_;
+        std::sort(sorted_map.begin(), sorted_map.end());
+        for (const auto& pair : sorted_map) {
+            result.append(pair.first).append(":").append(pair.second).append("\n");
+        }
+        return result;
+    }
+private:
+    std::mutex mutex_;
+    int64_t next_id_ = 0;
+    std::unordered_map<std::string, std::string> tag_to_id_map_;
+    std::vector<std::pair<std::string, std::string>> id_to_tag_map_;
+};
+
+// ===================================================================
+// Helper & Parsing Functions
+// ===================================================================
 
 std::optional<LogMode> parse_log_mode(const std::string& s) {
     if (s == "text") return LogMode::TEXT;
@@ -36,64 +199,39 @@ std::optional<LogMode> parse_log_mode(const std::string& s) {
     return std::nullopt;
 }
 
-// ===================================================================
-// Processing Mode Definition (Normal vs Fast)
-// ===================================================================
-enum class ProcessingMode { NORMAL, FAST };
-
 std::optional<ProcessingMode> parse_processing_mode(const std::string& s) {
     if (s == "normal") return ProcessingMode::NORMAL;
     if (s == "fast") return ProcessingMode::FAST;
     return std::nullopt;
 }
 
-// ===================================================================
-// Compression Kernel Definition
-// ===================================================================
-enum class CompressionKernel { LZMA, GZIP, BZIP2, LZ4, NONE };
-
-struct CompressionInfo {
-    std::string tar_flag;
-    std::string extension;
-};
-
 CompressionInfo get_compression_info(CompressionKernel kernel) {
     switch (kernel) {
-        case CompressionKernel::LZMA:   return {"-cJf", ".tar.xz"};
-        case CompressionKernel::GZIP:   return {"-czf", ".tar.gz"};
-        case CompressionKernel::BZIP2:  return {"-cjf", ".tar.bz2"};
-        case CompressionKernel::LZ4:    return {"-c --lz4 -f", ".tar.lz4"};
-        case CompressionKernel::NONE:   return {"-cf", ".tar"};
+        case CompressionKernel::LZMA:   return {".tar.xz"};
+        case CompressionKernel::GZIP:   return {".tar.gz"};
+        case CompressionKernel::BZIP2:  return {".tar.bz2"};
+        case CompressionKernel::LZ4:    return {".tar.lz4"};
+        case CompressionKernel::ZSTD:   return {".tar.zst"};
+        case CompressionKernel::NONE:   return {".tar"};
     }
-    return {"-cJf", ".tar.xz"}; // Default fallback
+    return {".tar.xz"};
 }
 
 std::optional<CompressionKernel> parse_kernel_from_string(const std::string& s) {
-    if (s == "lzma") return CompressionKernel::LZMA;
+    if (s == "lzma" || s == "xz") return CompressionKernel::LZMA;
     if (s == "gzip") return CompressionKernel::GZIP;
     if (s == "bzip2") return CompressionKernel::BZIP2;
     if (s == "lz4") return CompressionKernel::LZ4;
+    if (s == "zstd") return CompressionKernel::ZSTD;
     if (s == "none") return CompressionKernel::NONE;
     return std::nullopt;
 }
 
-// ===================================================================
-// Helper Functions
-// ===================================================================
 void ensure_directory_exists(const std::string& dir) {
-    try {
+    if (!std::filesystem::exists(dir)) {
         std::filesystem::create_directories(dir);
-    } catch (const std::exception& e) {
-        std::cerr << "Error creating directory: " << e.what() << std::endl;
     }
 }
-
-struct TokenType {
-    bool has_alpha = false;
-    bool has_digit = false;
-    bool has_special = false;
-    bool is_pure_digit = false;
-};
 
 TokenType get_token_type(std::string_view s) {
     TokenType type;
@@ -103,16 +241,11 @@ TokenType get_token_type(std::string_view s) {
     bool might_be_pure_digit = true;
     for (char c : s) {
         unsigned char uc = static_cast<unsigned char>(c);
-        if (std::isdigit(static_cast<unsigned char>(c))) {
+        if (std::isdigit(uc)) {
             type.has_digit = true;
         } else {
             might_be_pure_digit = false;
             if (std::isalpha(uc) || uc == '<' || uc == '>') {
-                type.has_alpha = true;
-            } else {
-                type.has_special = true;
-            }
-            if (std::isalpha(static_cast<unsigned char>(c))) {
                 type.has_alpha = true;
             } else {
                 type.has_special = true;
@@ -187,29 +320,16 @@ bool has_delimiter(std::string_view sv) {
     return false;
 }
 
-std::string to_alpha_id(int64_t n, const std::string& prefix = "z") {
-    if (n < 0) return prefix + "neg" + to_alpha_id(-n, "");
-    if (n == 0) return prefix + "a";
-    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const int charset_size = sizeof(charset) - 1;
-    std::string result;
-    while (n > 0) {
-        result += charset[n % charset_size];
-        n /= charset_size;
-    }
-    std::reverse(result.begin(), result.end());
-    return prefix + result;
-}
 
-std::vector<unsigned char> elastic_encode(int64_t num) {
-    std::vector<unsigned char> buffer;
+std::vector<char> elastic_encode_char(int64_t num) {
+    std::vector<char> buffer;
     uint64_t cur = (num << 1) ^ (num >> 63);
     while (true) {
         if (cur < 0x80) {
-            buffer.push_back(static_cast<unsigned char>(cur));
+            buffer.push_back(static_cast<char>(cur));
             break;
         } else {
-            buffer.push_back(static_cast<unsigned char>((cur & 0x7F) | 0x80));
+            buffer.push_back(static_cast<char>((cur & 0x7F) | 0x80));
             cur >>= 7;
         }
     }
@@ -230,207 +350,6 @@ std::list<int64_t> delta_transform(const std::list<int64_t>& l) {
     return new_list;
 }
 
-// In-memory dictionary and ID data
-struct StoredContent {
-    std::string mapping_data;
-    std::vector<unsigned char> ids_data;
-};
-
-// Generate in-memory dictionary and ID data from a vector of strings
-StoredContent generate_stored_content(const std::vector<std::string>& lines) {
-    std::unordered_map<std::string, int> content_to_id;
-    std::vector<std::pair<int, std::string>> id_to_content;
-    int id_counter = 1;
-    std::vector<int> id_list;
-    id_list.reserve(lines.size());
-
-    for (const auto& line : lines) {
-        // An empty string should not enter the dictionary but may exist as a variable value, represented by ID 0.
-        if (line.empty()) {
-            id_list.push_back(0);
-            continue;
-        }
-        auto it = content_to_id.find(line);
-        if (it == content_to_id.end()) {
-            content_to_id[line] = id_counter;
-            id_to_content.push_back({id_counter, line});
-            id_list.push_back(id_counter++);
-        } else {
-            id_list.push_back(it->second);
-        }
-    }
-
-    std::stringstream mapping_ss;
-    std::sort(id_to_content.begin(), id_to_content.end());
-    for (const auto& pair : id_to_content) {
-        mapping_ss << pair.second << "\n";
-    }
-
-    std::vector<unsigned char> ids_buffer;
-    for (int id : id_list) {
-        auto encoded = elastic_encode(id);
-        ids_buffer.insert(ids_buffer.end(), encoded.begin(), encoded.end());
-    }
-    
-    return {mapping_ss.str(), ids_buffer};
-}
-
-// The original store_content_with_ids is reserved for Normal mode and template files.
-void store_content_with_ids(const std::vector<std::string>& lines, const std::string& mapping_file_path, const std::string& ids_file_path) {
-    auto content = generate_stored_content(lines);
-    if (!ids_file_path.empty()){
-        std::ofstream ids_file(ids_file_path, std::ios::binary);
-        ids_file.write(reinterpret_cast<const char*>(content.ids_data.data()), content.ids_data.size());
-    }
-    if (!mapping_file_path.empty()){
-        std::ofstream mapping_file(mapping_file_path);
-        mapping_file << content.mapping_data;
-    }
-}
-
-
-// ===================================================================
-// Data Structures and Core Classes
-// ===================================================================
-enum class PieceType { STATIC_TEXT, VARIABLE };
-
-struct LinePiece {
-    PieceType type;
-    std::string original_token;
-    std::string full_tag;
-    // For JSON: positions in original line to allow reconstruction
-    std::optional<size_t> start_pos;
-    std::optional<size_t> end_pos;
-};
-
-using AnalyzedLine = std::vector<LinePiece>;
-
-std::string build_structured_tag( std::string_view context, std::string_view structure, std::optional<size_t> token_index, std::optional<size_t> token_len) {
-    std::string tag = "<";
-    bool first_part = true;
-    auto append_part = [&](const std::string& key, const std::string& value) {
-        if (value.empty()) return;
-        if (!first_part) {
-            tag += "|";
-        }
-        tag += key + "=" + value;
-        first_part = false;
-    };
-
-    if (token_index) append_part("IDX", std::to_string(*token_index));
-    if (token_len) append_part("LEN", std::to_string(*token_len));
-    if (!context.empty()) append_part("CTX", std::string(context));
-    if (!structure.empty()) {
-        std::string_view inner_structure = structure;
-        if (inner_structure.length() >= 2 && inner_structure.front() == '<' && inner_structure.back() == '>') {
-            inner_structure = inner_structure.substr(1, inner_structure.length() - 2);
-        }
-        append_part("STR", std::string(inner_structure));
-    }
-    tag += ">";
-    return tag;
-}
-
-
-class PatternRecognizer {
-public:
-    std::vector<pcre2_code*> compiled_patterns;
-    std::vector<std::string> substitutions;
-
-    PatternRecognizer(const std::string& logname) {
-        std::unordered_map<std::string, RegexPattern> regex_map;
-        regex_map["Android"] = { { R"((\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\.(\d{3}))"}, {"<T>"} };
-        regex_map["Apache"] = { {R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"((\d{2}) (\d{2}):(\d{2}):(\d{2}))"}, {"<I>", "<T>"} };
-        regex_map["BGL"] = { {R"((\d{4})-(\d{2})-(\d{2})-(\d{2})\.(\d{2})\.(\d{2}))", R"((\d{4})\.(\d{2})\.(\d{2}))", R"(core\.(\d+))", R"(\.(\d{6}))"}, { "<P>", "<O>", "<Q>","<R>"} };
-        regex_map["Hadoop"] = { {R"((\d{4})\-(\d{2})\-(\d{2}))", R"((\d{2}):(\d{2}):(\d{2}),(\d{3}))"}, {"<X>", "<T>"} };
-        regex_map["HDFS"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"(blk_-?\d+)"}, {"<A>",  "<B>"} };
-        regex_map["HealthApp"] = { { R"((\d{8})\-(\d+):(\d+):(\d+))"}, {"<A>"} };
-        regex_map["HPC"] = { {R"(\d{10})"}, {"<T>"} };
-        regex_map["Linux"] = { { R"(rhost=([^\s]+))", R"((\d+)\.(\d+)\.(\d+)\.(\d+))", R"((\d{2}):(\d{2}):(\d{2}))"}, {"<A>", "<B>", "<T>"} };
-        regex_map["Mac"] = { {R"((\d+)-(\d+)-(\d+)-(\d+))", R"((\d{2}):(\d{2}):(\d{2}))"}, {"<X>", "<T>"} };
-        regex_map["OpenSSH"] = { {R"((\d+)\.(\d+)\.(\d+)\.(\d+)(?![.\d]))", R"((\d+) (\d{2}):(\d{2}):(\d{2}))"}, {"<A>", "<T>"} };
-        regex_map["OpenStack"] = { { R"(\.(\d+)-(\d+)-(\d+)_(\d+):(\d+):(\d+))",R"((\d+)-(\d+)-(\d+).(\d+):(\d+):(\d+)\.(\d+))",R"((\d+)\.(\d+)\.(\d+)\.(\d+))"}, { "<X>", "<Y>", "<Z>"} };
-        regex_map["Proxifier"] = { { R"((\d{2})\.(\d{2}) (\d{2}):(\d{2}):(\d{2}))"}, {"<T>"} };
-        regex_map["Spark"] = { {  R"((\d{2})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2}))",R"((\d+)\.(\d+)\.(\d+)\.(\d+))"}, {"<T>","<A>"}};
-        regex_map["Thunderbird"] = { { R"((\d{2}):(\d{2}):(\d{2}))",R"((\d{4}\.)(\d{2})\.(\d{2}))"}, {"<A>","<T>"}};
-        regex_map["Windows"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))",R"((\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}))", R"((\d+):(\d+):(\d+))"}, {"<A>","<T>","<B>"} };
-        regex_map["Zookeeper"] = { { R"((\d+)\.(\d+)\.(\d+)\.(\d+))",R"((\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}),(\d{3}))"}, {"<A>","<T>"} };
-        
-
-
-        if (regex_map.count(logname)) {
-            const auto& log_patterns = regex_map.at(logname);
-            substitutions = log_patterns.substitutions;
-            for (const auto& pattern_str : log_patterns.patterns) {
-                compiled_patterns.push_back(compile_pattern(pattern_str.c_str()));
-            }
-        } else {
-            std::cerr << "Warning: No predefined patterns for logname '" << logname << "'." << std::endl;
-        }
-    }
-
-    ~PatternRecognizer() {
-        for (auto re : compiled_patterns) {
-            pcre2_code_free(re);
-        }
-    }
-private:
-    struct RegexPattern {
-        std::vector<std::string> patterns;
-        std::vector<std::string> substitutions;
-    };
-
-    pcre2_code* compile_pattern(const char *pattern) {
-        int errornumber;
-        PCRE2_SIZE erroroffset;
-        pcre2_code *re = pcre2_compile((PCRE2_SPTR)pattern, PCRE2_ZERO_TERMINATED, 0, &errornumber, &erroroffset, nullptr);
-        if (re == nullptr) {
-            throw std::runtime_error("Regex compilation failed for: " + std::string(pattern));
-        }
-        return re;
-    }
-};
-
-class TagManager {
-public:
-    std::string get_or_create_id(const std::string& full_tag) {
-        std::lock_guard<std::mutex> lock(mutex_);
-        auto it = tag_to_id_map_.find(full_tag);
-        if (it != tag_to_id_map_.end()) {
-            return it->second;
-        }
-        std::string new_alpha_id = to_alpha_id(next_id_++);
-        tag_to_id_map_[full_tag] = new_alpha_id;
-        id_to_tag_map_.push_back({new_alpha_id, full_tag});
-        return new_alpha_id;
-    }
-
-    const std::unordered_map<std::string, std::string>& get_tag_to_id_map() const {
-        return tag_to_id_map_;
-    }
-
-    void save_mapping(const std::string& path) const {
-        std::ofstream file(path);
-        std::vector<std::pair<std::string, std::string>> sorted_map = id_to_tag_map_;
-        std::sort(sorted_map.begin(), sorted_map.end());
-        for (const auto& pair : sorted_map) {
-            file << pair.first << ":" << pair.second << "\n";
-        }
-    }
-
-private:
-    std::mutex mutex_;
-    int64_t next_id_ = 0;
-    std::unordered_map<std::string, std::string> tag_to_id_map_;
-    std::vector<std::pair<std::string, std::string>> id_to_tag_map_;
-};
-
-using GlobalTagData = std::unordered_map<std::string, std::vector<std::string>>;
-
-
-// ===================================================================
-// JSON Parsing Logic
-// ===================================================================
 std::vector<std::pair<std::string_view, std::string_view>> parse_json_kvs(std::string_view line_sv) {
     std::vector<std::pair<std::string_view, std::string_view>> kvs;
     if (line_sv.length() < 2 || line_sv.front() != '{' || line_sv.back() != '}') {
@@ -481,10 +400,6 @@ std::vector<std::pair<std::string_view, std::string_view>> parse_json_kvs(std::s
     return kvs;
 }
 
-
-// ===================================================================
-// Core Processing Logic Function (TEXT Mode)
-// ===================================================================
 std::string extract_digits(std::string_view s) {
     std::string digits;
     digits.reserve(s.length());
@@ -495,6 +410,212 @@ std::string extract_digits(std::string_view s) {
     }
     return digits;
 }
+
+std::string build_structured_tag( std::string_view context, std::string_view structure, std::optional<size_t> token_index, std::optional<size_t> token_len) {
+    std::string tag = "<";
+    bool first_part = true;
+    auto append_part = [&](const std::string& key, const std::string& value) {
+        if (value.empty()) return;
+        if (!first_part) {
+            tag += "|";
+        }
+        tag += key + "=" + value;
+        first_part = false;
+    };
+
+    if (token_index) append_part("IDX", std::to_string(*token_index));
+    if (token_len) append_part("LEN", std::to_string(*token_len));
+    if (!context.empty()) append_part("CTX", std::string(context));
+    if (!structure.empty()) {
+        std::string_view inner_structure = structure;
+        if (inner_structure.length() >= 2 && inner_structure.front() == '<' && inner_structure.back() == '>') {
+            inner_structure = inner_structure.substr(1, inner_structure.length() - 2);
+        }
+        append_part("STR", std::string(inner_structure));
+    }
+    tag += ">";
+    return tag;
+}
+
+// ===================================================================
+// In-Memory Data Generation Functions
+// ===================================================================
+
+InMemoryTemplates generate_templates_in_memory(const std::vector<std::string>& lines) {
+    std::unordered_map<std::string, int> content_to_id;
+    std::vector<std::pair<int, std::string>> id_to_content;
+    int id_counter = 1;
+    std::vector<int> id_list;
+    id_list.reserve(lines.size());
+
+    for (const auto& line : lines) {
+        if (line.empty()) {
+            id_list.push_back(0);
+            continue;
+        }
+        auto it = content_to_id.find(line);
+        if (it == content_to_id.end()) {
+            content_to_id[line] = id_counter;
+            id_to_content.push_back({id_counter, line});
+            id_list.push_back(id_counter++);
+        } else {
+            id_list.push_back(it->second);
+        }
+    }
+
+    std::string mapping_data;
+    mapping_data.reserve(lines.size() * 15);
+    std::sort(id_to_content.begin(), id_to_content.end());
+    for (const auto& pair : id_to_content) {
+        mapping_data.append(pair.second);
+        mapping_data.push_back('\n');
+    }
+
+    std::vector<char> ids_buffer;
+    for (int id : id_list) {
+        auto encoded = elastic_encode_char(id);
+        ids_buffer.insert(ids_buffer.end(), encoded.begin(), encoded.end());
+    }
+
+    return {std::move(mapping_data), std::move(ids_buffer)};
+}
+
+InMemoryFileCollection process_aggregated_tags_in_memory(
+    const GlobalTagData& tag_data, const std::unordered_map<std::string, std::string>& tag_to_id_map,
+    ProcessingMode mode) {
+    
+    InMemoryFileCollection generated_files;
+
+    if (mode == ProcessingMode::FAST) {
+        std::string all_mappings_content;
+        std::vector<char> all_ids_content;
+        std::string index_content = "tag_id,mapping_offset,mapping_size,ids_offset,ids_size\n";
+        
+        for (const auto& pair : tag_data) {
+            const std::string& tag_name = pair.first;
+            const std::vector<std::string>& values = pair.second;
+            if (values.empty()) continue;
+
+            auto it = tag_to_id_map.find(tag_name);
+            if (it == tag_to_id_map.end()) continue;
+            const std::string& tag_id = it->second;
+
+            InMemoryTemplates content = generate_templates_in_memory(values);
+
+            size_t mapping_offset = all_mappings_content.size();
+            size_t ids_offset = all_ids_content.size();
+
+            all_mappings_content.append(content.mapping_data);
+            all_ids_content.insert(all_ids_content.end(), content.ids_data.begin(), content.ids_data.end());
+
+            index_content.append(tag_id).append(",")
+                         .append(std::to_string(mapping_offset)).append(",")
+                         .append(std::to_string(content.mapping_data.size())).append(",")
+                         .append(std::to_string(ids_offset)).append(",")
+                         .append(std::to_string(content.ids_data.size())).append("\n");
+        }
+        
+        generated_files["all_mappings.fast.txt"] = std::move(all_mappings_content);
+        generated_files["all_ids.fast.bin"] = std::move(all_ids_content);
+        generated_files["index.fast.csv"] = std::move(index_content);
+
+    } else { // NORMAL Mode
+        std::string all_mappings_content;
+        std::vector<char> all_variables_content;
+        std::string index_content = "tag_id,storage_type,file1_offset,file1_size,file2_offset,file2_size\n";
+        
+        const size_t MAX_SAFE_LLONG_STR_LEN = 18;
+
+        for (const auto& pair : tag_data) {
+            const std::string& tag_name = pair.first;
+            const std::vector<std::string>& values = pair.second;
+            if (values.empty()) continue;
+
+            auto it = tag_to_id_map.find(tag_name);
+            if (it == tag_to_id_map.end()) continue;
+            const std::string& tag_id = it->second;
+            
+            auto record_to_index = [&](const std::string& storage_type, size_t f1_off, size_t f1_size, size_t f2_off, size_t f2_size) {
+                index_content.append(tag_id).append(",")
+                             .append(storage_type).append(",")
+                             .append(std::to_string(f1_off)).append(",")
+                             .append(std::to_string(f1_size)).append(",")
+                             .append(std::to_string(f2_off)).append(",")
+                             .append(std::to_string(f2_size)).append("\n");
+            };
+
+            auto dictionary_encode_and_store = [&]() {
+                InMemoryTemplates content = generate_templates_in_memory(values);
+                size_t var_offset = all_variables_content.size();
+                size_t map_offset = all_mappings_content.size();
+                
+                all_variables_content.insert(all_variables_content.end(), content.ids_data.begin(), content.ids_data.end());
+                all_mappings_content.append(content.mapping_data);
+                
+                record_to_index("MAPPING", var_offset, content.ids_data.size(), map_offset, content.mapping_data.size());
+            };
+
+            if (tag_name.find("<B>") != std::string::npos || tag_name.find("<M>") != std::string::npos || tag_name.find("<K>") != std::string::npos || tag_name.find("<G>") != std::string::npos || tag_name.find("<X>") != std::string::npos || tag_name.find("<Y>") != std::string::npos || tag_name.find("<Z>") != std::string::npos) {
+                dictionary_encode_and_store();
+                continue;
+            }
+
+            bool all_same = std::all_of(values.begin() + 1, values.end(), [&](const auto& s){ return s == values[0]; });
+            if (all_same) {
+                bool is_numeric = !values[0].empty() && std::all_of(values[0].begin(), values[0].end(), ::isdigit);
+                if (is_numeric && values[0].length() <= MAX_SAFE_LLONG_STR_LEN) {
+                    auto encoded = elastic_encode_char(std::stoll(values[0]));
+                    size_t var_offset = all_variables_content.size();
+                    all_variables_content.insert(all_variables_content.end(), encoded.begin(), encoded.end());
+                    record_to_index("ALLSAME", var_offset, encoded.size(), 0, 0);
+                } else {
+                    dictionary_encode_and_store();
+                }
+                continue;
+            }
+            
+            bool all_values_are_numeric = std::all_of(values.begin(), values.end(), [](const auto& s){ return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit); });
+            if (!all_values_are_numeric) {
+                dictionary_encode_and_store();
+                continue;
+            }
+
+            bool safe_to_convert = std::all_of(values.begin(), values.end(), [&](const auto& s){ return s.length() <= MAX_SAFE_LLONG_STR_LEN; });
+            
+            if (safe_to_convert) {
+                std::list<int64_t> numbers;
+                for (const auto& val : values) { numbers.push_back(std::stoll(val)); }
+                
+                bool should_transform = (tag_name.find("<I>") == std::string::npos);
+                 if (should_transform && numbers.size() > 100) {
+                    std::set<size_t> lengths;
+                    for (int64_t num : numbers) { lengths.insert(std::to_string(num).length()); if (lengths.size() >= 3) break; }
+                    if (lengths.size() >= 3) should_transform = false;
+                }
+
+                std::list<int64_t> to_write = should_transform ? delta_transform(numbers) : numbers;
+                size_t var_offset = all_variables_content.size();
+                for (int64_t num : to_write) {
+                    auto encoded = elastic_encode_char(num);
+                    all_variables_content.insert(all_variables_content.end(), encoded.begin(), encoded.end());
+                }
+                size_t var_size = all_variables_content.size() - var_offset;
+                record_to_index(should_transform ? "NUMERIC_DELTA" : "NUMERIC_NODELTA", var_offset, var_size, 0, 0);
+            } else {
+                dictionary_encode_and_store();
+            }
+        }
+
+        generated_files["all_mappings.normal.txt"] = std::move(all_mappings_content);
+        generated_files["all_variables.normal.bin"] = std::move(all_variables_content);
+        generated_files["index.normal.csv"] = std::move(index_content);
+    }
+    return generated_files;
+}
+
+// ===================================================================
+// Core Line Processing Logic
+// ===================================================================
 
 void process_sub_token_single_pass(
     std::string_view token, std::string& result_line, std::string& context,
@@ -637,9 +758,6 @@ std::string process_line_text_single_pass(
     return result_line;
 }
 
-// ===================================================================
-// Core Processing Logic Function (JSON Mode)
-// ===================================================================
 std::string process_line_json_single_pass(
     std::string_view line_sv, GlobalTagData& local_tag_data,
     PatternRecognizer& recognizer, TagManager& tag_manager,
@@ -693,9 +811,6 @@ std::string process_line_json_single_pass(
     return result_line;
 }
 
-// ===================================================================
-// Multi-Pass Algorithm Analysis Stage (TEXT and JSON)
-// ===================================================================
 LinePiece analyze_sub_token(
     std::string_view token, std::string& context, size_t& token_index,
     std::unordered_map<std::string, int>& tag_counts) {
@@ -847,258 +962,138 @@ AnalyzedLine analyze_line_json(
 }
 
 // ===================================================================
-// STAGE 2: Post-Processing and Parallel Core (Generic and Optimized Versions)
+// Core Compression Chunk Functions (In-Memory)
 // ===================================================================
-void process_aggregated_tags(
-    const GlobalTagData& tag_data, const std::unordered_map<std::string, std::string>& tag_to_id_map,
-    const std::string& processed_dir, ProcessingMode mode) {
 
-    // --- FAST Mode: File Aggregation Optimization (Unchanged) ---
-    if (mode == ProcessingMode::FAST) {
-        std::cout << "  (Fast mode: aggregating variable data into single files...)\n";
-        std::ofstream all_mappings_file(std::filesystem::path(processed_dir) / "all_mappings.fast.txt", std::ios::binary);
-        std::ofstream all_ids_file(std::filesystem::path(processed_dir) / "all_ids.fast.bin", std::ios::binary);
-        std::ofstream index_file(std::filesystem::path(processed_dir) / "index.fast.csv");
-        
-        if (!all_mappings_file || !all_ids_file || !index_file) {
-            throw std::runtime_error("Could not create aggregation files for Fast mode.");
-        }
-        
-        index_file << "tag_id,mapping_offset,mapping_size,ids_offset,ids_size\n";
-
-        for (const auto& pair : tag_data) {
-            const std::string& tag_name = pair.first;
-            const std::vector<std::string>& values = pair.second;
-            if (values.empty()) continue;
-
-            auto it = tag_to_id_map.find(tag_name);
-            if (it == tag_to_id_map.end()) {
-                std::cerr << "Critical Error: Could not find an ID for the tag '" << tag_name << "'. Skipping." << std::endl;
-                continue;
-            }
-            const std::string& tag_id = it->second;
-
-            StoredContent content = generate_stored_content(values);
-
-            size_t mapping_offset = all_mappings_file.tellp();
-            size_t ids_offset = all_ids_file.tellp();
-
-            all_mappings_file.write(content.mapping_data.c_str(), content.mapping_data.size());
-            all_ids_file.write(reinterpret_cast<const char*>(content.ids_data.data()), content.ids_data.size());
-
-            index_file << tag_id << ","
-                       << mapping_offset << "," << content.mapping_data.size() << ","
-                       << ids_offset << "," << content.ids_data.size() << "\n";
-        }
-        return;
-    }
-
-    // *** MODIFICATION START: Modify Normal mode to use file aggregation ***
-    // --- NORMAL Mode: Now also uses file aggregation ---
-    std::cout << "  (Normal mode: aggregating variable data into single files...)\n";
-    std::ofstream all_mappings_file(std::filesystem::path(processed_dir) / "all_mappings.normal.txt", std::ios::binary);
-    std::ofstream all_variables_file(std::filesystem::path(processed_dir) / "all_variables.normal.bin", std::ios::binary);
-    std::ofstream index_file(std::filesystem::path(processed_dir) / "index.normal.csv");
+static void add_data_to_archive(archive* a, const std::string& path_in_archive, const char* data, size_t size) {
+    struct archive_entry *entry = archive_entry_new();
+    archive_entry_set_pathname(entry, path_in_archive.c_str());
+    archive_entry_set_size(entry, size);
+    archive_entry_set_filetype(entry, AE_IFREG);
+    archive_entry_set_perm(entry, 0644);
     
-    if (!all_mappings_file || !all_variables_file || !index_file) {
-        throw std::runtime_error("Could not create aggregation files for Normal mode.");
-    }
-    
-    // Index file header, file1 points to all_variables.normal.bin, file2 points to all_mappings.normal.txt
-    index_file << "tag_id,storage_type,file1_offset,file1_size,file2_offset,file2_size\n";
-
-    const size_t MAX_SAFE_LLONG_STR_LEN = 18;
-    for (const auto& pair : tag_data) {
-        const std::string& tag_name = pair.first;
-        const std::vector<std::string>& values = pair.second;
-        if (values.empty()) continue;
-
-        auto it = tag_to_id_map.find(tag_name);
-        if (it == tag_to_id_map.end()) {
-            std::cerr << "Critical Error: Could not find an ID for the tag '" << tag_name << "'. Skipping." << std::endl;
-            continue;
-        }
-        const std::string& tag_id = it->second;
-
-        auto record_to_index = [&](const std::string& storage_type, size_t f1_off, size_t f1_size, size_t f2_off, size_t f2_size) {
-            index_file << tag_id << "," << storage_type << "," << f1_off << "," << f1_size << "," << f2_off << "," << f2_size << "\n";
-        };
-
-        auto dictionary_encode_and_store = [&]() {
-            StoredContent content = generate_stored_content(values);
-            size_t var_offset = all_variables_file.tellp();
-            size_t map_offset = all_mappings_file.tellp();
-            all_variables_file.write(reinterpret_cast<const char*>(content.ids_data.data()), content.ids_data.size());
-            all_mappings_file.write(content.mapping_data.c_str(), content.mapping_data.size());
-            record_to_index("MAPPING", var_offset, content.ids_data.size(), map_offset, content.mapping_data.size());
-        };
-
-        // Generic handling for dictionary encoding
-        if (tag_name.find("<B>") != std::string::npos || tag_name.find("<M>") != std::string::npos || tag_name.find("<K>") != std::string::npos || tag_name.find("<G>") != std::string::npos || tag_name.find("<X>") != std::string::npos || tag_name.find("<Y>") != std::string::npos || tag_name.find("<Z>") != std::string::npos) {
-            dictionary_encode_and_store();
-            continue;
-        }
-        
-        bool all_same = std::all_of(values.begin() + 1, values.end(), [&](const auto& s){ return s == values[0]; });
-        if (all_same) {
-            bool is_numeric = !values[0].empty() && std::all_of(values[0].begin(), values[0].end(), ::isdigit);
-            if (is_numeric && values[0].length() <= MAX_SAFE_LLONG_STR_LEN) {
-                auto encoded = elastic_encode(std::stoll(values[0]));
-                size_t var_offset = all_variables_file.tellp();
-                all_variables_file.write(reinterpret_cast<const char*>(encoded.data()), encoded.size());
-                record_to_index("ALLSAME", var_offset, encoded.size(), 0, 0);
-            } else {
-                dictionary_encode_and_store();
-            }
-            continue;
-        }
-        
-        bool all_values_are_numeric = true;
-        for (const auto& s : values) {
-            if (s.empty() || !std::all_of(s.begin(), s.end(), ::isdigit)) {
-                all_values_are_numeric = false;
-                break;
-            }
-        }
-        
-        if (!all_values_are_numeric) {
-            dictionary_encode_and_store();
-            continue;
-        }
-
-        bool safe_to_convert = true;
-        bool is_predefined_numeric = (tag_name.find("<T>") != std::string::npos || tag_name.find("<I>") != std::string::npos || tag_name.find("<D>") != std::string::npos);
-        for (const auto& s : values) {
-            if (s.length() > MAX_SAFE_LLONG_STR_LEN) {
-                safe_to_convert = false;
-                break;
-            }
-        }
-        
-        if (safe_to_convert) {
-            std::list<int64_t> numbers;
-            for (const auto& val : values) {
-                if(!val.empty()) numbers.push_back(std::stoll(val));
-            }
-            
-            bool should_transform = (tag_name.find("<I>") == std::string::npos);
-            if (is_predefined_numeric && should_transform) {
-                if (numbers.size() > 100) {
-                    std::set<size_t> lengths;
-                    size_t count = 0;
-                    for (int64_t num : numbers) {
-                        lengths.insert(std::to_string(num).length());
-                        if (++count >= 100 || lengths.size() >= 3) break;
-                    }
-                    if (lengths.size() >= 3) {
-                        should_transform = false;
-                    }
-                }
-            }
-
-            std::list<int64_t> to_write = should_transform ? delta_transform(numbers) : numbers;
-            size_t var_offset = all_variables_file.tellp();
-            for (int64_t num : to_write) {
-                auto encoded = elastic_encode(num);
-                all_variables_file.write(reinterpret_cast<const char*>(encoded.data()), encoded.size());
-            }
-            size_t var_size = static_cast<size_t>(all_variables_file.tellp()) - var_offset;
-            record_to_index(should_transform ? "NUMERIC_DELTA" : "NUMERIC_NODELTA", var_offset, var_size, 0, 0);
-        } else {
-            dictionary_encode_and_store();
-        }
-    }
-    // *** MODIFICATION END ***
+    archive_write_header(a, entry);
+    archive_write_data(a, data, size);
+    archive_entry_free(entry);
 }
 
-
-
 uintmax_t process_and_compress_chunk(
-    const std::vector<std::string>& block, const std::string& logname, LogMode log_mode,
+    std::vector<std::string> block, const std::string& logname, LogMode log_mode,
     const std::string& base_output_dir, int chunk_id, CompressionKernel kernel,
     ProcessingMode mode, bool keep_temp_files) {
-    std::cout << "Processing chunk " << chunk_id << " with " << block.size() << " lines (single-pass)..." << std::endl;
+    
+    std::cout << "Processing chunk " << chunk_id << " with " << block.size() << " lines (in-memory via /dev/shm)..." << std::endl;
+    
+    // 步骤 1: 日志解析和数据收集 (这部分完全不变)
     PatternRecognizer recognizer(logname);
     TagManager tag_manager;
-
     std::vector<std::string> modified_lines;
     modified_lines.reserve(block.size());
     GlobalTagData chunk_tag_data;
-
     for (const auto& line : block) {
-        if (line.empty()) {
-            modified_lines.push_back("");
-            continue;
-        }
+        if (line.empty()) { modified_lines.push_back(""); continue; }
         GlobalTagData line_tag_data;
         if (log_mode == LogMode::TEXT) {
             modified_lines.push_back(process_line_text_single_pass(line, line_tag_data, recognizer, tag_manager, mode));
-        } else { // LogMode::JSON
+        } else {
             modified_lines.push_back(process_line_json_single_pass(line, line_tag_data, recognizer, tag_manager, mode));
         }
-
         for (auto& pair : line_tag_data) {
-            std::vector<std::string>& target_vec = chunk_tag_data[pair.first];
-            target_vec.insert(
-                target_vec.end(),
-                std::make_move_iterator(pair.second.begin()),
-                std::make_move_iterator(pair.second.end())
-            );
+            chunk_tag_data[pair.first].insert(chunk_tag_data[pair.first].end(), std::make_move_iterator(pair.second.begin()), std::make_move_iterator(pair.second.end()));
         }
     }
 
-    const std::string chunk_output_dir = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id));
-    const std::string processed_tags_dir = std::filesystem::path(chunk_output_dir) / "processed_tags";
-    ensure_directory_exists(processed_tags_dir);
-    
-    store_content_with_ids(modified_lines, std::filesystem::path(chunk_output_dir) / (logname + "_templates.mapping.txt"), std::filesystem::path(chunk_output_dir) / (logname + "_templates.ids.bin"));
-    
-    process_aggregated_tags(chunk_tag_data, tag_manager.get_tag_to_id_map(), processed_tags_dir, mode);
-    
-    tag_manager.save_mapping(std::filesystem::path(chunk_output_dir) / "tags_mapping.txt");
+    InMemoryTemplates templates = generate_templates_in_memory(modified_lines);
+    InMemoryFileCollection variable_files = process_aggregated_tags_in_memory(chunk_tag_data, tag_manager.get_tag_to_id_map(), mode);
+    std::string tag_mapping_content = tag_manager.get_mapping_as_string();
 
+    // 步骤 2: 使用 libarchive 写入到 /dev/shm 的临时文件中
+    struct archive *a;
+    a = archive_write_new();
+    
     CompressionInfo comp_info = get_compression_info(kernel);
-    std::string archive_path = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id) + comp_info.extension);
-    std::string command = "tar " + comp_info.tar_flag + " " + archive_path + " -C " + chunk_output_dir + " .";
-    int ret = std::system(command.c_str());
+    switch (kernel) {
+        case CompressionKernel::GZIP:  archive_write_add_filter_gzip(a); break;
+        case CompressionKernel::BZIP2: archive_write_add_filter_bzip2(a); break;
+        case CompressionKernel::LZMA:  archive_write_add_filter_xz(a); break;
+        case CompressionKernel::LZ4:   archive_write_add_filter_lz4(a); break;
+        case CompressionKernel::ZSTD:  archive_write_add_filter_zstd(a); break;
+        case CompressionKernel::NONE:  break;
+    }
+    archive_write_set_format_pax_restricted(a);
 
-    if (ret != 0) {
-        std::cerr << "Warning: tar command failed for chunk " << chunk_id << "." << std::endl;
-        if (!keep_temp_files) { std::filesystem::remove_all(chunk_output_dir); }
+    // 创建一个唯一的临时文件名
+    std::string temp_archive_path = "/dev/shm/delog_temp_" + std::to_string(getpid()) + "_" + std::to_string(chunk_id);
+    
+    if (archive_write_open_filename(a, temp_archive_path.c_str()) != ARCHIVE_OK) {
+        std::cerr << "Error: libarchive could not open temp file in /dev/shm: " << archive_error_string(a) << std::endl;
+        archive_write_free(a);
         return 0;
     }
 
+    // 步骤 3: 添加所有文件内容到归档中 (这部分不变)
+    add_data_to_archive(a, logname + "_templates.mapping.txt", templates.mapping_data.data(), templates.mapping_data.size());
+    add_data_to_archive(a, logname + "_templates.ids.bin", templates.ids_data.data(), templates.ids_data.size());
+    add_data_to_archive(a, "tags_mapping.txt", tag_mapping_content.data(), tag_mapping_content.size());
+    for (const auto& pair : variable_files) {
+        const std::string& filename = "processed_tags/" + pair.first;
+        std::visit([&](const auto& data) {
+            using T = std::decay_t<decltype(data)>;
+            if constexpr (std::is_same_v<T, std::string>) {
+                add_data_to_archive(a, filename, data.data(), data.size());
+            } else if constexpr (std::is_same_v<T, std::vector<char>>) {
+                add_data_to_archive(a, filename, data.data(), data.size());
+            }
+        }, pair.second);
+    }
+    
+    archive_write_close(a);
+    archive_write_free(a);
+
+    // 步骤 4: 获取大小并将临时文件移动到最终位置
     uintmax_t compressed_size = 0;
     try {
-        if (std::filesystem::exists(archive_path)) {
-            compressed_size = std::filesystem::file_size(archive_path);
+        if (std::filesystem::exists(temp_archive_path)) {
+            compressed_size = std::filesystem::file_size(temp_archive_path);
+            std::string final_archive_path = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id) + comp_info.extension);
+            std::filesystem::copy(temp_archive_path, final_archive_path); // 复制文件
+            std::filesystem::remove(temp_archive_path);  
+        } else {
+             std::cerr << "Error: Temporary archive file was not created in /dev/shm for chunk " << chunk_id << std::endl;
         }
-    } catch(const std::filesystem::filesystem_error& e) {
-        std::cerr << "Error getting file size for " << archive_path << ": " << e.what() << std::endl;
+    } catch (const std::filesystem::filesystem_error& e) {
+        std::cerr << "Error moving/accessing temp file: " << e.what() << std::endl;
+        compressed_size = 0;
+        // 尝试清理
+        if (std::filesystem::exists(temp_archive_path)) {
+            std::filesystem::remove(temp_archive_path);
+        }
     }
-
-    if (!keep_temp_files) {
-        std::filesystem::remove_all(chunk_output_dir);
-    }
+    
     std::cout << "Finished chunk " << chunk_id << ". Compressed size: " << compressed_size / 1024 << " KB." << std::endl;
     return compressed_size;
 }
-
 uintmax_t process_and_compress_chunk_with_threshold(
-    const std::vector<std::string>& block, const std::string& logname, LogMode log_mode,
+    std::vector<std::string> block, const std::string& logname, LogMode log_mode,
     const std::string& base_output_dir, int chunk_id, size_t frequency_threshold,
     CompressionKernel kernel, ProcessingMode mode, bool keep_temp_files) {
-    std::cout << "Processing chunk " << chunk_id << " with threshold " << frequency_threshold << " (" << block.size() << " lines)..." << std::endl;
+    
+    std::cout << "Processing chunk " << chunk_id << " with threshold " << frequency_threshold << " (" << block.size() << " lines, in-memory)..." << std::endl;
     PatternRecognizer recognizer(logname);
     TagManager tag_manager;
 
     std::unordered_map<std::string, int> tag_counts;
+    std::vector<AnalyzedLine> analyzed_blocks;
+    analyzed_blocks.reserve(block.size());
     for (const auto& line : block) {
-        if (line.empty()) continue;
+        if (line.empty()) {
+            analyzed_blocks.emplace_back();
+            continue;
+        }
         if (log_mode == LogMode::TEXT) {
-            analyze_line_text(line, recognizer, tag_counts);
+            analyzed_blocks.push_back(analyze_line_text(line, recognizer, tag_counts));
         } else {
-            analyze_line_json(line, recognizer, tag_counts);
+            analyzed_blocks.push_back(analyze_line_json(line, recognizer, tag_counts));
         }
     }
 
@@ -1114,21 +1109,12 @@ uintmax_t process_and_compress_chunk_with_threshold(
     final_modified_lines.reserve(block.size());
     GlobalTagData final_tag_data;
 
-    for (const auto& line : block) {
-        if (line.empty()) {
+    for (const auto& analyzed_line : analyzed_blocks) {
+        if(analyzed_line.empty()) {
             final_modified_lines.push_back("");
             continue;
-        };
-        std::unordered_map<std::string, int> dummy_tag_counts;
-        AnalyzedLine analyzed_line;
-        if (log_mode == LogMode::TEXT) {
-            analyzed_line = analyze_line_text(line, recognizer, dummy_tag_counts);
-        } else {
-            analyzed_line = analyze_line_json(line, recognizer, dummy_tag_counts);
         }
-        
         std::string result_line;
-        result_line.reserve(line.length());
         for (const auto& piece : analyzed_line) {
             if (piece.type == PieceType::STATIC_TEXT) {
                 result_line.append(piece.original_token);
@@ -1172,47 +1158,70 @@ uintmax_t process_and_compress_chunk_with_threshold(
         final_modified_lines.push_back(std::move(result_line));
     }
     
-    const std::string chunk_output_dir = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id));
-    const std::string processed_tags_dir = std::filesystem::path(chunk_output_dir) / "processed_tags";
-    ensure_directory_exists(processed_tags_dir);
-    
-    store_content_with_ids(final_modified_lines, std::filesystem::path(chunk_output_dir) / (logname + "_templates.mapping.txt"), std::filesystem::path(chunk_output_dir) / (logname + "_templates.ids.bin"));
+    InMemoryTemplates templates = generate_templates_in_memory(final_modified_lines);
+    InMemoryFileCollection variable_files = process_aggregated_tags_in_memory(final_tag_data, tag_manager.get_tag_to_id_map(), mode);
+    std::string tag_mapping_content = tag_manager.get_mapping_as_string();
 
-    process_aggregated_tags(final_tag_data, tag_manager.get_tag_to_id_map(), processed_tags_dir, mode);
+    struct archive *a;
+    char *mem_buffer = nullptr;
+    size_t mem_size = 0;
+    a = archive_write_new();
     
-    tag_manager.save_mapping(std::filesystem::path(chunk_output_dir) / "tags_mapping.txt");
-
     CompressionInfo comp_info = get_compression_info(kernel);
-    std::string archive_path = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id) + comp_info.extension);
-    std::string command = "tar " + comp_info.tar_flag + " " + archive_path + " -C " + chunk_output_dir + " .";
-    int ret = std::system(command.c_str());
-
-    if (ret != 0) {
-        std::cerr << "Warning: tar command failed for chunk " << chunk_id << "." << std::endl;
-        if (!keep_temp_files) { std::filesystem::remove_all(chunk_output_dir); }
-        return 0;
+    switch (kernel) {
+        case CompressionKernel::GZIP:  archive_write_add_filter_gzip(a); break;
+        case CompressionKernel::BZIP2: archive_write_add_filter_bzip2(a); break;
+        case CompressionKernel::LZMA:  archive_write_add_filter_xz(a); break;
+        case CompressionKernel::LZ4:   archive_write_add_filter_lz4(a); break;
+        case CompressionKernel::ZSTD:  archive_write_add_filter_zstd(a); break;
+        case CompressionKernel::NONE:  break;
     }
     
-    uintmax_t compressed_size = 0;
-    try {
-        if (std::filesystem::exists(archive_path)) {
-            compressed_size = std::filesystem::file_size(archive_path);
-        }
-    } catch(const std::filesystem::filesystem_error& e) {
-        std::cerr << "Error getting file size for " << archive_path << ": " << e.what() << std::endl;
-    }
+    archive_write_set_format_pax_restricted(a);
+    // FIX: Corrected argument order
+    archive_write_open_memory(a, (void**)&mem_buffer, 4096, &mem_size);
 
-    if (!keep_temp_files) {
-        std::filesystem::remove_all(chunk_output_dir);
+    add_data_to_archive(a, logname + "_templates.mapping.txt", templates.mapping_data.data(), templates.mapping_data.size());
+    add_data_to_archive(a, logname + "_templates.ids.bin", templates.ids_data.data(), templates.ids_data.size());
+    add_data_to_archive(a, "tags_mapping.txt", tag_mapping_content.data(), tag_mapping_content.size());
+
+    for (const auto& pair : variable_files) {
+        const std::string& filename = "processed_tags/" + pair.first;
+        std::visit([&](const auto& data) {
+            using T = std::decay_t<decltype(data)>;
+            if constexpr (std::is_same_v<T, std::string>) {
+                add_data_to_archive(a, filename, data.data(), data.size());
+            } else if constexpr (std::is_same_v<T, std::vector<char>>) {
+                add_data_to_archive(a, filename, data.data(), data.size());
+            }
+        }, pair.second);
     }
+    
+    archive_write_close(a);
+    archive_write_free(a);
+
+    uintmax_t compressed_size = 0;
+    if (mem_buffer && mem_size > 0) {
+        compressed_size = mem_size;
+        std::string archive_path = std::filesystem::path(base_output_dir) / ("chunk_" + std::to_string(chunk_id) + comp_info.extension);
+        std::ofstream outfile(archive_path, std::ios::binary | std::ios::trunc);
+        if (outfile) {
+            outfile.write(mem_buffer, mem_size);
+        } else {
+            std::cerr << "Error: Failed to open output file: " << archive_path << std::endl;
+            compressed_size = 0;
+        }
+        free(mem_buffer);
+    }
+    
     std::cout << "Finished chunk " << chunk_id << ". Compressed size: " << compressed_size / 1024 << " KB." << std::endl;
     return compressed_size;
 }
 
 // ===================================================================
-// Experiment Result Logging
+// Experiment Logging & Main Function
 // ===================================================================
-// Use a static mutex to ensure thread-safe file writing, even across multiple program instances launched by a script.
+
 static std::mutex result_file_mutex;
 
 void log_experiment_result(
@@ -1227,7 +1236,7 @@ void log_experiment_result(
     double original_size_mb,
     double final_size_mb,
     double ratio,
-    double compression_speed_mbps) // New parameter
+    double compression_speed_mbps)
 {
     std::lock_guard<std::mutex> lock(result_file_mutex);
 
@@ -1240,7 +1249,6 @@ void log_experiment_result(
         return;
     }
 
-    // If the file is newly created (or empty), write the header
     if (!file_exists || result_file.tellp() == 0) {
         result_file << "Timestamp,"
                     << "LogName,"
@@ -1254,14 +1262,12 @@ void log_experiment_result(
                     << "OriginalSize_MB,"
                     << "FinalSize_MB,"
                     << "Ratio,"
-                    << "CompressionSpeed_MBps\n"; // New header
+                    << "CompressionSpeed_MBps\n";
     }
 
-    // Get the current timestamp
     auto now = std::chrono::system_clock::now();
     auto in_time_t = std::chrono::system_clock::to_time_t(now);
     std::stringstream ss;
-    // std::localtime is not thread-safe in a multi-threaded environment, but it's safe here because the entire function is protected by a mutex.
     ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X");
 
     result_file << ss.str() << ","
@@ -1275,16 +1281,12 @@ void log_experiment_result(
                 << execution_time_ms << ","
                 << std::fixed << std::setprecision(4) << original_size_mb << ","
                 << std::fixed << std::setprecision(4) << final_size_mb << ","
-                << std::fixed << std::setprecision(3) << ratio << "," // Keep three decimal places for Ratio
-                << std::fixed << std::setprecision(2) << compression_speed_mbps << "\n"; // New speed, keep two decimal places
+                << std::fixed << std::setprecision(3) << ratio << ","
+                << std::fixed << std::setprecision(2) << compression_speed_mbps << "\n";
     
     std::cout << "Experiment results have been logged to " << result_filename << std::endl;
 }
 
-
-// ===================================================================
-// Main Function
-// ===================================================================
 int main(int argc, char* argv[]) {
     if (argc < 8) {
         std::cerr << "Usage: " << argv[0] << " <logname> <log_mode> <block_size> <num_threads> <frequency_threshold> <compression_kernel> <processing_mode> [--keep-temp-files]" << std::endl;
@@ -1323,14 +1325,14 @@ int main(int argc, char* argv[]) {
     ensure_directory_exists(base_output_dir);
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    uintmax_t total_compressed_size = 0;
+    
+    BS::thread_pool pool(num_threads);
+    std::vector<std::future<uintmax_t>> futures;
     
     std::ifstream log_file(log_path);
     if (!log_file.is_open()) { std::cerr << "Error: Failed to open log file: " << log_path_str << std::endl; return 1; }
     
-    std::vector<std::future<uintmax_t>> futures;
     int chunk_id = 0;
-
     while (log_file) {
         std::vector<std::string> block;
         block.reserve(BLOCK_SIZE);
@@ -1341,29 +1343,47 @@ int main(int argc, char* argv[]) {
 
         if (!block.empty()) {
             if (frequency_threshold > 0) {
-                futures.push_back(std::async(std::launch::async, process_and_compress_chunk_with_threshold, std::move(block), logname, log_mode, base_output_dir, chunk_id++, frequency_threshold, kernel, processing_mode, keep_temp_files));
+                // *** FIX: Wrapped the function call in a lambda ***
+                futures.push_back(
+                    pool.submit_task([
+                        // Capture necessary variables
+                        b = std::move(block), 
+                        id = chunk_id++, 
+                        logname, log_mode, base_output_dir, frequency_threshold, kernel, processing_mode, keep_temp_files
+                    ] {
+                        // The body of the lambda calls our original function
+                        return process_and_compress_chunk_with_threshold(b, logname, log_mode, base_output_dir, id, frequency_threshold, kernel, processing_mode, keep_temp_files);
+                    })
+                );
             } else {
-                futures.push_back(std::async(std::launch::async, process_and_compress_chunk, std::move(block), logname, log_mode, base_output_dir, chunk_id++, kernel, processing_mode, keep_temp_files));
+                // *** FIX: Wrapped the function call in a lambda ***
+                futures.push_back(
+                    pool.submit_task([
+                        // Capture necessary variables
+                        b = std::move(block), 
+                        id = chunk_id++, 
+                        logname, log_mode, base_output_dir, kernel, processing_mode, keep_temp_files
+                    ] {
+                        // The body of the lambda calls our original function
+                        return process_and_compress_chunk(b, logname, log_mode, base_output_dir, id, kernel, processing_mode, keep_temp_files);
+                    })
+                );
             }
-        }
-        
-        if (futures.size() >= static_cast<size_t>(num_threads)) {
-            for (auto& fut : futures) {
-                total_compressed_size += fut.get();
-            }
-            futures.clear();
         }
     }
     log_file.close();
 
+    uintmax_t total_compressed_size = 0;
     for (auto& fut : futures) {
         total_compressed_size += fut.get();
     }
+    
     std::cout << "All chunks processed." << std::endl;
 
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
+    // ... (后面的报告和日志记录代码完全不变) ...
     std::cout << "\n--- Execution Summary ---" << std::endl;
     try {
         uintmax_t original_size = std::filesystem::file_size(log_path);
@@ -1372,7 +1392,6 @@ int main(int argc, char* argv[]) {
         double ratio = 0.0;
         double compression_speed_mbps = 0.0;
 
-        // Calculate compression speed
         double execution_time_s = duration.count() / 1000.0;
         if (execution_time_s > 0) {
             compression_speed_mbps = original_size_mb / execution_time_s;
@@ -1384,13 +1403,12 @@ int main(int argc, char* argv[]) {
                       << "Original log size: " << std::fixed << std::setprecision(2) << original_size_mb << " MB\n"
                       << "Total final size: " << std::fixed << std::setprecision(2) << final_size_mb << " MB\n"
                       << "Effective Ratio: " << std::fixed << std::setprecision(2) << ratio << ":1\n"
-                      << "Compression Speed: " << std::fixed << std::setprecision(2) << compression_speed_mbps << " MB/s\n"; // Display speed
+                      << "Compression Speed: " << std::fixed << std::setprecision(2) << compression_speed_mbps << " MB/s\n";
         } else {
             std::cerr << "Compression failed or produced zero-sized output.\n";
             std::cout << "Total execution time: " << duration.count() << " ms\n";
         }
         
-        // Call the function to log experiment results and pass the speed
         log_experiment_result(
             logname,
             log_mode_str,
@@ -1403,12 +1421,11 @@ int main(int argc, char* argv[]) {
             original_size_mb,
             final_size_mb,
             ratio,
-            compression_speed_mbps // Pass the newly calculated speed
+            compression_speed_mbps
         );
 
     } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error getting file sizes for final report: " << e.what() << std::endl;
-        // Even if there's an error getting the file size, log the available information
         log_experiment_result(
             logname,
             log_mode_str,
@@ -1418,10 +1435,10 @@ int main(int argc, char* argv[]) {
             frequency_threshold,
             kernel_str,
             duration.count(),
-            -1.0, // Use -1 to indicate a failure to get the value
+            -1.0, 
             -1.0,
-            -1.0, // Use -1 to indicate a failure to get the value
-            -1.0  // Use -1 to indicate a failure to get the value
+            -1.0, 
+            -1.0  
         );
     }
     
