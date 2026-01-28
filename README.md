@@ -78,7 +78,7 @@ This traditional approach requires you to manually install dependencies and comp
 Compile the DeLog compressor and decompressor.
 ```bash
 # Compile Compressor
-g++ -std=c++17 -O3 -o Delog_compress compressor.cpp -lpcre2-8 -lstdc++fs -pthread
+g++ -std=c++17 -O3 -o Delog_compress compressor.cpp -lpcre2-8 -lstdc++fs -pthread -larchive
 
 # Compile Decompressor
 g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
@@ -251,7 +251,7 @@ This setting simplifies all variable tokens to a generic `<*>` tag.
     ```
 2.  **Recompile and Run:**
     ```bash
-    g++ -std=c++17 -O3 -o Delog_compress compressor.cpp -lpcre2-8 -lstdc++fs -pthread
+    g++ -std=c++17 -O3 -o Delog_compress compressor.cpp -lpcre2-8 -lstdc++fs -pthread -larchive
     python3 DeLog_benchmark.py
     ```
 
