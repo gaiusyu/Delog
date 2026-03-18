@@ -37,7 +37,7 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
 
 ## 1. Artifact Overview
 
-This artifact accompanies the paper "DeLog: An Efficient Log Compression Framework with Pattern-based Grouping". It enables the reproduction of the following key results:
+This artifact accompanies the paper "DeLog: Efficient and Compact Log Compression with Semantic Signature Synthesis". It enables the reproduction of the following key results:
 
 *   **RQ3 & RQ4:** The performance of DeLog on all public benchmark datasets (Loghub and Loghub 2.0).
 *   **RQ3 & RQ4:** The performance of baseline methods (LogReducer, Denum, LogShrink) on the same public benchmarks.
