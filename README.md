@@ -1,9 +1,12 @@
-# DeLog
+# DeLog: Efficient and Compact Log Compression with Semantic Signature Synthesis
+### Artifact for USENIX FAST '27 Spring Cycle Submission
 
-https://arxiv.org/abs/2601.15084
+> **A Note on Artifact Viewing:** We have observed that the anonymous artifact hosting platform, `https://anonymous.4open.science/`, has certain limitations in rendering this `README.md` file. Specifically, you may find that:
+> *   The internal links in the Table of Contents are not clickable.
+> *   The code blocks lack a convenient one-click "copy" button, requiring manual selection.
 
-This work uses the Loghub 1.0 and Loghub 2.0 datasets. We obtained consent from the dataset authors ([@pinjia he](mailto:hepinjia@cuhk.edu.cn) and [@zhihan jiang](mailto:zhjiang22@cse.cuhk.edu.hk)) and strictly comply with their non-commercial licenses. This work is for research purposes only and has not been used in any ByteDance product or commercial deployment.
-
+> We sincerely apologize for any inconvenience this may cause during your evaluation. The full, interactive experience will be available on the public GitHub repository once the anonymous review process is complete.
+We sincerely thank the Artifact Evaluation Committee for dedicating their time and expertise to reviewing our work. This artifact provides all the necessary components, data, and instructions to reproduce the key findings presented in our paper. We have strived to make the evaluation process as clear and straightforward as possible and welcome any feedback for improvement.
 ---
 
 ### Table of Contents
