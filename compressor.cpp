@@ -980,7 +980,7 @@ static void add_data_to_archive(archive* a, const std::string& path_in_archive, 
 uintmax_t process_and_compress_chunk(
     std::vector<std::string> block, const std::string& logname, LogMode log_mode,
     const std::string& base_output_dir, int chunk_id, CompressionKernel kernel,
-    ProcessingMode mode, bool keep_temp_files) {
+    ProcessingMode mode, bool keep_temp_files, bool omit_final_newline) {
     
     std::cout << "Processing chunk " << chunk_id << " with " << block.size() << " lines (in-memory via /dev/shm)..." << std::endl;
     
@@ -1035,6 +1035,8 @@ uintmax_t process_and_compress_chunk(
     add_data_to_archive(a, logname + "_templates.mapping.txt", templates.mapping_data.data(), templates.mapping_data.size());
     add_data_to_archive(a, logname + "_templates.ids.bin", templates.ids_data.data(), templates.ids_data.size());
     add_data_to_archive(a, "tags_mapping.txt", tag_mapping_content.data(), tag_mapping_content.size());
+    std::string chunk_meta = std::string("omit_final_newline=") + (omit_final_newline ? "1\n" : "0\n");
+    add_data_to_archive(a, "chunk_meta.txt", chunk_meta.data(), chunk_meta.size());
     for (const auto& pair : variable_files) {
         const std::string& filename = "processed_tags/" + pair.first;
         std::visit([&](const auto& data) {
@@ -1076,7 +1078,7 @@ uintmax_t process_and_compress_chunk(
 uintmax_t process_and_compress_chunk_with_threshold(
     std::vector<std::string> block, const std::string& logname, LogMode log_mode,
     const std::string& base_output_dir, int chunk_id, size_t frequency_threshold,
-    CompressionKernel kernel, ProcessingMode mode, bool keep_temp_files) {
+    CompressionKernel kernel, ProcessingMode mode, bool keep_temp_files, bool omit_final_newline) {
     
     std::cout << "Processing chunk " << chunk_id << " with threshold " << frequency_threshold << " (" << block.size() << " lines, in-memory)..." << std::endl;
     PatternRecognizer recognizer(logname);
@@ -1184,6 +1186,8 @@ uintmax_t process_and_compress_chunk_with_threshold(
     add_data_to_archive(a, logname + "_templates.mapping.txt", templates.mapping_data.data(), templates.mapping_data.size());
     add_data_to_archive(a, logname + "_templates.ids.bin", templates.ids_data.data(), templates.ids_data.size());
     add_data_to_archive(a, "tags_mapping.txt", tag_mapping_content.data(), tag_mapping_content.size());
+    std::string chunk_meta = std::string("omit_final_newline=") + (omit_final_newline ? "1\n" : "0\n");
+    add_data_to_archive(a, "chunk_meta.txt", chunk_meta.data(), chunk_meta.size());
 
     for (const auto& pair : variable_files) {
         const std::string& filename = "processed_tags/" + pair.first;
@@ -1324,6 +1328,20 @@ int main(int argc, char* argv[]) {
     if (std::filesystem::exists(base_output_dir)) std::filesystem::remove_all(base_output_dir);
     ensure_directory_exists(base_output_dir);
 
+    bool input_has_trailing_newline = true;
+    try {
+        uintmax_t input_size = std::filesystem::file_size(log_path);
+        if (input_size > 0) {
+            std::ifstream tail_file(log_path, std::ios::binary);
+            tail_file.seekg(-1, std::ios::end);
+            char last_char = '\0';
+            tail_file.get(last_char);
+            input_has_trailing_newline = (last_char == '\n');
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Warning: could not inspect trailing newline state: " << e.what() << std::endl;
+    }
+
     auto start_time = std::chrono::high_resolution_clock::now();
     
     BS::thread_pool pool(num_threads);
@@ -1342,6 +1360,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (!block.empty()) {
+            bool omit_final_newline = (!input_has_trailing_newline && log_file.eof());
             if (frequency_threshold > 0) {
                 // *** FIX: Wrapped the function call in a lambda ***
                 futures.push_back(
@@ -1349,10 +1368,10 @@ int main(int argc, char* argv[]) {
                         // Capture necessary variables
                         b = std::move(block), 
                         id = chunk_id++, 
-                        logname, log_mode, base_output_dir, frequency_threshold, kernel, processing_mode, keep_temp_files
+                        logname, log_mode, base_output_dir, frequency_threshold, kernel, processing_mode, keep_temp_files, omit_final_newline
                     ] {
                         // The body of the lambda calls our original function
-                        return process_and_compress_chunk_with_threshold(b, logname, log_mode, base_output_dir, id, frequency_threshold, kernel, processing_mode, keep_temp_files);
+                        return process_and_compress_chunk_with_threshold(b, logname, log_mode, base_output_dir, id, frequency_threshold, kernel, processing_mode, keep_temp_files, omit_final_newline);
                     })
                 );
             } else {
@@ -1362,10 +1381,10 @@ int main(int argc, char* argv[]) {
                         // Capture necessary variables
                         b = std::move(block), 
                         id = chunk_id++, 
-                        logname, log_mode, base_output_dir, kernel, processing_mode, keep_temp_files
+                        logname, log_mode, base_output_dir, kernel, processing_mode, keep_temp_files, omit_final_newline
                     ] {
                         // The body of the lambda calls our original function
-                        return process_and_compress_chunk(b, logname, log_mode, base_output_dir, id, kernel, processing_mode, keep_temp_files);
+                        return process_and_compress_chunk(b, logname, log_mode, base_output_dir, id, kernel, processing_mode, keep_temp_files, omit_final_newline);
                     })
                 );
             }

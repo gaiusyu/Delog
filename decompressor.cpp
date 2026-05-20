@@ -354,6 +354,7 @@ private:
     std::unordered_map<std::string, std::unique_ptr<VariableDataProvider>> data_providers_; // Maps compact ID -> pointer to its data provider.
     std::vector<std::vector<ParsedTemplatePiece>> preparsed_templates_; // All templates, pre-parsed for fast reconstruction.
     bool is_fast_mode_ = false; // Flag indicating if the "fast mode" optimization path is used.
+    bool omit_final_newline_ = false; // Preserve files whose final line has no trailing newline.
 
     // Decomposes all template strings into static text and variable placeholders.
     void preparse_all_templates(const std::vector<std::string>& raw_templates);
@@ -391,6 +392,17 @@ Decompressor::Decompressor(const std::filesystem::path& archive_path, const std:
         extract_archive(archive_path, temp_dir_path_);
     } catch (const std::exception& e) {
         throw std::runtime_error("Failed to extract archive (" + archive_path.string() + "): " + e.what());
+    }
+
+    std::ifstream chunk_meta_file(temp_dir_path_ / "chunk_meta.txt");
+    if (chunk_meta_file) {
+        std::string meta_line;
+        while (std::getline(chunk_meta_file, meta_line)) {
+            if (meta_line == "omit_final_newline=1") {
+                omit_final_newline_ = true;
+                break;
+            }
+        }
     }
 
     // 2. Parse tags_mapping.txt to build the map from compact ID to full tag.
@@ -618,28 +630,40 @@ void Decompressor::preparse_all_templates(const std::vector<std::string>& raw_te
              continue;
         }
         std::string_view template_sv = raw_templates[i];
-        size_t last_pos = 0;
-        size_t start_tag;
-        while ((start_tag = template_sv.find('<', last_pos)) != std::string::npos) {
-            // Add static text before the tag.
-            if (start_tag > last_pos) {
-                preparsed_templates_[i].push_back({false, std::string(template_sv.substr(last_pos, start_tag - last_pos))});
-            }
-            size_t end_tag = template_sv.find('>', start_tag);
-            // Handle unterminated tags.
-            if (end_tag == std::string::npos) {
-                preparsed_templates_[i].push_back({false, std::string(template_sv.substr(start_tag))});
-                last_pos = template_sv.length();
+        size_t cursor = 0;
+        while (cursor < template_sv.length()) {
+            size_t start_tag = template_sv.find('<', cursor);
+            if (start_tag == std::string::npos) {
+                preparsed_templates_[i].push_back({false, std::string(template_sv.substr(cursor))});
                 break;
             }
-            // Add variable placeholder.
-            std::string compact_id(template_sv.substr(start_tag + 1, end_tag - start_tag - 1));
-            preparsed_templates_[i].push_back({true, std::move(compact_id)});
-            last_pos = end_tag + 1;
-        }
-        // Add any remaining static text after the last tag.
-        if (last_pos < template_sv.length()) {
-            preparsed_templates_[i].push_back({false, std::string(template_sv.substr(last_pos))});
+
+            bool matched_placeholder = false;
+            size_t probe = start_tag;
+            while (probe != std::string::npos) {
+                size_t end_tag = template_sv.find('>', probe + 1);
+                if (end_tag == std::string::npos) break;
+
+                std::string compact_id(template_sv.substr(probe + 1, end_tag - probe - 1));
+                if (id_to_full_tag_.find(compact_id) != id_to_full_tag_.end()) {
+                    if (probe > cursor) {
+                        preparsed_templates_[i].push_back({false, std::string(template_sv.substr(cursor, probe - cursor))});
+                    }
+                    preparsed_templates_[i].push_back({true, std::move(compact_id)});
+                    cursor = end_tag + 1;
+                    matched_placeholder = true;
+                    break;
+                }
+
+                size_t nested = template_sv.find('<', probe + 1);
+                if (nested == std::string::npos || nested > end_tag) break;
+                probe = nested;
+            }
+
+            if (!matched_placeholder) {
+                preparsed_templates_[i].push_back({false, std::string(template_sv.substr(cursor, start_tag - cursor + 1))});
+                cursor = start_tag + 1;
+            }
         }
     }
 }
@@ -650,10 +674,12 @@ void Decompressor::preparse_all_templates(const std::vector<std::string>& raw_te
 
 void Decompressor::decompress_to_stream(std::ostream& out) {
     // Iterate through the sequence of template IDs to reconstruct each log line.
-    for (int template_id : template_id_sequence_) {
+    for (size_t seq_idx = 0; seq_idx < template_id_sequence_.size(); ++seq_idx) {
+        int template_id = template_id_sequence_[seq_idx];
+        bool suppress_newline = omit_final_newline_ && (seq_idx + 1 == template_id_sequence_.size());
         if (template_id == 0) {
             // template_id 0 is reserved for empty lines, a convention from the compression process.
-            out << "\n";
+            if (!suppress_newline) out << "\n";
             continue;
         }
         if (template_id < 0 || (size_t)template_id >= preparsed_templates_.size()) {
@@ -705,7 +731,8 @@ void Decompressor::decompress_to_stream(std::ostream& out) {
                 result_line.append(piece.data);
             }
         }
-        out << result_line << "\n";
+        out << result_line;
+        if (!suppress_newline) out << "\n";
     }
 }
 
@@ -790,6 +817,17 @@ void Decompressor::initialize_special_handlers() {
             } else {
                 return "[Windows timestamp format error (length should be 14): " + stored_value + "]";
             }
+        }
+        else if (logname_ == "Thunderbird") {
+            std::string padded_value = stored_value;
+            while (padded_value.length() < 8) {
+                padded_value.insert(0, 1, '0');
+            }
+            if (padded_value.length() == 8) {
+                return padded_value.substr(0, 4) + "." + padded_value.substr(4, 2) + "." +
+                       padded_value.substr(6, 2);
+            }
+            return "[Thunderbird timestamp format error (length should be 8): " + stored_value + "]";
         }
         else if (logname_ == "Zookeeper") {
             if (stored_value.length() == 17) {

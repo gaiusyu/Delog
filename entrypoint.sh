@@ -116,13 +116,16 @@ echo "----------------------------------------------------------"
 echo "Compression finished."
 
 INTERNAL_OUTPUT_DIR="/app/output/${LOG_NAME}"
+HOST_OUTPUT_DIR="/output/output_${LOG_NAME}"
 
 # 
 echo "Moving final archive(s) to the /output volume..."
+mkdir -p "${HOST_OUTPUT_DIR}"
+find "${HOST_OUTPUT_DIR}" -maxdepth 1 -name "chunk_*.tar*" -delete
 # 
-find "${INTERNAL_OUTPUT_DIR}" -name "chunk_*.tar*" -exec mv {} /output/ \;
+find "${INTERNAL_OUTPUT_DIR}" -name "chunk_*.tar*" -exec mv {} "${HOST_OUTPUT_DIR}/" \;
 
-echo "Done. The compressed file(s) are now in your host output directory."
+echo "Done. The compressed file(s) are now in your host output directory: output_${LOG_NAME}/"
 echo "=========================================================="
 
 # 
