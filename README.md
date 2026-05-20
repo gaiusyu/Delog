@@ -16,6 +16,7 @@ We sincerely thank the Artifact Evaluation Committee for dedicating their time a
     *   [2.2. Setup Options](#22-setup-options)
         *   [Option A: Manual Setup (for deep-dive and ablation studies)](#option-a-manual-setup-for-deep-dive-and-ablation-studies)
         *   [Option B: Using Docker (Recommended for quick evaluation)](#option-b-using-docker-recommended-for-quick-evaluation)
+    *   [2.3. SHA-256 Round-Trip Verification](#23-sha-256-round-trip-verification)
 3.  [Reproducing Key Evaluation Results](#3-reproducing-key-evaluation-results)
     *   [3.1. Main Evaluation: DeLog Performance (RQ3)](#31-main-evaluation-delog-performance-rq3)
     *   [3.2. Baseline Comparisons (RQ3)](#32-baseline-comparisons-rq3)
@@ -130,7 +131,7 @@ Apache.log Apache --kernel lzma --threads 4
 docker run --rm `
 -v "$(pwd)/my_logs:/data" `
 -v "$(pwd)/compressed_archives:/output" `
-Apache/delog-compressor `
+anonymous4d3a/delog-compressor `
 Apache.log Apache --kernel lzma --threads 4
 ```
 After this step, a new directory (e.g., `output_Apache`) containing compressed chunk files will appear inside your `compressed_archives` folder.
@@ -165,6 +166,28 @@ output_Apache decompressed_Apache.log 8
 After this command finishes, the fully reconstructed log file `decompressed_Apache.log` will appear in your `decompressed_logs` folder. You can verify that it is identical to the original `my_logs/Apache.log`.
 
 > **Note:** The automated benchmark scripts (`DeLog_benchmark.py`, etc.) and ablation studies are designed to be run in a manual setup environment (Option A), as they involve file system interactions and code modifications not easily managed within the streamlined Docker workflow.
+
+### 2.3. SHA-256 Round-Trip Verification
+
+DeLog reconstructs the original log byte-for-byte. After any compression and decompression run, verify the round trip by comparing SHA-256 checksums of the original log and the restored log.
+
+For the manual setup:
+
+```bash
+./Delog_compress Apache text 100000 4 0 lzma normal
+./decompress output/Apache restored_Apache.log 4
+sha256sum Logs/Apache/Apache.log restored_Apache.log
+```
+
+For the Docker setup:
+
+```bash
+sha256sum my_logs/Apache.log decompressed_logs/decompressed_Apache.log
+```
+
+The two hashes should be identical. On macOS, use `shasum -a 256` if `sha256sum` is unavailable.
+
+We used this same full-file verification workflow for all 16 public benchmark datasets.
 
 
 ## 3. Reproducing Key Evaluation Results
