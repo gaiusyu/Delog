@@ -33,6 +33,18 @@ This work uses the Loghub 1.0 and Loghub 2.0 datasets. We obtained consent from 
     *   [6.4. How to Reproduce these New Results](#64-how-to-reproduce-these-new-results)
 ---
 
+## Release Notes (October 2026)
+
+This version is the implementation used for the revised TSC manuscript. Compared with earlier versions of this repository:
+
+- **Lossless typed tokens.** Complex numeric tokens (e.g., `1.4.1`, `0.2477`) record the width of every digit run in their signature (e.g., `\d{1}\.\d{1}\.\d{1}`), and timestamp/IP-like tokens matched by the predefined patterns are normalized field by field: fixed-width fields are stored as is, and variable-width fields without leading zeros are zero-padded to a fixed width (`\c{W}`) and un-padded on restore. For each such stream, DeLog chooses delta/elastic or dictionary encoding by estimated encoded size. Earlier prebuilt binaries in this repository did not preserve these formats exactly.
+- **Delta-encoding heuristic.** The length-diversity check that disables delta encoding applies only to predefined numeric fields and inspects the first 100 values, as intended.
+- **Bounded memory.** At most `2 x threads` chunks are in flight, so peak memory depends on the number of threads and the chunk size rather than on the input size.
+- **Prebuilt binaries.** `Delog_compress` and `decompress` were rebuilt from this source (GCC 10.2.1, Debian 11, x86-64). All results in the revised paper were produced with these binaries, and every public dataset passes the SHA-256 round-trip check (Section 2.3).
+- **Reproducibility scripts.** `revision_experiments/` contains the scripts used for the main table, the chunk-size study, memory, and the decompression time breakdown. `Correlation_analysis/spearman_revision.py` recomputes the parser-accuracy correlations directly from the published table.
+
+---
+
 ## 1. Artifact Overview
 
 This artifact accompanies the paper "DeLog: An Efficient Log Compression Framework with Pattern-based Grouping". It enables the reproduction of the following key results:
@@ -89,21 +101,16 @@ g++ -std=c++17 -O2 -o decompress decompressor.cpp -lstdc++fs -pthread -larchive
 
 #### Option B: Using Docker (Recommended for quick evaluation)
 
-This method uses pre-configured Docker images that contain all dependencies and executables. It is the fastest way to run and verify our complete compression/decompression workflow.
+This method uses pre-configured Docker images that contain all dependencies and executables. It is the fastest way to run and verify our complete compression/decompression workflow. The images are built locally from this repository.
 
 **1. Prerequisites:**
 - [Docker](https://www.docker.com/products/docker-desktop/) must be installed and running on your system.
 
-**2. Pull the Docker Images:**
-Open your terminal and pull the pre-built images for both the compressor and decompressor from Docker Hub.
+**2. Build the Docker Images:**
+Build the compressor and decompressor images from the Dockerfiles in this repository, so that the images contain exactly this version of the source code.
 ```sh
-# 
-
-# Pull the compressor image
-docker pull anonymous4d3a/delog-compressor:latest
-
-# Pull the decompressor image
-docker pull anonymous4d3a/delog-decompressor:latest
+docker build -t delog-compressor -f Dockerfile .
+docker build -t delog-decompressor -f Dockerfile_decompress .
 ```
 
 **3. Prepare Datasets:**
@@ -121,20 +128,20 @@ Navigate to the directory containing the three folders, then execute the command
 docker run --rm \
 -v "$(pwd)/my_logs:/data" \
 -v "$(pwd)/compressed_archives:/output" \
-anonymous4d3a/delog-compressor \
+delog-compressor \
 Apache.log Apache --kernel lzma --threads 4
 
 # On Windows PowerShell:
 docker run --rm `
 -v "$(pwd)/my_logs:/data" `
 -v "$(pwd)/compressed_archives:/output" `
-anonymous4d3a/delog-compressor `
+delog-compressor `
 Apache.log Apache --kernel lzma --threads 4
 ```
 After this step, a new directory (e.g., `output_Apache`) containing compressed chunk files will appear inside your `compressed_archives` folder.
 
 **5. Docker Compressor Command-Line Options:**
-- **Usage:** `docker run ... anonymous4d3a/delog-compressor [OPTIONS] <input_file> <log_name>`
+- **Usage:** `docker run ... delog-compressor [OPTIONS] <input_file> <log_name>`
 - **Arguments:**
     - `<input_file>`: The name of the log file inside your `my_logs` folder.
     - `<log_name>`: A logical name for the log type (e.g., `HDFS`, `Apache`). This option enables predefined regular expressions for known benchmark log types to accurately extract timestamps and other common patterns. If you are compressing logs from outside the benchmarks, you can provide any arbitrary string for this parameter. DeLog will still achieve effective performance. Please note that for the compression of all ByteDance logs, we did not use any predefined regular expressions.
@@ -150,14 +157,14 @@ Now, use the decompressor image to restore the original log file.
 docker run --rm \
 -v "$(pwd)/compressed_archives:/input" \
 -v "$(pwd)/decompressed_logs:/output" \
-anonymous4d3a/delog-decompressor \
+delog-decompressor \
 output_Apache decompressed_Apache.log 8
 
 # On Windows PowerShell:
 docker run --rm `
 -v "$(pwd)/compressed_archives:/input" `
 -v "$(pwd)/decompressed_logs:/output" `
-anonymous4d3a/delog-decompressor `
+delog-decompressor `
 output_Apache decompressed_Apache.log 8
 ```
 After this command finishes, the fully reconstructed log file `decompressed_Apache.log` will appear in your `decompressed_logs` folder. You can verify that it is identical to the original `my_logs/Apache.log`.

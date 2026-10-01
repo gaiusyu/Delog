@@ -1027,13 +1027,13 @@ std::string Decompressor::reconstruct_token_from_value(const std::string& full_t
 
     // Handle STR=...
     auto it_str = tag_parts.find("STR");
-    if (it_str != tag_parts.end() && it_str->second.find("\\d") != std::string::npos) {
+    if (it_str != tag_parts.end() && (it_str->second.find("\\d") != std::string::npos || it_str->second.find("\\c{") != std::string::npos)) {
         std::string_view structure = it_str->second;
         std::string padded_stored_value = stored_value;
         
         size_t required_digits = 0;
         for (size_t i = 0; i < structure.length(); ++i) {
-            if (structure[i] == '\\' && i + 1 < structure.length() && structure[i+1] == 'd') {
+            if (structure[i] == '\\' && i + 1 < structure.length() && (structure[i+1] == 'd' || structure[i+1] == 'c')) {
                 if (i + 2 < structure.length() && structure[i+2] == '{') {
                     size_t end_brace = structure.find('}', i + 3);
                     if (end_brace != std::string::npos) {
@@ -1056,7 +1056,22 @@ std::string Decompressor::reconstruct_token_from_value(const std::string& full_t
         for (size_t i = 0; i < structure.length(); ++i) {
             if (structure[i] == '\\' && i + 1 < structure.length()) {
                 i++;
-                if (structure[i] == 'd') {
+                if (structure[i] == 'c' && i + 1 < structure.length() && structure[i+1] == '{') {
+                    // \c{W}: a canonical (no leading zeros) field stored zero-padded to W digits.
+                    size_t end_brace = structure.find('}', i + 2);
+                    int len_to_read = 0;
+                    if (end_brace != std::string::npos) {
+                        try { len_to_read = std::stoi(std::string(structure.substr(i + 2, end_brace - (i + 2)))); } catch(...) { len_to_read = 0; }
+                    }
+                    if (len_to_read <= 0 || value_idx + static_cast<size_t>(len_to_read) > padded_stored_value.length()) {
+                        return "[Data mismatch error: not enough digits to fill " + std::string(structure) + " in " + full_tag + "]";
+                    }
+                    size_t first = value_idx, last = value_idx + len_to_read - 1;
+                    while (first < last && padded_stored_value[first] == '0') first++;
+                    result_token.append(padded_stored_value, first, last - first + 1);
+                    value_idx += len_to_read;
+                    i = end_brace;
+                } else if (structure[i] == 'd') {
                     int len_to_read = 0;
                     size_t end_brace = std::string::npos;
                     if (i + 1 < structure.length() && structure[i+1] == '{') {

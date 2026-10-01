@@ -2,6 +2,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <deque>
 #include <fstream>
 #include <filesystem>
 #include <unordered_map>
@@ -84,10 +85,105 @@ using GlobalTagData = std::unordered_map<std::string, std::vector<std::string>>;
 // ===================================================================
 
 // FIX: Removed duplicate/placeholder definition
+void append_escaped(std::string& tag, char c);
+
 class PatternRecognizer {
 public:
     std::vector<pcre2_code*> compiled_patterns;
     std::vector<std::string> substitutions;
+    // Per-chunk, per-pattern field plan for typed tokens (letter-free matches only).
+    // Each digit run k is either fixed-width (field_width[k] = w > 0: every sampled value has w digits)
+    // or canonical (field_width[k] = -W: no leading zeros, stored zero-padded to W digits and
+    // un-padded on restore). Tokens that do not fit the plan fall back to their exact shape.
+    std::vector<bool> width_aware;
+    std::vector<std::vector<int>> field_width;
+
+    static void digit_runs(std::string_view s, std::vector<std::string_view>& runs) {
+        runs.clear();
+        size_t i = 0;
+        while (i < s.size()) {
+            if (std::isdigit(static_cast<unsigned char>(s[i]))) {
+                size_t j = i;
+                while (j < s.size() && std::isdigit(static_cast<unsigned char>(s[j]))) j++;
+                runs.push_back(s.substr(i, j - i));
+                i = j;
+            } else {
+                i++;
+            }
+        }
+    }
+
+    void decide_width_aware(const std::vector<std::string>& block, size_t sample_lines = 2000) {
+        width_aware.assign(compiled_patterns.size(), false);
+        field_width.assign(compiled_patterns.size(), {});
+        std::vector<std::string_view> runs;
+        for (size_t i = 0; i < compiled_patterns.size(); ++i) {
+            pcre2_match_data* md = pcre2_match_data_create_from_pattern(compiled_patterns[i], nullptr);
+            std::vector<std::set<size_t>> widths;
+            std::vector<bool> has_leading_zero;
+            bool ok = true;
+            size_t total = 0;
+            for (size_t n = 0; ok && n < block.size() && n < sample_lines; ++n) {
+                const std::string& line = block[n];
+                PCRE2_SIZE pos = 0;
+                while (ok && pos <= line.size() && pcre2_match(compiled_patterns[i], (PCRE2_SPTR)line.c_str(), line.size(), pos, 0, md, nullptr) > 0) {
+                    PCRE2_SIZE* ov = pcre2_get_ovector_pointer(md);
+                    std::string_view m(line.data() + ov[0], ov[1] - ov[0]);
+                    pos = (ov[1] > ov[0]) ? ov[1] : ov[1] + 1;
+                    if (std::any_of(m.begin(), m.end(), [](char c){ return std::isalpha(static_cast<unsigned char>(c)); })) { ok = false; break; }
+                    digit_runs(m, runs);
+                    if (runs.empty()) { ok = false; break; }
+                    if (total == 0) { widths.assign(runs.size(), {}); has_leading_zero.assign(runs.size(), false); }
+                    else if (runs.size() != widths.size()) { ok = false; break; }
+                    for (size_t k = 0; k < runs.size(); ++k) {
+                        widths[k].insert(runs[k].size());
+                        if (runs[k].size() > 1 && runs[k][0] == '0') has_leading_zero[k] = true;
+                    }
+                    total++;
+                }
+            }
+            pcre2_match_data_free(md);
+            if (!ok || total == 0) continue;
+            std::vector<int> plan(widths.size());
+            for (size_t k = 0; k < widths.size() && ok; ++k) {
+                if (widths[k].size() == 1) plan[k] = static_cast<int>(*widths[k].begin());
+                else if (!has_leading_zero[k]) plan[k] = -static_cast<int>(*widths[k].rbegin());
+                else ok = false;
+            }
+            if (!ok) continue;
+            width_aware[i] = true;
+            field_width[i] = std::move(plan);
+        }
+    }
+
+    // Builds the signature structure and digit value for a typed token. Returns false if the token
+    // does not fit the field plan, in which case the caller uses the exact digit-width shape.
+    static bool encode_with_plan(std::string_view m, const std::vector<int>& plan, std::string& structure, std::string& digits) {
+        structure.clear(); digits.clear();
+        size_t k = 0, i = 0;
+        while (i < m.size()) {
+            char c = m[i];
+            if (std::isalpha(static_cast<unsigned char>(c))) return false;
+            if (!std::isdigit(static_cast<unsigned char>(c))) { append_escaped(structure, c); i++; continue; }
+            size_t j = i;
+            while (j < m.size() && std::isdigit(static_cast<unsigned char>(m[j]))) j++;
+            std::string_view run = m.substr(i, j - i);
+            if (k >= plan.size()) return false;
+            int w = plan[k];
+            if (w > 0) {
+                if (run.size() != static_cast<size_t>(w)) return false;
+                structure.append("\\d{").append(std::to_string(w)).append("}");
+                digits.append(run);
+            } else {
+                size_t W = static_cast<size_t>(-w);
+                if (run.size() > W || (run.size() > 1 && run[0] == '0')) return false;
+                structure.append("\\c{").append(std::to_string(W)).append("}");
+                digits.append(W - run.size(), '0').append(run);
+            }
+            k++; i = j;
+        }
+        return k == plan.size();
+    }
 
     PatternRecognizer(const std::string& logname) {
         struct RegexPattern {
@@ -579,6 +675,26 @@ InMemoryFileCollection process_aggregated_tags_in_memory(
                 dictionary_encode_and_store();
                 continue;
             }
+            // Typed-token streams (CTX=T*): choose the cheaper of delta/elastic and dictionary encoding,
+            // estimated from encoded byte counts (e.g., random IPs favor IDs, ordered timestamps favor deltas).
+            if (tag_name.find("CTX=T") != std::string::npos &&
+                std::all_of(values.begin(), values.end(), [&](const auto& v){ return v.length() <= MAX_SAFE_LLONG_STR_LEN; })) {
+                size_t numeric_bytes = 0, dict_bytes = 0;
+                int64_t prev = 0;
+                std::unordered_map<std::string_view, int64_t> ids;
+                for (const auto& v : values) {
+                    int64_t x = std::stoll(v);
+                    numeric_bytes += elastic_encode_char(x - prev).size();
+                    prev = x;
+                    auto [it, inserted] = ids.emplace(v, static_cast<int64_t>(ids.size()));
+                    if (inserted) dict_bytes += v.size() + 1;
+                    dict_bytes += elastic_encode_char(it->second).size();
+                }
+                if (dict_bytes < numeric_bytes) {
+                    dictionary_encode_and_store();
+                    continue;
+                }
+            }
 
             bool safe_to_convert = std::all_of(values.begin(), values.end(), [&](const auto& s){ return s.length() <= MAX_SAFE_LLONG_STR_LEN; });
             
@@ -587,9 +703,13 @@ InMemoryFileCollection process_aggregated_tags_in_memory(
                 for (const auto& val : values) { numbers.push_back(std::stoll(val)); }
                 
                 bool should_transform = (tag_name.find("<I>") == std::string::npos);
-                 if (should_transform && numbers.size() > 100) {
+                // Length-diversity check applies only to predefined numeric fields (<T>/<I>/<D>)
+                // and inspects the first 100 values, as in the evaluated version.
+                bool is_predefined_numeric = (tag_name.find("<T>") != std::string::npos || tag_name.find("<I>") != std::string::npos || tag_name.find("<D>") != std::string::npos);
+                if (is_predefined_numeric && should_transform && numbers.size() > 100) {
                     std::set<size_t> lengths;
-                    for (int64_t num : numbers) { lengths.insert(std::to_string(num).length()); if (lengths.size() >= 3) break; }
+                    size_t count = 0;
+                    for (int64_t num : numbers) { lengths.insert(std::to_string(num).length()); if (++count >= 100 || lengths.size() >= 3) break; }
                     if (lengths.size() >= 3) should_transform = false;
                 }
 
@@ -637,13 +757,16 @@ void process_sub_token_single_pass(
             } else {
                 full_tag = build_structured_tag(context, generate_regex_like_tag(token), token_index, std::nullopt);
             }
+        } else if (type.has_digit && !type.has_alpha && mode == ProcessingMode::NORMAL) {
+            // Complex numeric: record digit-run widths so the digits can be refilled losslessly.
+            full_tag = build_structured_tag(context, generate_regex_like_tag(token), std::nullopt, std::nullopt);
         } else {
             std::string special_chars_str = extract_special_chars(token);
             full_tag = build_structured_tag(context, "_" + special_chars_str, std::nullopt, std::nullopt);
         }
         
         if (mode == ProcessingMode::NORMAL) {
-            if(type.is_pure_digit) {
+            if(type.is_pure_digit || (type.has_digit && !type.has_alpha)) {
                 value_to_store = extract_digits(token);
             }
         }
@@ -683,11 +806,27 @@ std::string process_line_text_single_pass(
             std::string_view match(current_line.data() + ovector[0], ovector[1] - ovector[0]);
             next_line.append(current_line, last_pos, ovector[0] - last_pos);
             
-            std::string compact_id = tag_manager.get_or_create_id(substitution_tag);
+            static const std::set<std::string> verbatim_tags = {"<X>", "<Y>", "<Z>", "<B>", "<M>", "<K>", "<G>", "<S>", "<E>", "<F>", "<A>"};
+            std::string stream_tag = substitution_tag;
+            std::string value_to_store;
+            bool width_aware = (mode == ProcessingMode::NORMAL && verbatim_tags.count(substitution_tag) > 0 &&
+                                i < recognizer.width_aware.size() && recognizer.width_aware[i] &&
+                                std::none_of(match.begin(), match.end(), [](char c){ return std::isalpha(static_cast<unsigned char>(c)); }));
+            if (width_aware) {
+                std::string type_name = substitution_tag.substr(1, substitution_tag.size() - 2);
+                std::string structure;
+                if (!PatternRecognizer::encode_with_plan(match, recognizer.field_width[i], structure, value_to_store)) {
+                    structure = generate_regex_like_tag(match);
+                    value_to_store = extract_digits(match);
+                }
+                stream_tag = build_structured_tag("T" + type_name, structure, std::nullopt, std::nullopt);
+            }
+            std::string compact_id = tag_manager.get_or_create_id(stream_tag);
             next_line.append("<").append(compact_id).append(">");
             
-            std::string value_to_store;
-            if (mode == ProcessingMode::FAST) {
+            if (width_aware) {
+                // value already set above
+            } else if (mode == ProcessingMode::FAST) {
                 value_to_store = std::string(match);
             } else {
                 if (substitution_tag == "<I>") {
@@ -709,7 +848,7 @@ std::string process_line_text_single_pass(
                     value_to_store = extract_digits(match);
                 }
             }
-            local_tag_data[substitution_tag].push_back(std::move(value_to_store));
+            local_tag_data[stream_tag].push_back(std::move(value_to_store));
             last_pos = ovector[1];
         }
         next_line.append(current_line, last_pos, std::string::npos);
@@ -986,6 +1125,7 @@ uintmax_t process_and_compress_chunk(
     
     // 步骤 1: 日志解析和数据收集 (这部分完全不变)
     PatternRecognizer recognizer(logname);
+    recognizer.decide_width_aware(block);
     TagManager tag_manager;
     std::vector<std::string> modified_lines;
     modified_lines.reserve(block.size());
@@ -1082,6 +1222,7 @@ uintmax_t process_and_compress_chunk_with_threshold(
     
     std::cout << "Processing chunk " << chunk_id << " with threshold " << frequency_threshold << " (" << block.size() << " lines, in-memory)..." << std::endl;
     PatternRecognizer recognizer(logname);
+    recognizer.decide_width_aware(block);
     TagManager tag_manager;
 
     std::unordered_map<std::string, int> tag_counts;
@@ -1345,13 +1486,21 @@ int main(int argc, char* argv[]) {
     auto start_time = std::chrono::high_resolution_clock::now();
     
     BS::thread_pool pool(num_threads);
-    std::vector<std::future<uintmax_t>> futures;
+    std::deque<std::future<uintmax_t>> futures;
+    // Bound the number of in-flight chunks so that peak memory depends on
+    // (threads x chunk size) rather than on the total input size.
+    const size_t max_in_flight = 2 * static_cast<size_t>(num_threads);
+    uintmax_t total_compressed_size = 0;
     
     std::ifstream log_file(log_path);
     if (!log_file.is_open()) { std::cerr << "Error: Failed to open log file: " << log_path_str << std::endl; return 1; }
     
     int chunk_id = 0;
     while (log_file) {
+        while (futures.size() >= max_in_flight) {
+            total_compressed_size += futures.front().get();
+            futures.pop_front();
+        }
         std::vector<std::string> block;
         block.reserve(BLOCK_SIZE);
         std::string line;
@@ -1392,7 +1541,6 @@ int main(int argc, char* argv[]) {
     }
     log_file.close();
 
-    uintmax_t total_compressed_size = 0;
     for (auto& fut : futures) {
         total_compressed_size += fut.get();
     }
