@@ -30,7 +30,7 @@ def main(table_path, out_path):
     fig, ax = plt.subplots(figsize=(6.4, 2.6))
     b1 = ax.bar(x - w / 2, pooled, w, color="white", edgecolor="black", hatch="///", label="Pooled (72 parser-dataset pairs)")
     med = np.array(median)
-    b2 = ax.bar(x + w / 2, med, w, color="white", edgecolor="black", hatch="...", label="Median within dataset (range: min-max)")
+    b2 = ax.bar(x + w / 2, med, w, color="white", edgecolor="black", hatch="...", label="Median within dataset, range min to max")
     ax.errorbar(x + w / 2, med, yerr=[med - np.array(lo), np.array(hi) - med], fmt="none", ecolor="black", capsize=3, lw=0.8)
     for rect, v in zip(b1, pooled):
         ax.text(rect.get_x() + rect.get_width() / 2, max(v, 0) + 0.02, f"{v:.3f}", ha="center", va="bottom", fontsize=7)
