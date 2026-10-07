@@ -1,20 +1,30 @@
 # Revision experiments
 
-Scripts used for the revised TSC manuscript. Both expect the layout
-`./bin/Delog_compress`, `./bin/Delog_decompress`, and `./Logs/<dataset>/<dataset>.log`
-in the directory that contains the script, and write CSV files to `./results/`.
+Scripts used for the revised TSC manuscript. All results in the revised paper were produced with
+the source and binaries in the repository root, on a Debian 11.9 container (Linux 5.4.143,
+GCC 10.2.1, 8 CPU cores, 32 GB memory), with 100K-line chunks, 4 threads, and lzma unless noted.
 
-- `run_main_table.sh <datasets...>`: DeLog (`normal`) and DeLog-L (`fast`) with 100K-line chunks,
-  4 threads, and lzma; reports CR, compression/decompression speed, peak RSS, and the SHA-256
-  round-trip result.
-- `run_chunk_memory_decompression.sh "<datasets>" "<chunk sizes>" <threads>`: chunk-size
-  sensitivity (CR and SHA-256 for each chunk size), signatures per chunk, peak RSS, and the
-  time spent only in lzma/tar extraction versus full decompression.
-
-Environment used in the paper: Debian 11.9 container, Linux 5.4.143, GCC 10.2.1, 4 threads.
-- `run_decompression_phases.sh`: builds `decompressor_timed.cpp` (the released decompressor with
-  phase timers) and reports, per dataset, the time spent reading the archive and lzma decoding,
-  loading the encoded streams, and token-by-token reconstruction, summed over threads.
-- `run_speed_same_session.sh <datasets...>`: compression and decompression throughput of DeLog,
-  DeLog-L, and Denum in one session, using the timings reported by each tool, plus the size of the
-  restored output and the SHA-256 round-trip result.
+1. Prepare a directory `$R` with
+   - `src/`: `compressor.cpp`, `decompressor.cpp`, `BS_thread_pool.hpp`, `Denum.cpp`,
+     `Denum_decompress.cpp` (from `Baselines/Denum`), and the generated variants below;
+   - `Logs/<dataset>/<dataset>.log` for the 16 Loghub datasets.
+2. Generate the variants:
+   - `python3 make_variants.py ../compressor.cpp $R/src` writes the ablation Settings 1 and 2
+     and the variable-anchor stress variant.
+   - `python3 make_timed_decompressor.py ../decompressor.cpp $R/src/decompressor_timed.cpp`
+     adds phase timers to the decompressor.
+3. Copy `run_all_revision.sh` and `run_scalability.sh` to `$R` and run
+   `./run_all_revision.sh` and then `./run_scalability.sh`. Data are copied to local disk
+   (`DELOG_WORK`, default `/tmp/delog_r2`), and CSV results are written to `$R/results/`:
+   - `r2_main_speed.csv`: CR, compression and decompression time, peak memory, restored size, and
+     SHA-256 result of DeLog, DeLog-L, and Denum, measured in one session (Table V, Tables S2-S3).
+     Denum needs a high open-file limit, which the script sets with `ulimit -n`.
+   - `r2_decomp_phases.csv`: decompression phase timing of DeLog and DeLog-L (Table S6).
+   - `r2_chunk_sensitivity.csv`: chunk sizes 10K-500K lines.
+   - `r2_recognizer_off.csv`: DeLog without the dataset-specific recognizers.
+   - `r2_ablation.csv`: ablation Settings 1 and 2 (Setting 3 is the main run).
+   - `r2_anchor_stress.csv`: variable-anchor stress test (Table S7).
+   - `r2_scalability.csv`: 1-8 threads for DeLog, Denum, and parallel lzma.
+4. Summarize and plot: `python3 summarize_r2.py $R/results`,
+   `python3 plot_ablation.py $R/results ablation.pdf`, and
+   `python3 plot_scalability_cpu.py $R/results/r2_scalability.csv scalability.pdf cpu.pdf`.

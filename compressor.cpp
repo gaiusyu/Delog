@@ -675,9 +675,9 @@ InMemoryFileCollection process_aggregated_tags_in_memory(
                 dictionary_encode_and_store();
                 continue;
             }
-            // Typed-token streams (CTX=T*): choose the cheaper of delta/elastic and dictionary encoding,
+            // Typed-token streams (CTX=T#*): choose the cheaper of delta/elastic and dictionary encoding,
             // estimated from encoded byte counts (e.g., random IPs favor IDs, ordered timestamps favor deltas).
-            if (tag_name.find("CTX=T") != std::string::npos &&
+            if (tag_name.find("CTX=T#") != std::string::npos &&
                 std::all_of(values.begin(), values.end(), [&](const auto& v){ return v.length() <= MAX_SAFE_LLONG_STR_LEN; })) {
                 size_t numeric_bytes = 0, dict_bytes = 0;
                 int64_t prev = 0;
@@ -819,7 +819,8 @@ std::string process_line_text_single_pass(
                     structure = generate_regex_like_tag(match);
                     value_to_store = extract_digits(match);
                 }
-                stream_tag = build_structured_tag("T" + type_name, structure, std::nullopt, std::nullopt);
+                // "T#" cannot collide with keyword contexts, which consist of letters only.
+                stream_tag = build_structured_tag("T#" + type_name, structure, std::nullopt, std::nullopt);
             }
             std::string compact_id = tag_manager.get_or_create_id(stream_tag);
             next_line.append("<").append(compact_id).append(">");
