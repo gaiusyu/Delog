@@ -1,7 +1,8 @@
 """Plot pooled and within-dataset Spearman correlations (GT excluded) for the TSC revision.
 
-Usage: python plot_spearman_revision.py path/to/empirical_full_tables.tex out.pdf
+Usage: python plot_spearman_revision.py [path/to/empirical_full_tables.tex] out.pdf
 """
+import os
 import sys
 
 import matplotlib
@@ -46,4 +47,7 @@ def main(table_path, out_path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    here = os.path.dirname(os.path.abspath(__file__))
+    table = sys.argv[1] if len(sys.argv) > 2 else os.path.join(here, "empirical_full_tables.tex")
+    out = sys.argv[2] if len(sys.argv) > 2 else sys.argv[1] if len(sys.argv) > 1 else "spearman_correlation_noGT.pdf"
+    main(table, out)

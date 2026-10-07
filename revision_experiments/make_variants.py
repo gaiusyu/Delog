@@ -68,6 +68,9 @@ def main(src_path, out_dir):
             std::string compact_id = tag_manager.get_or_create_id(tag);
             result_line.append("<").append(compact_id).append(">");
             local_tag_data[tag].push_back(std::string(token));
+            // Convert only the token right after the keyword: mark the context so that the
+            // next alphabetic token is not converted, while later tokens keep a related context.
+            if (!stress_after.empty() && context == stress_after) context = stress_after + "#";
         } else {
             result_line.append(token);
             context = token;

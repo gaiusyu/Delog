@@ -148,6 +148,10 @@ lane_cr_variants(){
     done
     say "ablation $ds done"
   done
+  lane_stress
+}
+lane_stress(){
+  local wd=$L/w_stress; rm -rf $wd; mkdir -p $wd
   local O3=$RES/r2_anchor_stress.csv
   echo "dataset,slot,variant,orig_bytes,archive_bytes,sig_distinct,sig_mean,lossless" > $O3
   for spec in "OpenSSH|user|AFTER" "Linux|user|AFTER" "Android|I,D|TOKENS" "Hadoop|INFO|TOKENS"; do
@@ -157,7 +161,7 @@ lane_cr_variants(){
       elif [ $kind = AFTER ]; then export DELOG_STRESS_AFTER=$slot; run_delog $L/bin/comp_stress $ds 100000 normal $wd; unset DELOG_STRESS_AFTER
       else export DELOG_STRESS_TOKENS=$slot; run_delog $L/bin/comp_stress $ds 100000 normal $wd; unset DELOG_STRESS_TOKENS; fi
       sig_stats $wd/output/$ds; check_restore $L/bin/Delog_decompress output/$ds $L/Logs/$ds/$ds.log $wd
-      echo "$ds,$slot,$variant,$(stat -L -c %s $L/Logs/$ds/$ds.log),$ARCH,$SIGU,$SIGM,$OK" >> $O3; rm -rf $wd/output
+      echo "$ds,\"$slot\",$variant,$(stat -L -c %s $L/Logs/$ds/$ds.log),$ARCH,$SIGU,$SIGM,$OK" >> $O3; rm -rf $wd/output
     done
     say "stress $ds done"
   done

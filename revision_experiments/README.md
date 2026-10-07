@@ -17,8 +17,10 @@ GCC 10.2.1, 8 CPU cores, 32 GB memory), with 100K-line chunks, 4 threads, and lz
    `./run_all_revision.sh` and then `./run_scalability.sh`. Data are copied to local disk
    (`DELOG_WORK`, default `/tmp/delog_r2`), and CSV results are written to `$R/results/`:
    - `r2_main_speed.csv`: CR, compression and decompression time, peak memory, restored size, and
-     SHA-256 result of DeLog, DeLog-L, and Denum, measured in one session (Table V, Tables S2-S3).
-     Denum needs a high open-file limit, which the script sets with `ulimit -n`.
+     byte-for-byte comparison (`cmp`) of DeLog, DeLog-L, and Denum, measured in one session. It gives
+     the DeLog and DeLog-L rows of Table V, the Denum CS row, and Tables S2-S3. The CR rows of
+     LogReducer, LogShrink, and Denum in Table V come from the original runs. Denum needs a high
+     open-file limit, which the script sets with `ulimit -n`.
    - `r2_decomp_phases.csv`: decompression phase timing of DeLog and DeLog-L (Table S6).
    - `r2_chunk_sensitivity.csv`: chunk sizes 10K-500K lines.
    - `r2_recognizer_off.csv`: DeLog without the dataset-specific recognizers.

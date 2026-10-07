@@ -7,6 +7,7 @@ within-dataset correlations over the six actual parsers.
 
 Usage: python spearman_revision.py path/to/empirical_full_tables.tex
 """
+import os
 import re
 import sys
 
@@ -53,4 +54,5 @@ def main(path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "empirical_full_tables.tex")
+    default = os.path.join(os.path.dirname(os.path.abspath(__file__)), "empirical_full_tables.tex")
+    main(sys.argv[1] if len(sys.argv) > 1 else default)
